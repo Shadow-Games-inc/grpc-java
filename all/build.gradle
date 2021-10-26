@@ -1,0 +1,81 @@
+plugins {
+    id "java-library"
+    id "maven-publish"
+
+    id "com.github.kt3k.coveralls"
+}
+
+description = "gRPC: All"
+
+def subprojects = [
+    project(':grpc-api'),
+    project(':grpc-auth'),
+    project(':grpc-context'),
+    project(':grpc-core'),
+    project(':grpc-grpclb'),
+    project(':grpc-netty'),
+    project(':grpc-okhttp'),
+    project(':grpc-protobuf'),
+    project(':grpc-protobuf-lite'),
+    project(':grpc-rls'),
+    project(':grpc-services'),
+    project(':grpc-stub'),
+    project(':grpc-testing'),
+    project(':grpc-xds'),
+]
+
+for (subproject in subprojects) {
+    if (subproject == project) {
+        continue
+    }
+    evaluationDependsOn(subproject.path)
+}
+evaluationDependsOn(':grpc-interop-testing')
+
+dependencies {
+    api subprojects.minus([project(':grpc-protobuf-lite')])
+}
+
+javadoc {
+    classpath = files(subprojects.collect { subproject ->
+        subproject.javadoc.classpath
+    })
+    for (subproject in subprojects) {
+        if (subproject == project) {
+            continue;
+        }
+        source subproject.javadoc.source
+        options.links subproject.javadoc.options.links.toArray(new String[0])
+    }
+}
+
+task jacocoMerge(type: JacocoMerge) {
+    dependsOn(subprojects.jacocoTestReport.dependsOn)
+    dependsOn(project(':grpc-interop-testing').jacocoTestReport.dependsOn)
+    mustRunAfter(subprojects.jacocoTestReport.mustRunAfter)
+    mustRunAfter(project(':grpc-interop-testing').jacocoTestReport.mustRunAfter)
+    destinationFile = file("${buildDir}/jacoco/test.exec")
+    executionData = files(subprojects.jacocoTestReport.executionData)
+            .plus(project(':grpc-interop-testing').jacocoTestReport.executionData)
+            .filter { f -> f.exists() }
+}
+
+jacocoTestReport {
+    dependsOn(jacocoMerge)
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+
+    subprojects.each { subproject ->
+        additionalSourceDirs.from(subproject.jacocoTestReport.additionalSourceDirs)
+        sourceDirectories.from(subproject.jacocoTestReport.sourceDirectories)
+        classDirectories.from(subproject.jacocoTestReport.classDirectories)
+    }
+}
+
+coveralls {
+    sourceDirs = subprojects.sourceSets.main.allSource.srcDirs.flatten()
+}
+
+tasks.coveralls { dependsOn(jacocoTestReport) }
