@@ -1,0 +1,106 @@
+plugins {
+    id "com.android.application"
+    id "com.google.protobuf"
+}
+
+description = 'gRPC: Android Integration Testing'
+
+repositories {
+    google()
+    mavenCentral()
+}
+
+android {
+    sourceSets {
+        main {
+            java {
+                srcDirs += "${projectDir}/../interop-testing/src/main/java/"
+                setIncludes(["io/grpc/android/integrationtest/**",
+                             "io/grpc/testing/integration/AbstractInteropTest.java",
+                             "io/grpc/testing/integration/TestServiceImpl.java",
+                             "io/grpc/testing/integration/Util.java"])
+            }
+            proto {
+                srcDirs += "${projectDir}/../interop-testing/src/main/proto/"
+            }
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    compileSdkVersion 26
+
+    defaultConfig {
+        applicationId "io.grpc.android.integrationtest"
+        minSdkVersion 19
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+    }
+    buildTypes {
+        debug { minifyEnabled false }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    lintOptions { disable 'InvalidPackage', 'HardcodedText' }
+}
+
+dependencies {
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.android.support:support-annotations:26.1.0'
+    implementation 'com.google.android.gms:play-services-base:16.1.0'
+
+    implementation project(':grpc-auth'),
+            project(':grpc-census'),
+            project(':grpc-okhttp'),
+            project(':grpc-protobuf-lite'),
+            project(':grpc-stub'),
+            project(':grpc-testing'),
+            libraries.hdrhistogram,
+            libraries.junit,
+            libraries.truth,
+            libraries.opencensus_contrib_grpc_metrics
+
+    implementation (libraries.google_auth_oauth2_http) {
+        exclude group: 'org.apache.httpcomponents'
+    }
+
+    compileOnly libraries.javax_annotation
+
+    androidTestImplementation 'androidx.test:rules:1.1.0-alpha1'
+    androidTestImplementation 'androidx.test:runner:1.1.0-alpha1'
+}
+
+// Checkstyle doesn't run automatically with android
+task checkStyleMain(type: Checkstyle) {
+    source 'src/main/java'
+    include '**/*.java'
+    classpath = files()
+}
+
+task checkStyleTest(type: Checkstyle) {
+    source 'src/androidTest/java'
+    include '**/*.java'
+    classpath = files()
+}
+
+project.tasks['check'].dependsOn checkStyleMain, checkStyleTest
+
+import net.ltgt.gradle.errorprone.CheckSeverity
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs += [
+            "-Xlint:-cast"
+    ]
+    appendToProperty(it.options.errorprone.excludedPaths, ".*/R.java", "|")
+    // Reuses source code from grpc-interop-testing, which targets Java 7 (no method references)
+    options.errorprone.check("UnnecessaryAnonymousClass", CheckSeverity.OFF)
+}
+
+configureProtoCompilation()
