@@ -1,0 +1,103 @@
+plugins {
+    id "application"
+    id "java"
+    id "maven-publish"
+
+    id "com.google.protobuf"
+    id "me.champeau.gradle.jmh"
+}
+
+description = "grpc Benchmarks"
+
+startScripts.enabled = false
+run.enabled = false
+
+jmh {
+    jvmArgs = "-server -Xms2g -Xmx2g"
+}
+
+configurations {
+    alpnagent
+}
+
+dependencies {
+    implementation project(':grpc-core'),
+            project(':grpc-netty'),
+            project(':grpc-okhttp'),
+            project(':grpc-stub'),
+            project(':grpc-protobuf'),
+            project(':grpc-testing'),
+            libraries.hdrhistogram,
+            libraries.netty_tcnative,
+            libraries.netty_epoll,
+            libraries.math
+    compileOnly libraries.javax_annotation
+    alpnagent libraries.jetty_alpn_agent
+
+    testImplementation libraries.junit,
+            libraries.mockito
+}
+
+import net.ltgt.gradle.errorprone.CheckSeverity
+
+compileJava {
+    // The Control.Void protobuf clashes
+    options.errorprone.check("JavaLangClash", CheckSeverity.OFF)
+}
+
+configureProtoCompilation()
+
+def vmArgs = [
+    "-server",
+    "-Xms2g",
+    "-Xmx2g",
+    "-XX:+PrintGCDetails"
+]
+
+task qps_client(type: CreateStartScripts) {
+    mainClassName = "io.grpc.benchmarks.qps.AsyncClient"
+    applicationName = "qps_client"
+    defaultJvmOpts = vmArgs
+    outputDir = new File(project.buildDir, 'tmp/scripts/' + name)
+    classpath = startScripts.classpath
+}
+
+task openloop_client(type: CreateStartScripts) {
+    mainClassName = "io.grpc.benchmarks.qps.OpenLoopClient"
+    applicationName = "openloop_client"
+    defaultJvmOpts = vmArgs
+    outputDir = new File(project.buildDir, 'tmp/scripts/' + name)
+    classpath = startScripts.classpath
+}
+
+task qps_server(type: CreateStartScripts) {
+    mainClassName = "io.grpc.benchmarks.qps.AsyncServer"
+    applicationName = "qps_server"
+    outputDir = new File(project.buildDir, 'tmp/scripts/' + name)
+    classpath = startScripts.classpath
+}
+
+task benchmark_worker(type: CreateStartScripts) {
+    mainClassName = "io.grpc.benchmarks.driver.LoadWorker"
+    applicationName = "benchmark_worker"
+    defaultJvmOpts = vmArgs
+    outputDir = new File(project.buildDir, 'tmp/scripts/' + name)
+    classpath = startScripts.classpath
+}
+
+applicationDistribution.into("bin") {
+    from(qps_client)
+    from(openloop_client)
+    from(qps_server)
+    from(benchmark_worker)
+    fileMode = 0755
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            artifact distZip
+            artifact distTar
+        }
+    }
+}
