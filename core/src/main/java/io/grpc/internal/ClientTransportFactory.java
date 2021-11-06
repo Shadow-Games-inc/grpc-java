@@ -94,3 +94,30 @@ public interface ClientTransportFactory extends Closeable {
       this.channelLogger = channelLogger;
       return this;
     }
+
+    public String getAuthority() {
+      return authority;
+    }
+
+    /** Sets the non-null authority. */
+    public ClientTransportOptions setAuthority(String authority) {
+      this.authority = Preconditions.checkNotNull(authority, "authority");
+      return this;
+    }
+
+    public Attributes getEagAttributes() {
+      return eagAttributes;
+    }
+
+    /** Sets the non-null EquivalentAddressGroup's attributes. */
+    public ClientTransportOptions setEagAttributes(Attributes eagAttributes) {
+      Preconditions.checkNotNull(eagAttributes, "eagAttributes");
+      this.eagAttributes = eagAttributes;
+      return this;
+    }
+
+    @Nullable
+    public String getUserAgent() {
+      return userAgent;
+    }
+
