@@ -55,3 +55,33 @@ public class CompositeReadableBuffer extends AbstractReadableBuffer {
    * this {@code CompositeBuffer}.
    */
   public void addBuffer(ReadableBuffer buffer) {
+    boolean markHead = marked && readableBuffers.isEmpty();
+    enqueueBuffer(buffer);
+    if (markHead) {
+      readableBuffers.peek().mark();
+    }
+  }
+
+  private void enqueueBuffer(ReadableBuffer buffer) {
+    if (!(buffer instanceof CompositeReadableBuffer)) {
+      readableBuffers.add(buffer);
+      readableBytes += buffer.readableBytes();
+      return;
+    }
+
+    CompositeReadableBuffer compositeBuffer = (CompositeReadableBuffer) buffer;
+    while (!compositeBuffer.readableBuffers.isEmpty()) {
+      ReadableBuffer subBuffer = compositeBuffer.readableBuffers.remove();
+      readableBuffers.add(subBuffer);
+    }
+    readableBytes += compositeBuffer.readableBytes;
+    compositeBuffer.readableBytes = 0;
+    compositeBuffer.close();
+  }
+
+  @Override
+  public int readableBytes() {
+    return readableBytes;
+  }
+
+  private static final NoThrowReadOperation<Void> UBYTE_OP =
