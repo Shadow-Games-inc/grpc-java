@@ -14,3 +14,21 @@
  * limitations under the License.
  */
 
+package io.grpc.internal;
+
+import com.google.common.base.Objects;
+import com.google.common.base.Preconditions;
+import io.grpc.Attributes;
+import io.grpc.CallCredentials;
+import io.grpc.ChannelCredentials;
+import io.grpc.ChannelLogger;
+import io.grpc.HttpConnectProxiedSocketAddress;
+import java.io.Closeable;
+import java.net.SocketAddress;
+import java.util.concurrent.ScheduledExecutorService;
+import javax.annotation.CheckReturnValue;
+import javax.annotation.Nullable;
+
+/** Pre-configured factory for creating {@link ConnectionClientTransport} instances. */
+public interface ClientTransportFactory extends Closeable {
+  /**
