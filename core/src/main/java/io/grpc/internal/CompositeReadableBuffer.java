@@ -112,3 +112,32 @@ public class CompositeReadableBuffer extends AbstractReadableBuffer {
   }
 
   private static final NoThrowReadOperation<byte[]> BYTE_ARRAY_OP =
+      new NoThrowReadOperation<byte[]>() {
+        @Override
+        public int read(ReadableBuffer buffer, int length, byte[] dest, int offset) {
+          buffer.readBytes(dest, offset, length);
+          return offset + length;
+        }
+      };
+
+  @Override
+  public void readBytes(byte[] dest, int destOffset, int length) {
+    executeNoThrow(BYTE_ARRAY_OP, length, dest, destOffset);
+  }
+
+  private static final NoThrowReadOperation<ByteBuffer> BYTE_BUF_OP =
+      new NoThrowReadOperation<ByteBuffer>() {
+        @Override
+        public int read(ReadableBuffer buffer, int length, ByteBuffer dest, int unused) {
+          // Change the limit so that only lengthToCopy bytes are available.
+          int prevLimit = dest.limit();
+          ((Buffer) dest).limit(dest.position() + length);
+          // Write the bytes and restore the original limit.
+          buffer.readBytes(dest);
+          ((Buffer) dest).limit(prevLimit);
+          return 0;
+        }
+      };
+
+  @Override
+  public void readBytes(ByteBuffer dest) {
