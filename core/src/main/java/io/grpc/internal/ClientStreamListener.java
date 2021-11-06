@@ -49,3 +49,20 @@ public interface ClientStreamListener extends StreamListener {
   void closed(Status status, RpcProgress rpcProgress, Metadata trailers);
 
   /**
+   * The progress of the RPC when client stream listener is closed.
+   */
+  enum RpcProgress {
+    /**
+     * The RPC is processed by the server normally.
+     */
+    PROCESSED,
+    /**
+     * The RPC is not processed by the server's application logic.
+     */
+    REFUSED,
+    /**
+     * The RPC is dropped (by load balancer).
+     */
+    DROPPED
+  }
+}
