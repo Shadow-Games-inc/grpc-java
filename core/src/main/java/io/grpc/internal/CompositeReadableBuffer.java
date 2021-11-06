@@ -307,3 +307,32 @@ public class CompositeReadableBuffer extends AbstractReadableBuffer {
   private <T> int executeNoThrow(NoThrowReadOperation<T> op, int length, T dest, int value) {
     try {
       return execute(op, length, dest, value);
+    } catch (IOException e) {
+      throw new AssertionError(e); // shouldn't happen
+    }
+  }
+
+  /**
+   * If the current buffer is exhausted, removes and closes it.
+   */
+  private void advanceBufferIfNecessary() {
+    ReadableBuffer buffer = readableBuffers.peek();
+    if (buffer.readableBytes() == 0) {
+      advanceBuffer();
+    }
+  }
+
+  /**
+   * Removes one buffer from the front and closes it.
+   */
+  private void advanceBuffer() {
+    if (marked) {
+      rewindableBuffers.add(readableBuffers.remove());
+      ReadableBuffer next = readableBuffers.peek();
+      if (next != null) {
+        next.mark();
+      }
+    } else {
+      readableBuffers.remove().close();
+    }
+  }
