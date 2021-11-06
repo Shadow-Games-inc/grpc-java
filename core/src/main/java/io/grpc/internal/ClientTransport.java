@@ -48,3 +48,19 @@ public interface ClientTransport extends InternalInstrumented<SocketStats> {
    * @param headers to send at the beginning of the call
    * @param callOptions runtime options of the call
    * @param tracers a non-empty array of tracers. The last element in it is reserved to be set by
+   *        the load balancer's pick result and otherwise is a no-op tracer.
+   * @return the newly created stream.
+   */
+  // TODO(nmittler): Consider also throwing for stopping.
+  ClientStream newStream(
+      MethodDescriptor<?, ?> method, Metadata headers, CallOptions callOptions,
+      // Using array for tracers instead of a list or composition for better performance.
+      ClientStreamTracer[] tracers);
+
+  /**
+   * Pings a remote endpoint. When an acknowledgement is received, the given callback will be
+   * invoked using the given executor.
+   *
+   * <p>Pings are not necessarily sent to the same endpont, thus a successful ping only means at
+   * least one endpoint responded, but doesn't imply the availability of other endpoints (if there
+   * is any).
