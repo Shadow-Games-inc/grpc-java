@@ -31,3 +31,21 @@ public interface ClientStream extends Stream {
 
   /**
    * Abnormally terminates the stream. After calling this method, no further messages will be
+   * sent or received, however it may still be possible to receive buffered messages for a brief
+   * period until {@link ClientStreamListener#closed} is called. This method may only be called
+   * after {@link #start}, but else is safe to be called at any time and multiple times and
+   * from any thread.
+   *
+   * @param reason must be non-OK
+   */
+  void cancel(Status reason);
+
+  /**
+   * Closes the local side of this stream and flushes any remaining messages. After this is called,
+   * no further messages may be sent on this stream, but additional messages may be received until
+   * the remote end-point is closed. This method may only be called once, and only after
+   * {@link #start}.
+   */
+  void halfClose();
+
+  /**
