@@ -49,3 +49,27 @@ public interface ClientTransportFactory extends Closeable {
    * to allow cancelled scheduled runnables to be GCed.
    *
    * <p>The executor should not be used after the factory has been closed. The caller should ensure
+   * any outstanding tasks are cancelled before the factory is closed. However, it is a
+   * <a href="https://github.com/grpc/grpc-java/issues/1981">known issue</a> that ClientCallImpl may
+   * use this executor after close, so implementations should not go out of their way to prevent
+   * usage.
+   */
+  ScheduledExecutorService getScheduledExecutorService();
+
+  /**
+   * Swaps to a new ChannelCredentials with all other settings unchanged. Returns null if the
+   * ChannelCredentials is not supported by the current ClientTransportFactory settings.
+   */
+  @CheckReturnValue
+  @Nullable
+  SwapChannelCredentialsResult swapChannelCredentials(ChannelCredentials channelCreds);
+
+  /**
+   * Releases any resources.
+   *
+   * <p>After this method has been called, it's no longer valid to call
+   * {@link #newClientTransport}. No guarantees about thread-safety are made.
+   */
+  @Override
+  void close();
+
