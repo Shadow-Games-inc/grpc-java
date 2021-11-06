@@ -16,3 +16,18 @@
 
 package io.grpc.internal;
 
+import io.grpc.Attributes;
+import io.grpc.Deadline;
+import io.grpc.DecompressorRegistry;
+import io.grpc.Status;
+import javax.annotation.Nonnull;
+
+/**
+ * Extension of {@link Stream} to support client-side termination semantics.
+ *
+ * <p>An implementation doesn't need to be thread-safe. All methods are expected to execute quickly.
+ */
+public interface ClientStream extends Stream {
+
+  /**
+   * Abnormally terminates the stream. After calling this method, no further messages will be
