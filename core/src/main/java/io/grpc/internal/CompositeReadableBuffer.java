@@ -227,3 +227,30 @@ public class CompositeReadableBuffer extends AbstractReadableBuffer {
 
   @Override
   public void reset() {
+    if (!marked) {
+      throw new InvalidMarkException();
+    }
+    ReadableBuffer buffer;
+    if ((buffer = readableBuffers.peek()) != null) {
+      int currentRemain = buffer.readableBytes();
+      buffer.reset();
+      readableBytes += (buffer.readableBytes() - currentRemain);
+    }
+    while ((buffer = rewindableBuffers.pollLast()) != null) {
+      buffer.reset();
+      readableBuffers.addFirst(buffer);
+      readableBytes += buffer.readableBytes();
+    }
+  }
+
+  @Override
+  public boolean byteBufferSupported() {
+    for (ReadableBuffer buffer : readableBuffers) {
+      if (!buffer.byteBufferSupported()) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  @Nullable
