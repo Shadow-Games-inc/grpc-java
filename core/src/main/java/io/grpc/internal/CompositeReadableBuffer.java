@@ -32,3 +32,26 @@ import javax.annotation.Nullable;
  * <p>When a buffer is added to a composite, its life cycle is controlled by the composite. Once
  * the composite has read past the end of a given buffer, that buffer is automatically closed and
  * removed from the composite.
+ */
+public class CompositeReadableBuffer extends AbstractReadableBuffer {
+
+  private final Deque<ReadableBuffer> readableBuffers;
+  private Deque<ReadableBuffer> rewindableBuffers;
+  private int readableBytes;
+  private boolean marked;
+
+  public CompositeReadableBuffer(int initialCapacity) {
+    readableBuffers = new ArrayDeque<>(initialCapacity);
+  }
+
+  public CompositeReadableBuffer() {
+    readableBuffers = new ArrayDeque<>();
+  }
+
+  /**
+   * Adds a new {@link ReadableBuffer} at the end of the buffer list. After a buffer is added, it is
+   * expected that this {@code CompositeBuffer} has complete ownership. Any attempt to modify the
+   * buffer (i.e. modifying the readable bytes) may result in corruption of the internal state of
+   * this {@code CompositeBuffer}.
+   */
+  public void addBuffer(ReadableBuffer buffer) {
