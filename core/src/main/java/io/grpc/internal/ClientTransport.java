@@ -82,3 +82,14 @@ public interface ClientTransport extends InternalInstrumented<SocketStats> {
      *
      * @param roundTripTimeNanos the round-trip duration between the ping being sent and the
      *     acknowledgement received
+     */
+    void onSuccess(long roundTripTimeNanos);
+
+    /**
+     * Invoked when a ping fails. The given argument is the cause of the failure.
+     *
+     * @param cause the cause of the ping failure
+     */
+    void onFailure(Throwable cause);
+  }
+}
