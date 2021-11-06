@@ -32,3 +32,20 @@ import javax.annotation.Nullable;
 /** Pre-configured factory for creating {@link ConnectionClientTransport} instances. */
 public interface ClientTransportFactory extends Closeable {
   /**
+   * Creates an unstarted transport for exclusive use. Ownership of {@code options} is passed to the
+   * callee; the caller should not reuse or read from the options after this method is called.
+   *
+   * @param serverAddress the address that the transport is connected to
+   * @param options additional configuration
+   * @param channelLogger logger for the transport.
+   */
+  ConnectionClientTransport newClientTransport(
+      SocketAddress serverAddress,
+      ClientTransportOptions options,
+      ChannelLogger channelLogger);
+
+  /**
+   * Returns an executor for scheduling provided by the transport. The service should be configured
+   * to allow cancelled scheduled runnables to be GCed.
+   *
+   * <p>The executor should not be used after the factory has been closed. The caller should ensure
