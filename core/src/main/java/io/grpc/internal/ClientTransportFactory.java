@@ -147,3 +147,22 @@ public interface ClientTransportFactory extends Closeable {
       if (!(o instanceof ClientTransportOptions)) {
         return false;
       }
+      ClientTransportOptions that = (ClientTransportOptions) o;
+      return this.authority.equals(that.authority)
+          && this.eagAttributes.equals(that.eagAttributes)
+          && Objects.equal(this.userAgent, that.userAgent)
+          && Objects.equal(this.connectProxiedSocketAddr, that.connectProxiedSocketAddr);
+    }
+  }
+
+  final class SwapChannelCredentialsResult {
+    final ClientTransportFactory transportFactory;
+    @Nullable final CallCredentials callCredentials;
+
+    public SwapChannelCredentialsResult(
+        ClientTransportFactory transportFactory, @Nullable CallCredentials callCredentials) {
+      this.transportFactory = Preconditions.checkNotNull(transportFactory, "transportFactory");
+      this.callCredentials = callCredentials;
+    }
+  }
+}
