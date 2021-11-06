@@ -254,3 +254,36 @@ public class CompositeReadableBuffer extends AbstractReadableBuffer {
   }
 
   @Nullable
+  @Override
+  public ByteBuffer getByteBuffer() {
+    if (readableBuffers.isEmpty()) {
+      return null;
+    }
+    return readableBuffers.peek().getByteBuffer();
+  }
+
+  @Override
+  public void close() {
+    while (!readableBuffers.isEmpty()) {
+      readableBuffers.remove().close();
+    }
+    if (rewindableBuffers != null) {
+      while (!rewindableBuffers.isEmpty()) {
+        rewindableBuffers.remove().close();
+      }
+    }
+  }
+
+  /**
+   * Executes the given {@link ReadOperation} against the {@link ReadableBuffer}s required to
+   * satisfy the requested {@code length}.
+   */
+  private <T> int execute(ReadOperation<T> op, int length, T dest, int value) throws IOException {
+    checkReadable(length);
+
+    if (!readableBuffers.isEmpty()) {
+      advanceBufferIfNecessary();
+    }
+
+    for (; length > 0 && !readableBuffers.isEmpty(); advanceBufferIfNecessary()) {
+      ReadableBuffer buffer = readableBuffers.peek();
