@@ -336,3 +336,25 @@ public class CompositeReadableBuffer extends AbstractReadableBuffer {
       readableBuffers.remove().close();
     }
   }
+
+  /**
+   * A simple read operation to perform on a single {@link ReadableBuffer}.
+   * All state management for the buffers is done by
+   * {@link CompositeReadableBuffer#execute(ReadOperation, int, Object, int)}.
+   */
+  private interface ReadOperation<T> {
+    /**
+     * This method can also be used to simultaneously perform operation-specific int-valued
+     * aggregation over the sequence of buffers in a {@link CompositeReadableBuffer}.
+     * {@code value} is the return value from the prior buffer, or the "initial" value passed
+     * to {@code execute()} in the case of the first buffer. {@code execute()} returns the value
+     * returned by the operation called on the last buffer.
+     */
+    int read(ReadableBuffer buffer, int length, T dest, int value) throws IOException;
+  }
+
+  private interface NoThrowReadOperation<T> extends ReadOperation<T> {
+    @Override
+    int read(ReadableBuffer buffer, int length, T dest, int value);
+  }
+}
