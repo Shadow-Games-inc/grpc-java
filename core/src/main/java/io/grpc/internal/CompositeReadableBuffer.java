@@ -169,3 +169,33 @@ public class CompositeReadableBuffer extends AbstractReadableBuffer {
 
     ReadableBuffer newBuffer = null;
     CompositeReadableBuffer newComposite = null;
+    do {
+      ReadableBuffer buffer = readableBuffers.peek();
+      int readable = buffer.readableBytes();
+      ReadableBuffer readBuffer;
+      if (readable > length) {
+        readBuffer = buffer.readBytes(length);
+        length = 0;
+      } else {
+        if (marked) {
+          readBuffer = buffer.readBytes(readable);
+          advanceBuffer();
+        } else {
+          readBuffer = readableBuffers.poll();
+        }
+        length -= readable;
+      }
+      if (newBuffer == null) {
+        newBuffer = readBuffer;
+      } else {
+        if (newComposite == null) {
+          newComposite = new CompositeReadableBuffer(
+              length == 0 ? 2 : Math.min(readableBuffers.size() + 2, 16));
+          newComposite.addBuffer(newBuffer);
+          newBuffer = newComposite;
+        }
+        newComposite.addBuffer(readBuffer);
+      }
+    } while (length > 0);
+    return newBuffer;
+  }
