@@ -69,3 +69,18 @@ public interface ClientStream extends Stream {
   void setDecompressorRegistry(DecompressorRegistry decompressorRegistry);
 
   /**
+   * Starts stream. This method may only be called once.  It is safe to do latent initialization of
+   * the stream up until {@link #start} is called.
+   *
+   * <p>This method should not throw any exceptions.
+   *
+   * @param listener non-{@code null} listener of stream events
+   */
+  void start(ClientStreamListener listener);
+
+  /**
+   * Sets the max size accepted from the remote endpoint.
+   */
+  void setMaxInboundMessageSize(int maxSize);
+
+  /**
