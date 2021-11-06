@@ -64,3 +64,21 @@ public interface ClientTransport extends InternalInstrumented<SocketStats> {
    * <p>Pings are not necessarily sent to the same endpont, thus a successful ping only means at
    * least one endpoint responded, but doesn't imply the availability of other endpoints (if there
    * is any).
+   *
+   * <p>This is an optional method. Transports that do not have any mechanism by which to ping the
+   * remote endpoint may throw {@link UnsupportedOperationException}.
+   */
+  void ping(PingCallback callback, Executor executor);
+
+  /**
+   * A callback that is invoked when the acknowledgement to a {@link #ping} is received. Exactly one
+   * of the two methods should be called per {@link #ping}.
+   */
+  interface PingCallback {
+
+    /**
+     * Invoked when a ping is acknowledged. The given argument is the round-trip time of the ping,
+     * in nanoseconds.
+     *
+     * @param roundTripTimeNanos the round-trip duration between the ping being sent and the
+     *     acknowledgement received
