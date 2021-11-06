@@ -141,3 +141,31 @@ public class CompositeReadableBuffer extends AbstractReadableBuffer {
 
   @Override
   public void readBytes(ByteBuffer dest) {
+    executeNoThrow(BYTE_BUF_OP, dest.remaining(), dest, 0);
+  }
+
+  private static final ReadOperation<OutputStream> STREAM_OP =
+      new ReadOperation<OutputStream>() {
+        @Override
+        public int read(ReadableBuffer buffer, int length, OutputStream dest, int unused)
+            throws IOException {
+          buffer.readBytes(dest, length);
+          return 0;
+        }
+      };
+
+  @Override
+  public void readBytes(OutputStream dest, int length) throws IOException {
+    execute(STREAM_OP, length, dest, 0);
+  }
+
+  @Override
+  public ReadableBuffer readBytes(int length) {
+    if (length <= 0) {
+      return ReadableBuffers.empty();
+    }
+    checkReadable(length);
+    readableBytes -= length;
+
+    ReadableBuffer newBuffer = null;
+    CompositeReadableBuffer newComposite = null;
