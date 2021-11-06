@@ -85,3 +85,30 @@ public class CompositeReadableBuffer extends AbstractReadableBuffer {
   }
 
   private static final NoThrowReadOperation<Void> UBYTE_OP =
+      new NoThrowReadOperation<Void>() {
+        @Override
+        public int read(ReadableBuffer buffer, int length, Void unused, int value) {
+          return buffer.readUnsignedByte();
+        }
+      };
+
+  @Override
+  public int readUnsignedByte() {
+    return executeNoThrow(UBYTE_OP, 1, null, 0);
+  }
+
+  private static final NoThrowReadOperation<Void> SKIP_OP =
+      new NoThrowReadOperation<Void>() {
+        @Override
+        public int read(ReadableBuffer buffer, int length, Void unused, int unused2) {
+          buffer.skipBytes(length);
+          return 0;
+        }
+      };
+
+  @Override
+  public void skipBytes(int length) {
+    executeNoThrow(SKIP_OP, length, null, 0);
+  }
+
+  private static final NoThrowReadOperation<byte[]> BYTE_ARRAY_OP =
