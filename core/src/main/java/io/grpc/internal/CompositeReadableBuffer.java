@@ -287,3 +287,23 @@ public class CompositeReadableBuffer extends AbstractReadableBuffer {
 
     for (; length > 0 && !readableBuffers.isEmpty(); advanceBufferIfNecessary()) {
       ReadableBuffer buffer = readableBuffers.peek();
+      int lengthToCopy = Math.min(length, buffer.readableBytes());
+
+      // Perform the read operation for this buffer.
+      value = op.read(buffer, lengthToCopy, dest, value);
+
+      length -= lengthToCopy;
+      readableBytes -= lengthToCopy;
+    }
+
+    if (length > 0) {
+      // Should never get here.
+      throw new AssertionError("Failed executing read operation");
+    }
+
+    return value;
+  }
+
+  private <T> int executeNoThrow(NoThrowReadOperation<T> op, int length, T dest, int value) {
+    try {
+      return execute(op, length, dest, value);
