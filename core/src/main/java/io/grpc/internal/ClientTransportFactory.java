@@ -121,3 +121,29 @@ public interface ClientTransportFactory extends Closeable {
       return userAgent;
     }
 
+    public ClientTransportOptions setUserAgent(@Nullable String userAgent) {
+      this.userAgent = userAgent;
+      return this;
+    }
+
+    @Nullable
+    public HttpConnectProxiedSocketAddress getHttpConnectProxiedSocketAddress() {
+      return connectProxiedSocketAddr;
+    }
+
+    public ClientTransportOptions setHttpConnectProxiedSocketAddress(
+        @Nullable HttpConnectProxiedSocketAddress connectProxiedSocketAddr) {
+      this.connectProxiedSocketAddr = connectProxiedSocketAddr;
+      return this;
+    }
+
+    @Override
+    public int hashCode() {
+      return Objects.hashCode(authority, eagAttributes, userAgent, connectProxiedSocketAddr);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+      if (!(o instanceof ClientTransportOptions)) {
+        return false;
+      }
