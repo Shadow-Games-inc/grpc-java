@@ -199,3 +199,31 @@ public class CompositeReadableBuffer extends AbstractReadableBuffer {
     } while (length > 0);
     return newBuffer;
   }
+
+  @Override
+  public boolean markSupported() {
+    for (ReadableBuffer buffer : readableBuffers) {
+      if (!buffer.markSupported()) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  @Override
+  public void mark() {
+    if (rewindableBuffers == null) {
+      rewindableBuffers = new ArrayDeque<>(Math.min(readableBuffers.size(), 16));
+    }
+    while (!rewindableBuffers.isEmpty()) {
+      rewindableBuffers.remove().close();
+    }
+    marked = true;
+    ReadableBuffer buffer = readableBuffers.peek();
+    if (buffer != null) {
+      buffer.mark();
+    }
+  }
+
+  @Override
+  public void reset() {
