@@ -31,3 +31,23 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+/**
+ * Unit tests for {@link FailingClientTransport}.
+ */
+@RunWith(JUnit4.class)
+public class FailingClientTransportTest {
+
+  @Test
+  public void newStreamStart() {
+    Status error = Status.UNAVAILABLE;
+    RpcProgress rpcProgress = RpcProgress.DROPPED;
+    FailingClientTransport transport = new FailingClientTransport(error, rpcProgress);
+    ClientStream stream = transport.newStream(
+        TestMethodDescriptors.voidMethod(), new Metadata(), CallOptions.DEFAULT,
+        new ClientStreamTracer[] { new ClientStreamTracer() {} });
+    ClientStreamListener listener = mock(ClientStreamListener.class);
+    stream.start(listener);
+
+    verify(listener).closed(eq(error), eq(rpcProgress), any(Metadata.class));
+  }
+}
