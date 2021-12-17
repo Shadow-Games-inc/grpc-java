@@ -20,3 +20,39 @@ Since gRPC's 1.24 release, the `grpc-cronet` package provides access to the
 `CronetChannelBuilder` class. Cronet jars are available on Google's Maven repository. 
 See the example app at https://github.com/GoogleChrome/cronet-sample/blob/master/README.md.
 
+## Example usage:
+
+In your app module's `build.gradle` file, include a dependency on both `grpc-cronet` and the 
+Google Play Services Client Library for Cronet
+
+```
+implementation 'io.grpc:grpc-cronet:1.41.0'
+implementation 'com.google.android.gms:play-services-cronet:16.0.0'
+```
+
+In cases where Cronet cannot be loaded from Google Play services, there is a less performant 
+implementation of Cronet's API that can be used. Depend on `org.chromium.net:cronet-fallback` 
+to use this fall-back implementation.
+
+
+You will also need permission to access the device's network state in your 
+`AndroidManifest.xml`:
+
+```
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+```
+
+Once the above steps are completed, you can create a gRPC Cronet channel as
+follows:
+
+```
+import io.grpc.cronet.CronetChannelBuilder;
+import org.chromium.net.ExperimentalCronetEngine;
+
+...
+
+ExperimentalCronetEngine engine =
+    new ExperimentalCronetEngine.Builder(context /* Android Context */).build();
+ManagedChannel channel = CronetChannelBuilder.forAddress("localhost", 8080, engine).build();
+```
+
