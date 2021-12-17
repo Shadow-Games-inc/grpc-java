@@ -32,3 +32,18 @@ public class ForwardingLoadBalancerTest {
   private final LoadBalancer mockDelegate = mock(LoadBalancer.class);
 
   private final class TestBalancer extends ForwardingLoadBalancer {
+    @Override
+    protected LoadBalancer delegate() {
+      return mockDelegate;
+    }
+  }
+
+  @Test
+  public void allMethodsForwarded() throws Exception {
+    ForwardingTestUtil.testMethodsForwarded(
+        LoadBalancer.class,
+        mockDelegate,
+        new TestBalancer(),
+        Collections.<Method>emptyList());
+  }
+}
