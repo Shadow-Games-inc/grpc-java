@@ -26,3 +26,101 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+/**
+ * Unit test for {@link ServiceConfigUtil}.
+ */
+@RunWith(JUnit4.class)
+public class ServiceConfigUtilTest {
+
+  @Test
+  public void unwrapLoadBalancingConfig() throws Exception {
+    String lbConfig = "{\"xds_experimental\" : { "
+        + "\"childPolicy\" : [{\"round_robin\" : {}}, {\"lbPolicy2\" : {\"key\" : \"val\"}}]"
+        + "}}";
+
+    LbConfig config =
+        ServiceConfigUtil.unwrapLoadBalancingConfig(checkObject(JsonParser.parse(lbConfig)));
+    assertThat(config.getPolicyName()).isEqualTo("xds_experimental");
+    assertThat(config.getRawConfigValue()).isEqualTo(JsonParser.parse(
+            "{\"childPolicy\" : [{\"round_robin\" : {}}, {\"lbPolicy2\" : {\"key\" : \"val\"}}]"
+            + "}"));
+  }
+
+  @Test
+  public void unwrapLoadBalancingConfig_failOnTooManyFields() throws Exception {
+    // A LoadBalancingConfig should not have more than one field.
+    String lbConfig = "{\"xds_experimental\" : { "
+        + "\"childPolicy\" : [{\"round_robin\" : {}}, {\"lbPolicy2\" : {\"key\" : \"val\"}}]"
+        + "},"
+        + "\"grpclb\" : {} }";
+    try {
+      ServiceConfigUtil.unwrapLoadBalancingConfig(checkObject(JsonParser.parse(lbConfig)));
+      fail("Should throw");
+    } catch (Exception e) {
+      assertThat(e).hasMessageThat().contains("There are 2 fields");
+    }
+  }
+
+  @Test
+  public void unwrapLoadBalancingConfig_failOnEmptyObject() throws Exception {
+    // A LoadBalancingConfig should not exactly one field.
+    String lbConfig = "{}";
+    try {
+      ServiceConfigUtil.unwrapLoadBalancingConfig(checkObject(JsonParser.parse(lbConfig)));
+      fail("Should throw");
+    } catch (Exception e) {
+      assertThat(e).hasMessageThat().contains("There are 0 fields");
+    }
+  }
+
+  @Test
+  public void unwrapLoadBalancingConfig_failWhenConfigIsString() throws Exception {
+    // The value of the config should be a JSON dictionary (map)
+    String lbConfig = "{ \"xds\" : \"I thought I was a config.\" }";
+    try {
+      ServiceConfigUtil.unwrapLoadBalancingConfig(checkObject(JsonParser.parse(lbConfig)));
+      fail("Should throw");
+    } catch (Exception e) {
+      assertThat(e).hasMessageThat().contains("is not object");
+    }
+  }
+
+  @Test
+  public void unwrapLoadBalancingConfigList() throws Exception {
+    String lbConfig = "[ "
+        + "{\"xds_experimental\" : {\"unknown_field\" : \"dns:///balancer.example.com:8080\"} },"
+        + "{\"grpclb\" : {} } ]";
+    List<LbConfig> configs =
+        ServiceConfigUtil.unwrapLoadBalancingConfigList(
+            checkObjectList(JsonParser.parse(lbConfig)));
+    assertThat(configs).containsExactly(
+        ServiceConfigUtil.unwrapLoadBalancingConfig(checkObject(JsonParser.parse(
+                "{\"xds_experimental\" : "
+                + "{\"unknown_field\" : \"dns:///balancer.example.com:8080\"} }"))),
+        ServiceConfigUtil.unwrapLoadBalancingConfig(checkObject(JsonParser.parse(
+                "{\"grpclb\" : {} }")))).inOrder();
+  }
+
+  @Test
+  public void unwrapLoadBalancingConfigList_failOnMalformedConfig() throws Exception {
+    String lbConfig = "[ "
+        + "{\"xds_experimental\" : \"I thought I was a config\" },"
+        + "{\"grpclb\" : {} } ]";
+    try {
+      ServiceConfigUtil.unwrapLoadBalancingConfigList(checkObjectList(JsonParser.parse(lbConfig)));
+      fail("Should throw");
+    } catch (Exception e) {
+      assertThat(e).hasMessageThat().contains("is not object");
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  private static List<Map<String, ?>> checkObjectList(Object o) {
+    return (List<Map<String, ?>>) o;
+  }
+
+  @SuppressWarnings("unchecked")
+  private static Map<String, ?> checkObject(Object o) {
+    return (Map<String, ?>) o;
+  }
+}
