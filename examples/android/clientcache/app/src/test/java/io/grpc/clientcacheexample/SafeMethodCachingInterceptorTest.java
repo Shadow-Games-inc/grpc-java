@@ -17,6 +17,29 @@ import io.grpc.MethodDescriptor;
 import io.grpc.ServerCall;
 import io.grpc.ServerCallHandler;
 import io.grpc.ServerInterceptor;
+import io.grpc.ServerInterceptors;
+import io.grpc.Status;
+import io.grpc.StatusRuntimeException;
+import io.grpc.examples.helloworld.AnotherGreeterGrpc;
+import io.grpc.examples.helloworld.GreeterGrpc;
+import io.grpc.examples.helloworld.HelloReply;
+import io.grpc.examples.helloworld.HelloRequest;
+import io.grpc.stub.ClientCalls;
+import io.grpc.stub.StreamObserver;
+import io.grpc.testing.GrpcServerRule;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+
+public class SafeMethodCachingInterceptorTest {
+  private static final Metadata.Key<String> CACHE_CONTROL_METADATA_KEY =
+      Metadata.Key.of("cache-control", Metadata.ASCII_STRING_MARSHALLER);
 
   @Rule public final GrpcServerRule grpcServerRule = new GrpcServerRule().directExecutor();
 
