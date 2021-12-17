@@ -1,3 +1,4 @@
+/*
  * Copyright 2015 The gRPC Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,3 +34,10 @@ public abstract class WritableBufferAllocatorTestBase {
   public void testBuffersAreDifferent() {
     WritableBuffer buffer1 = allocator().allocate(100);
     WritableBuffer buffer2 = allocator().allocate(100);
+
+    assertNotSame(buffer1, buffer2);
+
+    buffer1.release();
+    buffer2.release();
+  }
+}
