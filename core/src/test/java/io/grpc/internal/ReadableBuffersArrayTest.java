@@ -22,3 +22,32 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+
+/**
+ * Tests for the array-backed {@link ReadableBuffer} returned by {@link ReadableBuffers#wrap(byte[],
+ * int, int)}.
+ */
+@RunWith(JUnit4.class)
+public class ReadableBuffersArrayTest extends ReadableBufferTestBase {
+
+  @Test
+  public void bufferShouldExposeArray() {
+    byte[] array = msg.getBytes(UTF_8);
+    ReadableBuffer buffer = wrap(array, 1, msg.length() - 1);
+    assertTrue(buffer.hasArray());
+    assertSame(array, buffer.array());
+    assertEquals(1, buffer.arrayOffset());
+
+    // Now read a byte and verify that the offset changes.
+    buffer.readUnsignedByte();
+    assertEquals(2, buffer.arrayOffset());
+  }
+
+  @Override
+  protected ReadableBuffer buffer() {
+    return ReadableBuffers.wrap(msg.getBytes(UTF_8), 0, msg.length());
+  }
+}
