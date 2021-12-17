@@ -1,3 +1,5 @@
+/*
+ * Copyright 2017 The gRPC Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,3 +33,33 @@ public class ReflectionLongAdderCounterTest {
 
   @Test
   public void testIncrement() {
+    counter.add(1);
+    assertEquals(1, counter.value());
+  }
+
+  @Test
+  public void testIncrementDelta() {
+    counter.add(2);
+    assertEquals(2, counter.value());
+  }
+
+  @Test
+  public void testIncrementMulti() {
+    counter.add(2);
+    counter.add(1);
+    assertEquals(3, counter.value());
+  }
+
+  @Test
+  public void testDecrement() {
+    counter.add(2);
+    counter.add(-1);
+    assertEquals(1, counter.value());
+  }
+
+  @Test
+  public void testNegativeValue() {
+    counter.add(-2);
+    assertEquals(-2, counter.value());
+  }
+}
