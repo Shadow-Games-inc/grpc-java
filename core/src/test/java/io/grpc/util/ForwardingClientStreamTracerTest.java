@@ -1,3 +1,5 @@
+/*
+ * Copyright 2019 The gRPC Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,3 +31,20 @@ import org.junit.runners.JUnit4;
 public class ForwardingClientStreamTracerTest {
   private final ClientStreamTracer mockDelegate = mock(ClientStreamTracer.class);
 
+  @Test
+  public void allMethodsForwarded() throws Exception {
+    ForwardingTestUtil.testMethodsForwarded(
+        ClientStreamTracer.class,
+        mockDelegate,
+        new ForwardingClientStreamTracerTest.TestClientStreamTracer(),
+        Collections.<Method>emptyList());
+  }
+
+  @SuppressWarnings("deprecation")
+  private final class TestClientStreamTracer extends ForwardingClientStreamTracer {
+    @Override
+    protected ClientStreamTracer delegate() {
+      return mockDelegate;
+    }
+  }
+}
