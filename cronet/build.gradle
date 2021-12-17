@@ -1,0 +1,24 @@
+plugins {
+    id "maven-publish"
+
+    id "com.android.library"
+    id "digital.wup.android-maven-publish"
+}
+
+description = "gRPC: Cronet Android"
+
+repositories {
+    google()
+    mavenCentral()
+}
+
+android {
+    compileSdkVersion 29
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
