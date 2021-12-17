@@ -1,3 +1,4 @@
+/*
  * Copyright 2015 The gRPC Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,3 +31,119 @@ import org.junit.runners.JUnit4;
 
 @RunWith(JUnit4.class)
 public class SerializeReentrantCallsDirectExecutorTest {
+
+  SerializeReentrantCallsDirectExecutor executor;
+
+  @Before
+  public void setup() {
+    executor = new SerializeReentrantCallsDirectExecutor();
+  }
+
+  @Test public void reentrantCallsShouldBeSerialized() {
+    final List<Integer> callOrder = new ArrayList<>(4);
+    executor.execute(new Runnable() {
+      @Override
+      public void run() {
+        executor.execute(new Runnable() {
+          @Override
+          public void run() {
+            executor.execute(new Runnable() {
+              @Override public void run() {
+                callOrder.add(3);
+              }
+            });
+
+            callOrder.add(2);
+
+            executor.execute(new Runnable() {
+              @Override public void run() {
+                callOrder.add(4);
+              }
+            });
+          }
+        });
+        callOrder.add(1);
+      }
+    });
+
+    assertEquals(asList(1, 2, 3, 4), callOrder);
+  }
+
+  @Test
+  public void exceptionShouldNotCancelQueuedTasks() {
+    final AtomicBoolean executed1 = new AtomicBoolean();
+    final AtomicBoolean executed2 = new AtomicBoolean();
+    executor.execute(new Runnable() {
+      @Override
+      public void run() {
+        executor.execute(new Runnable() {
+          @Override
+          public void run() {
+            executed1.set(true);
+            throw new RuntimeException("Two");
+          }
+        });
+        executor.execute(new Runnable() {
+          @Override
+          public void run() {
+            executed2.set(true);
+          }
+        });
+
+        throw new RuntimeException("One");
+      }
+    });
+
+    assertTrue(executed1.get());
+    assertTrue(executed2.get());
+  }
+
+  @Test(expected = NullPointerException.class)
+  public void executingNullShouldFail() {
+    executor.execute(null);
+  }
+
+  @Test
+  public void executeCanBeRepeated() {
+    final List<Integer> executes = new ArrayList<>();
+    executor.execute(new Runnable() {
+      @Override
+      public void run() {
+        executes.add(1);
+      }
+    });
+    executor.execute(new Runnable() {
+      @Override
+      public void run() {
+        executes.add(2);
+      }
+    });
+
+    assertEquals(asList(1,2), executes);
+  }
+
+  @Test
+  public void interruptDoesNotAffectExecution() {
+    final AtomicInteger callsExecuted = new AtomicInteger();
+
+    Thread.currentThread().interrupt();
+
+    executor.execute(new Runnable() {
+      @Override
+      public void run() {
+        Thread.currentThread().interrupt();
+        callsExecuted.incrementAndGet();
+      }
+    });
+
+    executor.execute(new Runnable() {
+      @Override
+      public void run() {
+        callsExecuted.incrementAndGet();
+      }
+    });
+
+    // clear interrupted flag
+    Thread.interrupted();
+  }
+}
