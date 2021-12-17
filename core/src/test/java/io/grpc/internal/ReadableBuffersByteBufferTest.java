@@ -1,3 +1,4 @@
+/*
  * Copyright 2014 The gRPC Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,3 +23,11 @@ import java.nio.ByteBuffer;
 /**
  * Tests for the array-backed {@link ReadableBuffer} returned by {@link
  * ReadableBuffers#wrap(ByteBuffer)}.
+ */
+public class ReadableBuffersByteBufferTest extends ReadableBufferTestBase {
+
+  @Override
+  protected ReadableBuffer buffer() {
+    return ReadableBuffers.wrap(ByteBuffer.wrap(msg.getBytes(UTF_8)));
+  }
+}
