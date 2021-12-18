@@ -1,0 +1,1 @@
+- This example intends to show the compatibility of gRPC with Android StrictMode.
