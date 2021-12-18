@@ -1,0 +1,27 @@
+proto_library(
+    name = "helloworld_proto",
+    srcs = ["src/main/proto/helloworld/helloworld.proto"],
+)
+
+java_proto_library(
+    name = "helloworld_java_proto",
+    deps = [":helloworld_proto"],
+)
+
+java_grpc_library(
+    name = "helloworld_java_grpc",
+    srcs = [":helloworld_proto"],
+    deps = [":helloworld_java_proto"],
+)
+
+java_library(
+    name = "hostname_greeter",
+    testonly = 1,
+    srcs = [
+        "src/main/java/io/grpc/examples/hostname/HostnameGreeter.java",
+    ],
+    deps = [
+        ":helloworld_java_grpc",
+        ":helloworld_java_proto",
+        "@io_grpc_grpc_java//stub",
+    ],
