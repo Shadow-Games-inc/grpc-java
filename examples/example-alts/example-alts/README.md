@@ -4,6 +4,14 @@ gRPC ALTS Example
 This example suite shows secure communication between a Hello World 
 client and a Hello World server authenticated by Google's Application Layer 
 Transport Security (ALTS). For more information about ALTS itself, see 
+[ALTS Whiltepaper](https://cloud.google.com/security/encryption-in-transit/application-layer-transport-security) or [grpc.io tutorial](https://grpc.io/docs/languages/java/alts/).
+
+In the gRPC-java context, for both the ALTS client and the ALTS server, a 
+`gRPC-client`-backed handshaker is installed in their channel protocol 
+negotiator. Once a connection is established between the ALTS Client and the 
+ALTS Server, the protocol negotiators will trigger the ALTS handshaking process, 
+which fires multiple rounds of gRPC communication between multiple parties, 
+including the ALTS client, the ALTS server and a pre-deployed handshaker 
 server. At the end, they will reach a shared secret to be used to encrypt the 
 following RPC calls.
 
