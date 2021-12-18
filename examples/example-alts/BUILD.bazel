@@ -1,0 +1,2 @@
+    srcs = [":helloworld_proto"],
+    deps = [":helloworld_java_proto"],
