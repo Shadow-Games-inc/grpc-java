@@ -30,3 +30,27 @@ java_library(
         ":helloworld_java_grpc",
         ":helloworld_java_proto",
         "@io_grpc_grpc_java//api",
+        "@io_grpc_grpc_java//netty",
+        "@io_grpc_grpc_java//protobuf",
+        "@io_grpc_grpc_java//stub",
+        "@maven//:io_netty_netty_handler",
+    ],
+)
+
+java_binary(
+    name = "hello-world-tls-client",
+    testonly = 1,
+    main_class = "io.grpc.examples.helloworldtls.HelloWorldClientTls",
+    runtime_deps = [
+        ":example-tls",
+    ],
+)
+
+java_binary(
+    name = "hello-world-tls-server",
+    testonly = 1,
+    main_class = "io.grpc.examples.helloworldtls.HelloWorldServerTls",
+    runtime_deps = [
+        ":example-tls",
+    ],
+)
