@@ -31,3 +31,40 @@ The auth-client accepts optional arguments for server-host, server-port, user-na
 
 **auth-client**:
 
+```text
+USAGE: auth-client [server-host [server-port [user-name [client-id]]]]
+```
+
+The `user-name` value is simply passed in the `HelloRequest` message as payload and the value of
+`client-id` is included in the JWT claims passed in the metadata header.
+
+
+#### How to run the example:
+
+```bash
+# Run the server:
+./build/install/example-jwt-auth/bin/auth-server 50051
+# In another terminal run the client
+./build/install/example-jwt-auth/bin/auth-client localhost 50051 userA clientB
+```
+
+That's it! The client will show the user-name reflected back in the message from the server as follows:
+```
+INFO: Greeting: Hello, userA
+```
+
+And on the server side you will see the message with the client's identifier:
+```
+Processing request from clientB
+```
+
+## Maven
+
+If you prefer to use Maven follow these [steps](../README.md#maven). You can run the example as follows:
+
+```
+$ # Run the server
+$ mvn exec:java -Dexec.mainClass=io.grpc.examples.authentication.AuthServer -Dexec.args="50051"
+$ # In another terminal run the client
+$ mvn exec:java -Dexec.mainClass=io.grpc.examples.authentication.AuthClient -Dexec.args="localhost 50051 userA clientB"
+```
