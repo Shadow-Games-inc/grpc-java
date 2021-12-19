@@ -1,3 +1,7 @@
+/*
+ * Copyright 2017 The gRPC Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -22,3 +26,28 @@ final class BackendAddressGroup {
   @Nullable
   private final String token;
 
+  BackendAddressGroup(EquivalentAddressGroup addresses, @Nullable String token) {
+    this.addresses = checkNotNull(addresses, "addresses");
+    this.token = token;
+  }
+
+  EquivalentAddressGroup getAddresses() {
+    return addresses;
+  }
+
+  @Nullable
+  String getToken() {
+    return token;
+  }
+
+  @Override
+  public String toString() {
+    // This is printed in logs.  Be concise.
+    StringBuilder buffer = new StringBuilder();
+    buffer.append(addresses);
+    if (token != null) {
+      buffer.append("(").append(token).append(")");
+    }
+    return buffer.toString();
+  }
+}
