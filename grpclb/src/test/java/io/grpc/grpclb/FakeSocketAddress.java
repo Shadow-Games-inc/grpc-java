@@ -1,3 +1,9 @@
+/*
+ * Copyright 2018 The gRPC Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -17,3 +23,24 @@ final class FakeSocketAddress extends SocketAddress {
 
   FakeSocketAddress(String name) {
     this.name = name;
+  }
+
+  @Override
+  public String toString() {
+    return "FakeSocketAddress-" + name;
+  }
+
+  @Override
+  public boolean equals(Object other) {
+    if (other instanceof FakeSocketAddress) {
+      FakeSocketAddress otherAddr = (FakeSocketAddress) other;
+      return name.equals(otherAddr.name);
+    }
+    return false;
+  }
+
+  @Override
+  public int hashCode() {
+    return name.hashCode();
+  }
+}
