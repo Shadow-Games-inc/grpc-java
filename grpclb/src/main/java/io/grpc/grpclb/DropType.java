@@ -1,3 +1,5 @@
+/*
+ * Copyright 2017 The gRPC Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,3 +20,6 @@ package io.grpc.grpclb;
  * The reason for dropping a request as instructed by the remote balancer.
  */
 enum DropType {
+    RATE_LIMITING,
+    LOAD_BALANCING
+}
