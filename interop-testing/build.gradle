@@ -1,0 +1,20 @@
+
+description = "gRPC: Integration Testing"
+startScripts.enabled = false
+
+configurations {
+    alpnagent
+}
+
+evaluationDependsOn(project(':grpc-context').path)
+
+dependencies {
+    implementation project(path: ':grpc-alts', configuration: 'shadow'),
+            project(':grpc-auth'),
+            project(':grpc-census'),
+            project(':grpc-core'),
+            project(':grpc-netty'),
+            project(':grpc-okhttp'),
+            project(':grpc-protobuf'),
+            project(':grpc-services'),
+            project(':grpc-stub'),
