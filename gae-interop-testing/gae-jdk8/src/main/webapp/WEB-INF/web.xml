@@ -1,0 +1,18 @@
+  version="2.5">
+  <servlet>
+    <servlet-name>interoptest</servlet-name>
+    <servlet-class>io.grpc.testing.integration.NettyClientInteropServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>longlivedchannel</servlet-name>
+    <servlet-class>io.grpc.testing.integration.LongLivedChannel</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>interoptest</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>longlivedchannel</servlet-name>
+    <url-pattern>/long_lived_channel</url-pattern>
+  </servlet-mapping>
+</web-app>
