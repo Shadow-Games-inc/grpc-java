@@ -1,3 +1,5 @@
+load("//:java_grpc_library.bzl", "java_grpc_library")
+
 java_library(
     name = "grpclb",
     srcs = glob([
@@ -16,3 +18,11 @@ java_library(
         "@com_google_j2objc_j2objc_annotations//jar",
         "@com_google_protobuf//:protobuf_java_util",
         "@io_grpc_grpc_proto//:grpclb_load_balancer_java_proto",
+    ],
+)
+
+java_grpc_library(
+    name = "load_balancer_java_grpc",
+    srcs = ["@io_grpc_grpc_proto//:grpclb_load_balancer_proto"],
+    deps = ["@io_grpc_grpc_proto//:grpclb_load_balancer_java_proto"],
+)
