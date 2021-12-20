@@ -90,3 +90,21 @@ public class AltsHandshakerTestService extends HandshakerServiceImplBase {
                   .setResult(getResult())
                   .setBytesConsumed(FIXED_LENGTH_OUTPUT)
                   .build();
+              log.log(Level.FINE, "server finished response " + resp);
+              responseObserver.onNext(resp);
+              expectState = State.CLIENT_INIT;
+              break;
+            default:
+              throw new RuntimeException("unknown state");
+          }
+        }
+      }
+
+      @Override
+      public void onError(Throwable t) {
+        log.log(Level.INFO, "onError " + t);
+      }
+
+      @Override
+      public void onCompleted() {
+        responseObserver.onCompleted();
