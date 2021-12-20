@@ -293,3 +293,9 @@ public final class Http2Client {
         error = t;
         latch.countDown();
       }
+
+      @Override
+      public void onCompleted() {
+        latch.countDown();
+      }
+
