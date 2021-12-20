@@ -274,3 +274,4 @@ public final class GrpclbFallbackTestClient {
     waitForFallbackAndDoRpcs(fallbackDeadline);
   }
 
+}
