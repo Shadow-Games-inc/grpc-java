@@ -143,3 +143,25 @@ public final class GrpclbFallbackTestClient {
     }
   }
 
+  private ManagedChannel createChannel() {
+    if (!customCredentialsType.equals("compute_engine_channel_creds")) {
+      throw new AssertionError(
+          "This test currently only supports "
+          + "--custom_credentials_type=compute_engine_channel_creds. "
+          + "TODO: add support for other types.");
+    }
+    ComputeEngineChannelBuilder builder = ComputeEngineChannelBuilder.forTarget(serverUri);
+    builder.keepAliveTime(3600, TimeUnit.SECONDS);
+    builder.keepAliveTimeout(20, TimeUnit.SECONDS);
+    return builder.build();
+  }
+
+  void initStub() {
+    channel = createChannel();
+    blockingStub = TestServiceGrpc.newBlockingStub(channel);
+  }
+
+  private void tearDown() {
+    try {
+      if (channel != null) {
+        channel.shutdownNow();
