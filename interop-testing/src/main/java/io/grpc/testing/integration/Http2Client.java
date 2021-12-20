@@ -299,3 +299,6 @@ public final class Http2Client {
         latch.countDown();
       }
 
+      public List<SimpleResponse> getResponses() {
+        return responses;
+      }
