@@ -263,3 +263,28 @@ public final class Http2Client {
       assertResponseEquals(blockingStub.unaryCall(simpleRequest), goldenResponse);
     }
 
+    private void maxStreams() throws Exception {
+      final int numThreads = 10;
+
+      // Preliminary call to ensure MAX_STREAMS setting is received by the client.
+      assertResponseEquals(blockingStub.unaryCall(simpleRequest), goldenResponse);
+
+      threadpool = MoreExecutors.listeningDecorator(newFixedThreadPool(numThreads));
+      List<ListenableFuture<?>> workerFutures = new ArrayList<>();
+      for (int i = 0; i < numThreads; i++) {
+        workerFutures.add(threadpool.submit(new MaxStreamsWorker(i, simpleRequest)));
+      }
+      ListenableFuture<?> f = Futures.allAsList(workerFutures);
+      f.get(timeoutSeconds, TimeUnit.SECONDS);
+    }
+
+    private class RstStreamObserver implements StreamObserver<SimpleResponse> {
+      private final CountDownLatch latch = new CountDownLatch(1);
+      private final List<SimpleResponse> responses = new ArrayList<>();
+      private Throwable error;
+
+      @Override
+      public void onNext(SimpleResponse value) {
+        responses.add(value);
+      }
+
