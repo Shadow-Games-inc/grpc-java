@@ -124,3 +124,22 @@ public final class GrpclbFallbackTestClient {
           + "\n  --custom_credentials_type             Name of Credentials to use. "
           + "Default: " + c.customCredentialsType
           + "\n  --unroute_lb_and_backend_addrs_cmd    Shell command used to make "
+          + "LB and backend addresses unroutable. Default: "
+          + c.unrouteLbAndBackendAddrsCmd
+          + "\n  --blackhole_lb_and_backend_addrs_cmd  Shell command used to make "
+          + "LB and backend addresses black holed. Default: "
+          + c.blackholeLbAndBackendAddrsCmd
+          + "\n  --test_case=TEST_CASE        Test case to run. Valid options are:"
+          + "\n      fast_fallback_before_startup : fallback before LB connection"
+          + "\n      fast_fallback_after_startup : fallback after startup due to "
+          + "LB/backend addresses becoming unroutable"
+          + "\n      slow_fallback_before_startup : fallback before LB connection "
+          + "due to LB/backend addresses being blackholed"
+          + "\n      slow_fallback_after_startup : fallback after startup due to "
+          + "LB/backend addresses becoming blackholed"
+          + "\n      Default: " + c.testCase
+      );
+      System.exit(1);
+    }
+  }
+
