@@ -312,3 +312,11 @@ public final class Http2Client {
       }
     }
 
+    private class MaxStreamsWorker implements Runnable {
+      int threadNum;
+      SimpleRequest request;
+
+      MaxStreamsWorker(int threadNum, SimpleRequest request) {
+        this.threadNum = threadNum;
+        this.request = request;
+      }
