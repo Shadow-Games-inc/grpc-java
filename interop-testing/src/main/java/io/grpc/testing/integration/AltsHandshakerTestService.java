@@ -56,3 +56,19 @@ public class AltsHandshakerTestService extends HandshakerServiceImplBase {
         synchronized (AltsHandshakerTestService.this) {
           switch (expectState) {
             case CLIENT_INIT:
+              checkState(CLIENT_START.equals(value.getReqOneofCase()));
+              HandshakerResp initClient = HandshakerResp.newBuilder()
+                  .setOutFrames(fakeOutput)
+                  .build();
+              log.log(Level.FINE, "init client response " + initClient);
+              responseObserver.onNext(initClient);
+              expectState = State.SERVER_INIT;
+              break;
+            case SERVER_INIT:
+              checkState(SERVER_START.equals(value.getReqOneofCase()));
+              HandshakerResp initServer = HandshakerResp.newBuilder()
+                  .setBytesConsumed(FIXED_LENGTH_OUTPUT)
+                  .setOutFrames(fakeOutput)
+                  .build();
+              log.log(Level.FINE, "init server response" + initServer);
+              responseObserver.onNext(initServer);
