@@ -160,3 +160,15 @@ public final class Http2Client {
       throw new RuntimeException(ex);
     }
   }
+
+  private void run() {
+    logger.info("Running test " + testCase);
+    try {
+      runTest(Http2TestCases.fromString(testCase));
+    } catch (RuntimeException ex) {
+      throw ex;
+    } catch (Exception ex) {
+      throw new RuntimeException(ex);
+    }
+    logger.info("Test completed.");
+  }
