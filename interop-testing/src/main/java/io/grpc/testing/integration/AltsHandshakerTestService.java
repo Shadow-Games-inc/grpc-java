@@ -108,3 +108,27 @@ public class AltsHandshakerTestService extends HandshakerServiceImplBase {
       @Override
       public void onCompleted() {
         responseObserver.onCompleted();
+      }
+    };
+  }
+
+  private HandshakerResult getResult() {
+    return HandshakerResult.newBuilder().setApplicationProtocol("grpc")
+        .setRecordProtocol("ALTSRP_GCM_AES128_REKEY")
+        .setKeyData(secret)
+        .setMaxFrameSize(131072)
+        .setPeerIdentity(Identity.newBuilder()
+            .setServiceAccount("123456789-compute@developer.gserviceaccount.com")
+            .build())
+        .setPeerRpcVersions(RpcProtocolVersions.newBuilder()
+            .setMaxRpcVersion(Version.newBuilder()
+                .setMajor(2).setMinor(1)
+                .build())
+            .setMinRpcVersion(Version.newBuilder()
+                .setMajor(2).setMinor(1)
+                .build())
+            .build())
+        .build();
+  }
+
+  private ByteString data(int len) {
