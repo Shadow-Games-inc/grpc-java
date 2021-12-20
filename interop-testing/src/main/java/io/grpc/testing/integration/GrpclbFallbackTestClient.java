@@ -215,3 +215,12 @@ public final class GrpclbFallbackTestClient {
     while (!fallbackDeadline.isExpired()) {
       GrpclbRouteType grpclbRouteType = doRpcAndGetPath(
           Deadline.after(1, TimeUnit.SECONDS));
+      if (grpclbRouteType == GrpclbRouteType.GRPCLB_ROUTE_TYPE_BACKEND) {
+        throw new AssertionError("Got grpclb route type backend. Backends are "
+            + "supposed to be unreachable, so this test is broken");
+      }
+      if (grpclbRouteType == GrpclbRouteType.GRPCLB_ROUTE_TYPE_FALLBACK) {
+        logger.info("Made one successful RPC to a fallback. Now expect the "
+            + "same for the rest.");
+        fellBack = true;
+        break;
