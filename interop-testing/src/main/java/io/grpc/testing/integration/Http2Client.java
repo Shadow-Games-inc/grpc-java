@@ -98,3 +98,15 @@ public final class Http2Client {
         break;
       }
       String[] parts = arg.substring(2).split("=", 2);
+      String key = parts[0];
+      if ("help".equals(key)) {
+        usage = true;
+        break;
+      }
+      if (parts.length != 2) {
+        System.err.println("All arguments must be of the form --arg=value");
+        usage = true;
+        break;
+      }
+      String value = parts[1];
+      if ("server_host".equals(key)) {
