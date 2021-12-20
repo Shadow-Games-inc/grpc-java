@@ -236,3 +236,20 @@ public final class Http2Client {
         throw new AssertionError("Expected one response");
       }
     }
+
+    private void rstDuringData() throws Exception {
+      // Use async stub to verify no data is received.
+      RstStreamObserver responseObserver = new RstStreamObserver();
+      asyncStub.unaryCall(simpleRequest, responseObserver);
+      if (!responseObserver.awaitCompletion(timeoutSeconds, TimeUnit.SECONDS)) {
+        throw new AssertionError("Operation timed out");
+      }
+      if (responseObserver.getError() == null) {
+        throw new AssertionError("Expected call to fail");
+      }
+      assertRstStreamReceived(Status.fromThrowable(responseObserver.getError()));
+      if (responseObserver.getResponses().size() != 0) {
+        throw new AssertionError("Expected zero responses");
+      }
+    }
+
