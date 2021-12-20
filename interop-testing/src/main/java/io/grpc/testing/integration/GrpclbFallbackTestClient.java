@@ -235,3 +235,8 @@ public final class GrpclbFallbackTestClient {
     for (int i = 0; i < 30; i++) {
       assertEquals(
           GrpclbRouteType.GRPCLB_ROUTE_TYPE_FALLBACK,
+          doRpcAndGetPath(Deadline.after(20, TimeUnit.SECONDS)));
+      Thread.sleep(1000);
+    }
+  }
+
