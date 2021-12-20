@@ -65,3 +65,27 @@ public final class GrpclbFallbackTestClient {
       client.run();
     } finally {
       client.tearDown();
+    }
+    System.exit(0);
+  }
+
+  private String unrouteLbAndBackendAddrsCmd = "exit 1";
+  private String blackholeLbAndBackendAddrsCmd = "exit 1";
+  private String serverUri;
+  private String customCredentialsType;
+  private String testCase;
+
+  private ManagedChannel channel;
+  private TestServiceGrpc.TestServiceBlockingStub blockingStub;
+
+  private void parseArgs(String[] args) {
+    boolean usage = false;
+    for (String arg : args) {
+      if (!arg.startsWith("--")) {
+        System.err.println("All arguments must start with '--': " + arg);
+        usage = true;
+        break;
+      }
+      String[] parts = arg.substring(2).split("=", 2);
+      String key = parts[0];
+      if ("help".equals(key)) {
