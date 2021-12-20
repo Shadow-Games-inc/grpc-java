@@ -44,3 +44,24 @@ public final class GrpclbFallbackTestClient {
       Logger.getLogger(GrpclbFallbackTestClient.class.getName());
 
   /**
+   * Entry point.
+   */
+  public static void main(String[] args) throws Exception {
+    final GrpclbFallbackTestClient client = new GrpclbFallbackTestClient();
+    client.parseArgs(args);
+    Runtime.getRuntime().addShutdownHook(new Thread() {
+      @Override
+      @SuppressWarnings("CatchAndPrintStackTrace")
+      public void run() {
+        System.out.println("Shutting down");
+        try {
+          client.tearDown();
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      }
+    });
+    try {
+      client.run();
+    } finally {
+      client.tearDown();
