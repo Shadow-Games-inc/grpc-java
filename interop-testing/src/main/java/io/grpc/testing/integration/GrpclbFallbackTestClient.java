@@ -104,3 +104,23 @@ public final class GrpclbFallbackTestClient {
         testCase = value;
       } else if ("unroute_lb_and_backend_addrs_cmd".equals(key)) {
         unrouteLbAndBackendAddrsCmd = value;
+      } else if ("blackhole_lb_and_backend_addrs_cmd".equals(key)) {
+        blackholeLbAndBackendAddrsCmd = value;
+      } else if ("custom_credentials_type".equals(key)) {
+        customCredentialsType = value;
+      } else {
+        System.err.println("Unknown argument: " + key);
+        usage = true;
+        break;
+      }
+    }
+    if (usage) {
+      GrpclbFallbackTestClient c = new GrpclbFallbackTestClient();
+      System.out.println(
+          "Usage: [ARGS...]"
+          + "\n"
+          + "\n  --server_uri                          Server target. Default: "
+          + c.serverUri
+          + "\n  --custom_credentials_type             Name of Credentials to use. "
+          + "Default: " + c.customCredentialsType
+          + "\n  --unroute_lb_and_backend_addrs_cmd    Shell command used to make "
