@@ -288,3 +288,8 @@ public final class Http2Client {
         responses.add(value);
       }
 
+      @Override
+      public void onError(Throwable t) {
+        error = t;
+        latch.countDown();
+      }
