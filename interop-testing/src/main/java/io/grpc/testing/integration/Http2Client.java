@@ -253,3 +253,13 @@ public final class Http2Client {
       }
     }
 
+    private void goAway() throws Exception {
+      assertResponseEquals(blockingStub.unaryCall(simpleRequest), goldenResponse);
+      TimeUnit.SECONDS.sleep(1);
+      assertResponseEquals(blockingStub.unaryCall(simpleRequest), goldenResponse);
+    }
+
+    private void ping() throws Exception {
+      assertResponseEquals(blockingStub.unaryCall(simpleRequest), goldenResponse);
+    }
+
