@@ -136,3 +136,9 @@ public final class Http2Client {
     }
   }
 
+  private void setUp() {
+    channel = createChannel();
+    blockingStub = TestServiceGrpc.newBlockingStub(channel);
+    asyncStub = TestServiceGrpc.newStub(channel);
+  }
+
