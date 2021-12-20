@@ -142,3 +142,12 @@ public final class Http2Client {
     asyncStub = TestServiceGrpc.newStub(channel);
   }
 
+  private void shutdown() {
+    try {
+      if (channel != null) {
+        channel.shutdownNow();
+        channel.awaitTermination(1, TimeUnit.SECONDS);
+      }
+    } catch (Exception ex) {
+      throw new RuntimeException(ex);
+    }
