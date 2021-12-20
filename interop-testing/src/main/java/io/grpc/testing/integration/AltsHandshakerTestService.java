@@ -19,3 +19,23 @@ package io.grpc.testing.integration;
 import static com.google.common.base.Preconditions.checkState;
 import static io.grpc.alts.internal.HandshakerReq.ReqOneofCase.CLIENT_START;
 import static io.grpc.alts.internal.HandshakerReq.ReqOneofCase.NEXT;
+import static io.grpc.alts.internal.HandshakerReq.ReqOneofCase.SERVER_START;
+
+import com.google.protobuf.ByteString;
+import io.grpc.alts.internal.HandshakerReq;
+import io.grpc.alts.internal.HandshakerResp;
+import io.grpc.alts.internal.HandshakerResult;
+import io.grpc.alts.internal.HandshakerServiceGrpc.HandshakerServiceImplBase;
+import io.grpc.alts.internal.Identity;
+import io.grpc.alts.internal.RpcProtocolVersions;
+import io.grpc.alts.internal.RpcProtocolVersions.Version;
+import io.grpc.stub.StreamObserver;
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ * A fake HandshakeService for ALTS integration testing in non-gcp environments.
+ * */
+public class AltsHandshakerTestService extends HandshakerServiceImplBase {
+  private static final Logger log = Logger.getLogger(AltsHandshakerTestService.class.getName());
