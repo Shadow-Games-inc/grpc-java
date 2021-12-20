@@ -89,3 +89,12 @@ public final class Http2Client {
   TestServiceGrpc.TestServiceBlockingStub blockingStub;
   TestServiceGrpc.TestServiceStub asyncStub;
 
+  private void parseArgs(String[] args) {
+    boolean usage = false;
+    for (String arg : args) {
+      if (!arg.startsWith("--")) {
+        System.err.println("All arguments must start with '--': " + arg);
+        usage = true;
+        break;
+      }
+      String[] parts = arg.substring(2).split("=", 2);
