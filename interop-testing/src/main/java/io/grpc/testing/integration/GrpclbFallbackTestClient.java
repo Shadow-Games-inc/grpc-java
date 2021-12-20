@@ -189,3 +189,26 @@ public final class GrpclbFallbackTestClient {
     logger.info("doRpcAndGetPath deadline: " + deadline);
     final SimpleRequest request = SimpleRequest.newBuilder()
         .setFillGrpclbRouteType(true)
+    GrpclbRouteType result = GrpclbRouteType.GRPCLB_ROUTE_TYPE_UNKNOWN;
+    try {
+      SimpleResponse response = blockingStub
+          .withDeadline(deadline)
+          .unaryCall(request);
+      result = response.getGrpclbRouteType();
+    } catch (StatusRuntimeException ex) {
+      logger.warning("doRpcAndGetPath failed. Status: " + ex);
+      return GrpclbRouteType.GRPCLB_ROUTE_TYPE_UNKNOWN;
+    }
+    logger.info("doRpcAndGetPath. GrpclbRouteType result: " + result);
+    if (result != GrpclbRouteType.GRPCLB_ROUTE_TYPE_FALLBACK
+        && result != GrpclbRouteType.GRPCLB_ROUTE_TYPE_BACKEND) {
+      throw new AssertionError("Received invalid LB route type. This suggests "
+          + "that the server hasn't implemented this test correctly.");
+    }
+    return result;
+  }
+
+  private void waitForFallbackAndDoRpcs(Deadline fallbackDeadline) throws Exception {
+    int fallbackRetryCount = 0;
+    boolean fellBack = false;
+    while (!fallbackDeadline.isExpired()) {
