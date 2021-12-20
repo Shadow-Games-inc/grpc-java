@@ -49,3 +49,14 @@ import java.util.logging.Logger;
  * server. Some of the test cases require server-side checks and do not have assertions within the
  * client code.
  */
+public final class Http2Client {
+  private static final Logger logger = Logger.getLogger(Http2Client.class.getName());
+
+  /**
+   * The main application allowing this client to be launched from the command line.
+   */
+  public static void main(String[] args) throws Exception {
+    final Http2Client client = new Http2Client();
+    client.parseArgs(args);
+    client.setUp();
+
