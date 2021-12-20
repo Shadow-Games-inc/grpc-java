@@ -189,6 +189,7 @@ public final class GrpclbFallbackTestClient {
     logger.info("doRpcAndGetPath deadline: " + deadline);
     final SimpleRequest request = SimpleRequest.newBuilder()
         .setFillGrpclbRouteType(true)
+        .build();
     GrpclbRouteType result = GrpclbRouteType.GRPCLB_ROUTE_TYPE_UNKNOWN;
     try {
       SimpleResponse response = blockingStub
@@ -212,3 +213,5 @@ public final class GrpclbFallbackTestClient {
     int fallbackRetryCount = 0;
     boolean fellBack = false;
     while (!fallbackDeadline.isExpired()) {
+      GrpclbRouteType grpclbRouteType = doRpcAndGetPath(
+          Deadline.after(1, TimeUnit.SECONDS));
