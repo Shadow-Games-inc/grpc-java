@@ -240,3 +240,17 @@ public final class GrpclbFallbackTestClient {
     }
   }
 
+  private void runFastFallbackBeforeStartup() throws Exception {
+    runShellCmd(unrouteLbAndBackendAddrsCmd);
+    final Deadline fallbackDeadline = Deadline.after(5, TimeUnit.SECONDS);
+    initStub();
+    waitForFallbackAndDoRpcs(fallbackDeadline);
+  }
+
+  private void runSlowFallbackBeforeStartup() throws Exception {
+    runShellCmd(blackholeLbAndBackendAddrsCmd);
+    final Deadline fallbackDeadline = Deadline.after(20, TimeUnit.SECONDS);
+    initStub();
+    waitForFallbackAndDoRpcs(fallbackDeadline);
+  }
+
