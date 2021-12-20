@@ -165,3 +165,27 @@ public final class GrpclbFallbackTestClient {
     try {
       if (channel != null) {
         channel.shutdownNow();
+        channel.awaitTermination(1, TimeUnit.SECONDS);
+      }
+    } catch (Exception ex) {
+      throw new RuntimeException(ex);
+    }
+  }
+
+  private static void runShellCmd(String cmd) throws Exception {
+    logger.info("Run shell command: " + cmd);
+    ProcessBuilder pb = new ProcessBuilder("bash", "-c", cmd);
+    pb.redirectErrorStream(true);
+    Process process = pb.start();
+    logger.info("Shell command merged stdout and stderr: "
+        + CharStreams.toString(
+            new InputStreamReader(process.getInputStream(), UTF_8)));
+    int exitCode = process.waitFor();
+    logger.info("Shell command exit code: " + exitCode);
+    assertEquals(0, exitCode);
+  }
+
+  private GrpclbRouteType doRpcAndGetPath(Deadline deadline) {
+    logger.info("doRpcAndGetPath deadline: " + deadline);
+    final SimpleRequest request = SimpleRequest.newBuilder()
+        .setFillGrpclbRouteType(true)
