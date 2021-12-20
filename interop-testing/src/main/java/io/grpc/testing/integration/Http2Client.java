@@ -60,3 +60,13 @@ public final class Http2Client {
     client.parseArgs(args);
     client.setUp();
 
+    Runtime.getRuntime().addShutdownHook(new Thread() {
+      @Override
+      public void run() {
+        try {
+          client.shutdown();
+        } catch (Exception e) {
+          logger.log(Level.SEVERE, e.getMessage(), e);
+        }
+      }
+    });
