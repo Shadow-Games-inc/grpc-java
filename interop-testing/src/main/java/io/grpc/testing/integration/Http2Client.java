@@ -39,3 +39,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ * Client application for the {@link TestServiceGrpc.TestServiceImplBase} that runs through a series
+ * of HTTP/2 interop tests. The tests are designed to simulate incorrect behavior on the part of the
+ * server. Some of the test cases require server-side checks and do not have assertions within the
+ * client code.
+ */
