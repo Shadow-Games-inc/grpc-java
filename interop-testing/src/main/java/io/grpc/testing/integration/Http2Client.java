@@ -172,3 +172,28 @@ public final class Http2Client {
     }
     logger.info("Test completed.");
   }
+
+  private void runTest(Http2TestCases testCase) throws Exception {
+    switch (testCase) {
+      case RST_AFTER_HEADER:
+        tester.rstAfterHeader();
+        break;
+      case RST_AFTER_DATA:
+        tester.rstAfterData();
+        break;
+      case RST_DURING_DATA:
+        tester.rstDuringData();
+        break;
+      case GOAWAY:
+        tester.goAway();
+        break;
+      case PING:
+        tester.ping();
+        break;
+      case MAX_STREAMS:
+        tester.maxStreams();
+        break;
+      default:
+        throw new IllegalArgumentException("Unknown test case: " + testCase);
+    }
+  }
