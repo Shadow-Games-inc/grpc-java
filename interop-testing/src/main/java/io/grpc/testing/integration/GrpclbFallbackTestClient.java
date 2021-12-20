@@ -254,3 +254,13 @@ public final class GrpclbFallbackTestClient {
     waitForFallbackAndDoRpcs(fallbackDeadline);
   }
 
+  private void runFastFallbackAfterStartup() throws Exception {
+    initStub();
+    assertEquals(
+        GrpclbRouteType.GRPCLB_ROUTE_TYPE_BACKEND,
+        doRpcAndGetPath(Deadline.after(20, TimeUnit.SECONDS)));
+    runShellCmd(unrouteLbAndBackendAddrsCmd);
+    final Deadline fallbackDeadline = Deadline.after(40, TimeUnit.SECONDS);
+    waitForFallbackAndDoRpcs(fallbackDeadline);
+  }
+
