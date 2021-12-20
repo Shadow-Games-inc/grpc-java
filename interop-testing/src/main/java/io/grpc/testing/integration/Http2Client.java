@@ -70,3 +70,11 @@ public final class Http2Client {
         }
       }
     });
+
+    try {
+      client.run();
+    } finally {
+      client.shutdown();
+    }
+  }
+
