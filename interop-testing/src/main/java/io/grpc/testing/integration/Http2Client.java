@@ -354,3 +354,15 @@ public final class Http2Client {
     }
   }
 
+  private ManagedChannel createChannel() {
+    InetAddress address;
+    try {
+      address = InetAddress.getByName(serverHost);
+    } catch (UnknownHostException ex) {
+      throw new RuntimeException(ex);
+    }
+    return NettyChannelBuilder.forAddress(new InetSocketAddress(address, serverPort))
+        .negotiationType(NegotiationType.PLAINTEXT)
+        .build();
+  }
+
