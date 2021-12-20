@@ -224,3 +224,14 @@ public final class GrpclbFallbackTestClient {
             + "same for the rest.");
         fellBack = true;
         break;
+      } else {
+        logger.info("Retryable RPC failure on iteration: " + fallbackRetryCount);
+      }
+      fallbackRetryCount++;
+    }
+    if (!fellBack) {
+      throw new AssertionError("Didn't fall back within deadline");
+    }
+    for (int i = 0; i < 30; i++) {
+      assertEquals(
+          GrpclbRouteType.GRPCLB_ROUTE_TYPE_FALLBACK,
