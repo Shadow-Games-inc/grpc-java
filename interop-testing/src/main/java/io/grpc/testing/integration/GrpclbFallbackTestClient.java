@@ -23,3 +23,24 @@ import com.google.common.io.CharStreams;
 import io.grpc.Deadline;
 import io.grpc.ManagedChannel;
 import io.grpc.StatusRuntimeException;
+import io.grpc.alts.ComputeEngineChannelBuilder;
+import io.grpc.testing.integration.Messages.GrpclbRouteType;
+import io.grpc.testing.integration.Messages.SimpleRequest;
+import io.grpc.testing.integration.Messages.SimpleResponse;
+import java.io.InputStreamReader;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
+
+/**
+ * Test client that verifies that grpclb failover into fallback mode works under
+ * different failure modes.
+ * This client is suitable for testing fallback with any "grpclb" load-balanced
+ * service, but is particularly meant to implement a set of test cases described
+ * in an internal doc titled "DirectPath Cloud-to-Prod End-to-End Test Cases",
+ * section "gRPC DirectPath-to-CFE fallback".
+ */
+public final class GrpclbFallbackTestClient {
+  private static final Logger logger =
+      Logger.getLogger(GrpclbFallbackTestClient.class.getName());
+
+  /**
