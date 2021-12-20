@@ -264,3 +264,13 @@ public final class GrpclbFallbackTestClient {
     waitForFallbackAndDoRpcs(fallbackDeadline);
   }
 
+  private void runSlowFallbackAfterStartup() throws Exception {
+    initStub();
+    assertEquals(
+        GrpclbRouteType.GRPCLB_ROUTE_TYPE_BACKEND,
+        doRpcAndGetPath(Deadline.after(20, TimeUnit.SECONDS)));
+    runShellCmd(blackholeLbAndBackendAddrsCmd);
+    final Deadline fallbackDeadline = Deadline.after(40, TimeUnit.SECONDS);
+    waitForFallbackAndDoRpcs(fallbackDeadline);
+  }
+
