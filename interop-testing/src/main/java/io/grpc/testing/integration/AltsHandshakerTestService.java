@@ -39,3 +39,20 @@ import java.util.logging.Logger;
  * */
 public class AltsHandshakerTestService extends HandshakerServiceImplBase {
   private static final Logger log = Logger.getLogger(AltsHandshakerTestService.class.getName());
+
+  private final Random random = new Random();
+  private static final int FIXED_LENGTH_OUTPUT = 16;
+  private final ByteString fakeOutput = data(FIXED_LENGTH_OUTPUT);
+  private final ByteString secret = data(128);
+  private State expectState = State.CLIENT_INIT;
+
+  @Override
+  public StreamObserver<HandshakerReq> doHandshake(
+      final StreamObserver<HandshakerResp> responseObserver) {
+    return new StreamObserver<HandshakerReq>() {
+      @Override
+      public void onNext(HandshakerReq value) {
+        log.log(Level.FINE, "request received: " + value);
+        synchronized (AltsHandshakerTestService.this) {
+          switch (expectState) {
+            case CLIENT_INIT:
