@@ -197,3 +197,12 @@ public final class Http2Client {
         throw new IllegalArgumentException("Unknown test case: " + testCase);
     }
   }
+
+  private class Tester {
+    private final int timeoutSeconds = 180;
+
+    private final int responseSize = 314159;
+    private final int payloadSize = 271828;
+    private final SimpleRequest simpleRequest = SimpleRequest.newBuilder()
+        .setResponseSize(responseSize)
+        .setPayload(Payload.newBuilder().setBody(ByteString.copyFrom(new byte[payloadSize])))
