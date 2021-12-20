@@ -347,3 +347,10 @@ public final class Http2Client {
       }
     }
 
+    private void assertResponseEquals(SimpleResponse response, SimpleResponse goldenResponse) {
+      if (!response.equals(goldenResponse)) {
+        throw new AssertionError("Incorrect response received");
+      }
+    }
+  }
+
