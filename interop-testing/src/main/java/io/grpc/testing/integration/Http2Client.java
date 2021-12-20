@@ -78,3 +78,14 @@ public final class Http2Client {
     }
   }
 
+  private String serverHost = "localhost";
+  private int serverPort = 8080;
+  private String testCase = Http2TestCases.RST_AFTER_DATA.name();
+
+  private Tester tester = new Tester();
+  private ListeningExecutorService threadpool;
+
+  ManagedChannel channel;
+  TestServiceGrpc.TestServiceBlockingStub blockingStub;
+  TestServiceGrpc.TestServiceStub asyncStub;
+
