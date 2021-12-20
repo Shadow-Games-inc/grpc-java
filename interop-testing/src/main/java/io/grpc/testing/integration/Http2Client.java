@@ -334,3 +334,16 @@ public final class Http2Client {
       }
     }
 
+    private void assertRstStreamReceived(Status status) {
+      if (!status.getCode().equals(Status.Code.UNAVAILABLE)) {
+        throw new AssertionError("Wrong status code. Expected: " + Status.Code.UNAVAILABLE
+            + " Received: " + status.getCode());
+      }
+      String http2ErrorPrefix = "HTTP/2 error code: NO_ERROR";
+      if (status.getDescription() == null
+          || !status.getDescription().startsWith(http2ErrorPrefix)) {
+        throw new AssertionError("Wrong HTTP/2 error code. Expected: " + http2ErrorPrefix
+            + " Received: " + status.getDescription());
+      }
+    }
+
