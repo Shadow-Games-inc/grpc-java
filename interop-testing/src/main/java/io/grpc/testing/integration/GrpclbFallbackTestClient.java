@@ -274,4 +274,19 @@ public final class GrpclbFallbackTestClient {
     waitForFallbackAndDoRpcs(fallbackDeadline);
   }
 
+  private void run() throws Exception {
+    logger.info("Begin test case: " + testCase);
+    if (testCase.equals("fast_fallback_before_startup")) {
+      runFastFallbackBeforeStartup();
+    } else if (testCase.equals("slow_fallback_before_startup")) {
+      runSlowFallbackBeforeStartup();
+    } else if (testCase.equals("fast_fallback_after_startup")) {
+      runFastFallbackAfterStartup();
+    } else if (testCase.equals("slow_fallback_after_startup")) {
+      runSlowFallbackAfterStartup();
+    } else {
+      throw new RuntimeException("invalid testcase: " + testCase);
+    }
+    logger.info("Test case: " + testCase + " done!");
+  }
 }
