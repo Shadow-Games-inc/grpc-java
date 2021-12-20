@@ -306,3 +306,9 @@ public final class Http2Client {
       public Throwable getError() {
         return error;
       }
+
+      public boolean awaitCompletion(long timeout, TimeUnit unit) throws Exception {
+        return latch.await(timeout, unit);
+      }
+    }
+
