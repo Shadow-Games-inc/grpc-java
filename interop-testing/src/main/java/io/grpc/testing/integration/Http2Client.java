@@ -366,3 +366,16 @@ public final class Http2Client {
         .build();
   }
 
+  private static String validTestCasesHelpText() {
+    StringBuilder builder = new StringBuilder();
+    for (Http2TestCases testCase : Http2TestCases.values()) {
+      String strTestcase = testCase.name().toLowerCase(Locale.ROOT);
+      builder.append("\n      ")
+          .append(strTestcase)
+          .append(": ")
+          .append(testCase.description());
+    }
+    return builder.toString();
+  }
+}
+
