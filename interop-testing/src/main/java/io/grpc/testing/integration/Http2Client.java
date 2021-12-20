@@ -320,3 +320,17 @@ public final class Http2Client {
         this.threadNum = threadNum;
         this.request = request;
       }
+
+      @Override
+      public void run() {
+        Thread.currentThread().setName("thread:" + threadNum);
+        try {
+          TestServiceGrpc.TestServiceBlockingStub blockingStub =
+              TestServiceGrpc.newBlockingStub(channel);
+          assertResponseEquals(blockingStub.unaryCall(simpleRequest), goldenResponse);
+        } catch (Exception e) {
+          throw new RuntimeException(e);
+        }
+      }
+    }
+
