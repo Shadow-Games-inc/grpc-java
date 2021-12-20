@@ -302,3 +302,7 @@ public final class Http2Client {
       public List<SimpleResponse> getResponses() {
         return responses;
       }
+
+      public Throwable getError() {
+        return error;
+      }
