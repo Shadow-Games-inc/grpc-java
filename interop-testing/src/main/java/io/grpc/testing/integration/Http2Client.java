@@ -220,3 +220,19 @@ public final class Http2Client {
         assertRstStreamReceived(ex.getStatus());
       }
     }
+
+    private void rstAfterData() throws Exception {
+      // Use async stub to verify data is received.
+      RstStreamObserver responseObserver = new RstStreamObserver();
+      asyncStub.unaryCall(simpleRequest, responseObserver);
+      if (!responseObserver.awaitCompletion(timeoutSeconds, TimeUnit.SECONDS)) {
+        throw new AssertionError("Operation timed out");
+      }
+      if (responseObserver.getError() == null) {
+        throw new AssertionError("Expected call to fail");
+      }
+      assertRstStreamReceived(Status.fromThrowable(responseObserver.getError()));
+      if (responseObserver.getResponses().size() != 1) {
+        throw new AssertionError("Expected one response");
+      }
+    }
