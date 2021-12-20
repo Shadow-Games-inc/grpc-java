@@ -151,3 +151,12 @@ public final class Http2Client {
     } catch (Exception ex) {
       throw new RuntimeException(ex);
     }
+
+    try {
+      if (threadpool != null) {
+        threadpool.shutdownNow();
+      }
+    } catch (Exception ex) {
+      throw new RuntimeException(ex);
+    }
+  }
