@@ -206,3 +206,17 @@ public final class Http2Client {
     private final SimpleRequest simpleRequest = SimpleRequest.newBuilder()
         .setResponseSize(responseSize)
         .setPayload(Payload.newBuilder().setBody(ByteString.copyFrom(new byte[payloadSize])))
+        .build();
+    final SimpleResponse goldenResponse = SimpleResponse.newBuilder()
+        .setPayload(Payload.newBuilder()
+            .setBody(ByteString.copyFrom(new byte[responseSize])))
+        .build();
+
+    private void rstAfterHeader() throws Exception {
+      try {
+        blockingStub.unaryCall(simpleRequest);
+        throw new AssertionError("Expected call to fail");
+      } catch (StatusRuntimeException ex) {
+        assertRstStreamReceived(ex.getStatus());
+      }
+    }
