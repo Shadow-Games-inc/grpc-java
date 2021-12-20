@@ -132,3 +132,15 @@ public class AltsHandshakerTestService extends HandshakerServiceImplBase {
   }
 
   private ByteString data(int len) {
+    byte[] k = new byte[len];
+    random.nextBytes(k);
+    return ByteString.copyFrom(k);
+  }
+
+  private enum State {
+    CLIENT_INIT,
+    SERVER_INIT,
+    CLIENT_FINISH,
+    SERVER_FINISH
+  }
+}
