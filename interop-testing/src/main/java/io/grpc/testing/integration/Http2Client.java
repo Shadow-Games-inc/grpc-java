@@ -110,3 +110,29 @@ public final class Http2Client {
       }
       String value = parts[1];
       if ("server_host".equals(key)) {
+        serverHost = value;
+      } else if ("server_port".equals(key)) {
+        serverPort = Integer.parseInt(value);
+      } else if ("test_case".equals(key)) {
+        testCase = value;
+      } else {
+        System.err.println("Unknown argument: " + key);
+        usage = true;
+        break;
+      }
+    }
+    if (usage) {
+      Http2Client c = new Http2Client();
+      System.out.println(
+          "Usage: [ARGS...]"
+              + "\n"
+              + "\n  --server_host=HOST          Server to connect to. Default " + c.serverHost
+              + "\n  --server_port=PORT          Port to connect to. Default " + c.serverPort
+              + "\n  --test_case=TESTCASE        Test case to run. Default " + c.testCase
+              + "\n    Valid options:"
+              + validTestCasesHelpText()
+      );
+      System.exit(1);
+    }
+  }
+
