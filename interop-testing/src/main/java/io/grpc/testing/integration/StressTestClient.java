@@ -655,6 +655,7 @@ public class StressTestClient {
   }
 
   @VisibleForTesting
+  int stubsPerChannel() {
     return stubsPerChannel;
   }
 
