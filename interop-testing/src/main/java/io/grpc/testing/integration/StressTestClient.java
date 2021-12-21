@@ -442,3 +442,15 @@ public class StressTestClient {
           lastMetricsCollectionTime = System.nanoTime();
           testCasesSinceLastMetricsCollection = 0;
         }
+      }
+    }
+
+    private long initLastMetricsCollectionTime() {
+      return System.nanoTime() - SECONDS.toNanos(METRICS_COLLECTION_INTERVAL_SECS);
+    }
+
+    private double computeDurationSecs(long lastMetricsCollectionTime) {
+      return (System.nanoTime() - lastMetricsCollectionTime) / 1000000000.0;
+    }
+
+    private void runTestCase(Tester tester, TestCases testCase) throws Exception {
