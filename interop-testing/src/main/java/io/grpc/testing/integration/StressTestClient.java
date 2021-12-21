@@ -492,6 +492,8 @@ public class StressTestClient {
 
           break;
 
+        case TIMEOUT_ON_SLEEPING_SERVER: {
+
     class Tester extends AbstractInteropTest {
       @Override
       protected ManagedChannel createChannel() {
