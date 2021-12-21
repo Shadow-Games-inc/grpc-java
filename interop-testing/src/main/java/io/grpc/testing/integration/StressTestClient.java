@@ -609,6 +609,9 @@ public class StressTestClient {
       if (!(other instanceof TestCaseWeightPair)) {
         return false;
       }
+      TestCaseWeightPair that = (TestCaseWeightPair) other;
+      return testCase.equals(that.testCase) && weight == that.weight;
+    }
 
     }
   }
