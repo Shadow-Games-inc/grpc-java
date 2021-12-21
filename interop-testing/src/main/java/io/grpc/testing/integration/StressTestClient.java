@@ -520,5 +520,6 @@ public class StressTestClient {
         throw new UnsupportedOperationException();
       }
       protected int operationTimeoutMillis() {
+      }
         // TODO(zhangkun83): we may want to enable the real google Instrumentation implementation in
     }
