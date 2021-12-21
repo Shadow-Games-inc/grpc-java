@@ -214,3 +214,10 @@ public class StressTestClient {
         .start();
   }
 
+  @VisibleForTesting
+  void runStressTest() throws Exception {
+    Preconditions.checkState(!shutdown, "client was shutdown.");
+    if (testCaseWeightPairs.isEmpty()) {
+      return;
+    }
+
