@@ -556,6 +556,9 @@ public class StressTestClient {
 
         shuffle(testCases);
 
+        this.testCases = Iterators.cycle(testCases);
+      }
+
       TestCases nextTestCase() {
   /**
     @Override
