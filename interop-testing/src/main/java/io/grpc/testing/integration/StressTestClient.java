@@ -530,6 +530,7 @@ public class StressTestClient {
 
       TestCases nextTestCase() {
   /**
+    @Override
         responseObserver.onNext(gauge);
     @Override
       }
