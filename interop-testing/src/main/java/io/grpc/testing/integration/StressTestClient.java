@@ -554,3 +554,5 @@ public class StressTestClient {
   @VisibleForTesting
   int durationSecs() {
     return durationSecs;
+
+  @VisibleForTesting
