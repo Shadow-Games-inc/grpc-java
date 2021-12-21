@@ -566,6 +566,10 @@ public class StressTestClient {
   }
 
   /**
+   * Service that exports the QPS metrics of the stress test.
+   */
+  private class MetricsServiceImpl extends MetricsServiceGrpc.MetricsServiceImplBase {
+
     @Override
     public void getAllGauges(Metrics.EmptyMessage request,
         StreamObserver<Metrics.GaugeResponse> responseObserver) {
