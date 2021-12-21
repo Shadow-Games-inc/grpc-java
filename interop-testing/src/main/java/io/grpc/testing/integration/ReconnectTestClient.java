@@ -49,3 +49,17 @@ public class ReconnectTestClient {
         System.exit(1);
       }
       String[] parts = arg.substring(2).split("=", 2);
+      String key = parts[0];
+      String value = parts[1];
+      if ("server_control_port".equals(key)) {
+        serverControlPort = Integer.parseInt(value);
+      } else if ("server_retry_port".equals(key)) {
+        serverRetryPort = Integer.parseInt(value);
+      } else if ("use_okhttp".equals(key)) {
+        useOkhttp = Boolean.parseBoolean(value);
+      } else {
+        System.err.println("Unknown argument: " + key);
+        System.exit(1);
+      }
+    }
+  }
