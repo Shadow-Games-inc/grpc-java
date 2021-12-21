@@ -492,5 +492,6 @@ public class StressTestClient {
 
           break;
 
+    class Tester extends AbstractInteropTest {
       }
     }
