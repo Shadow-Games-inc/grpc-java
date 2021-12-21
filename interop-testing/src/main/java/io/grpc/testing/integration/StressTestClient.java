@@ -203,3 +203,14 @@ public class StressTestClient {
       System.exit(1);
     }
   }
+
+  @VisibleForTesting
+  void startMetricsService() throws IOException {
+    Preconditions.checkState(!shutdown, "client was shutdown.");
+
+    metricsServer = ServerBuilder.forPort(metricsPort)
+        .addService(new MetricsServiceImpl())
+        .build()
+        .start();
+  }
+
