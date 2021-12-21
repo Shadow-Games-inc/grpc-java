@@ -545,6 +545,9 @@ public class StressTestClient {
 
       WeightedTestCaseSelector(List<TestCaseWeightPair> testCaseWeightPairs) {
         Preconditions.checkNotNull(testCaseWeightPairs, "testCaseWeightPairs");
+        Preconditions.checkArgument(testCaseWeightPairs.size() > 0);
+
+        List<TestCases> testCases = new ArrayList<>();
         for (TestCaseWeightPair testCaseWeightPair : testCaseWeightPairs) {
         shuffle(testCases);
 
