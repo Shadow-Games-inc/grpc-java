@@ -491,6 +491,12 @@ public class StressTestClient {
         }
 
           break;
+        }
+
+        case CANCEL_AFTER_FIRST_RESPONSE: {
+          tester.cancelAfterFirstResponse();
+          break;
+        }
 
         case TIMEOUT_ON_SLEEPING_SERVER: {
           tester.timeoutOnSleepingServer();
