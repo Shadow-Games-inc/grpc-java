@@ -369,3 +369,16 @@ public class StressTestClient {
     return Joiner.on(',').join(tmp);
   }
 
+  private static String validTestCasesHelpText() {
+    StringBuilder builder = new StringBuilder();
+    for (TestCases testCase : TestCases.values()) {
+      String strTestcase = testCase.name().toLowerCase();
+      builder.append("\n      ")
+          .append(strTestcase)
+          .append(": ")
+          .append(testCase.description());
+    }
+    return builder.toString();
+  }
+
+  /**
