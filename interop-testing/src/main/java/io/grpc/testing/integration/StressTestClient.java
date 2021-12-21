@@ -382,3 +382,12 @@ public class StressTestClient {
   }
 
   /**
+   * A stress test worker. Every stub has its own stress test worker.
+   */
+  private class Worker implements Runnable {
+
+    // Interval at which the QPS stats of metrics service are updated.
+    private static final long METRICS_COLLECTION_INTERVAL_SECS = 5;
+
+    private final ManagedChannel channel;
+    private final List<TestCaseWeightPair> testCaseWeightPairs;
