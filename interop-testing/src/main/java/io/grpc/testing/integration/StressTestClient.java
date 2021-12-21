@@ -410,3 +410,11 @@ public class StressTestClient {
       Thread.currentThread().setName(gaugeName);
 
       Tester tester = new Tester();
+      tester.setUp();
+      WeightedTestCaseSelector testCaseSelector = new WeightedTestCaseSelector(testCaseWeightPairs);
+      Long endTime = durationSec == null ? null : System.nanoTime() + SECONDS.toNanos(durationSecs);
+      long lastMetricsCollectionTime = initLastMetricsCollectionTime();
+      // Number of interop testcases run since the last time metrics have been updated.
+      long testCasesSinceLastMetricsCollection = 0;
+
+      while (!Thread.currentThread().isInterrupted() && !shutdown
