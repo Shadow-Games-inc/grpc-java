@@ -493,6 +493,10 @@ public class StressTestClient {
           break;
 
         case TIMEOUT_ON_SLEEPING_SERVER: {
+          tester.timeoutOnSleepingServer();
+          break;
+        }
+
         default:
           throw new IllegalArgumentException("Unknown test case: " + testCase);
       }
