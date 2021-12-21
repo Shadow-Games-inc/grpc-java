@@ -508,6 +508,7 @@ public class StressTestClient {
         default:
           throw new IllegalArgumentException("Unknown test case: " + testCase);
       }
+    }
 
     class Tester extends AbstractInteropTest {
       @Override
