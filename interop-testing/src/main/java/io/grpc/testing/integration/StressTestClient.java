@@ -113,3 +113,19 @@ public class StressTestClient {
       new ConcurrentHashMap<>();
 
   private volatile boolean shutdown;
+
+  /**
+   * List of futures that {@link #blockUntilStressTestComplete()} waits for.
+   */
+  private final List<ListenableFuture<?>> workerFutures =
+      new ArrayList<>();
+  private final List<ManagedChannel> channels = new ArrayList<>();
+  private ListeningExecutorService threadpool;
+
+  @VisibleForTesting
+  void parseArgs(String[] args) {
+    boolean usage = false;
+    String serverAddresses = "";
+    for (String arg : args) {
+      if (!arg.startsWith("--")) {
+        System.err.println("All arguments must start with '--': " + arg);
