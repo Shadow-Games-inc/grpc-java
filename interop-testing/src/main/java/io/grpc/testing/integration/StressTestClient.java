@@ -573,6 +573,9 @@ public class StressTestClient {
     @Override
     public void getAllGauges(Metrics.EmptyMessage request,
         StreamObserver<Metrics.GaugeResponse> responseObserver) {
+      for (Metrics.GaugeResponse gauge : gauges.values()) {
+        responseObserver.onNext(gauge);
+      }
       responseObserver.onCompleted();
     @Override
     public void getGauge(Metrics.GaugeRequest request,
