@@ -580,6 +580,12 @@ public class StressTestClient {
       }
 
     }
+  }
+
+  @VisibleForTesting
+  List<InetSocketAddress> addresses() {
+    return Collections.unmodifiableList(addresses);
+  }
 
   @VisibleForTesting
   String serverHostOverride() {
