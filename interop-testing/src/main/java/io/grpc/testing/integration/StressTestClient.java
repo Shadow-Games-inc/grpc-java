@@ -631,6 +631,10 @@ public class StressTestClient {
 
   @VisibleForTesting
   boolean useTls() {
+    return useTls;
+  }
+
+  @VisibleForTesting
   boolean useTestCa() {
     return useTestCa;
   }
