@@ -129,3 +129,28 @@ public class StressTestClient {
     for (String arg : args) {
       if (!arg.startsWith("--")) {
         System.err.println("All arguments must start with '--': " + arg);
+        usage = true;
+        break;
+      }
+      String[] parts = arg.substring(2).split("=", 2);
+      String key = parts[0];
+      if ("help".equals(key)) {
+        usage = true;
+        break;
+      }
+      if (parts.length != 2) {
+        System.err.println("All arguments must be of the form --arg=value");
+        usage = true;
+        break;
+      }
+      String value = parts[1];
+      if ("server_addresses".equals(key)) {
+        // May need to apply server host overrides to the addresses, so delay processing
+        serverAddresses = value;
+      } else if ("server_host_override".equals(key)) {
+        serverHostOverride = value;
+      } else if ("use_tls".equals(key)) {
+        useTls = Boolean.parseBoolean(value);
+      } else if ("use_test_ca".equals(key)) {
+        useTestCa = Boolean.parseBoolean(value);
+      } else if ("test_cases".equals(key)) {
