@@ -255,3 +255,10 @@ public class StressTestClient {
     }
   }
 
+  @VisibleForTesting
+  void shutdown() {
+    if (shutdown) {
+      return;
+    }
+    shutdown = true;
+
