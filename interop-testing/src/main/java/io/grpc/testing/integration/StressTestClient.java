@@ -400,3 +400,13 @@ public class StressTestClient {
       this.channel = Preconditions.checkNotNull(channel, "channel");
       this.testCaseWeightPairs =
           Preconditions.checkNotNull(testCaseWeightPairs, "testCaseWeightPairs");
+      this.durationSec = durationSec == -1 ? null : durationSec;
+      this.gaugeName = Preconditions.checkNotNull(gaugeName, "gaugeName");
+    }
+
+    @Override
+    public void run() {
+      // Simplify debugging if the worker crashes / never terminates.
+      Thread.currentThread().setName(gaugeName);
+
+      Tester tester = new Tester();
