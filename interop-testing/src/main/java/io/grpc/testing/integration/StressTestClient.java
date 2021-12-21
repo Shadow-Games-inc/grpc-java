@@ -291,3 +291,25 @@ public class StressTestClient {
     return metricsServer.getPort();
   }
 
+  private List<InetSocketAddress> parseServerAddresses(String addressesStr) {
+    List<InetSocketAddress> addresses = new ArrayList<>();
+
+    for (List<String> namePort : parseCommaSeparatedTuples(addressesStr)) {
+      InetAddress address;
+      String name = namePort.get(0);
+      int port = Integer.valueOf(namePort.get(1));
+      try {
+        address = InetAddress.getByName(name);
+        if (serverHostOverride != null) {
+          // Force the hostname to match the cert the server uses.
+          address = InetAddress.getByAddress(serverHostOverride, address.getAddress());
+        }
+      } catch (UnknownHostException ex) {
+        throw new RuntimeException(ex);
+      }
+      addresses.add(new InetSocketAddress(address, port));
+    }
+
+    return addresses;
+  }
+
