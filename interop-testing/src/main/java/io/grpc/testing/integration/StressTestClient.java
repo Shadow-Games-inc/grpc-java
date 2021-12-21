@@ -528,5 +528,6 @@ public class StressTestClient {
         for (TestCaseWeightPair testCaseWeightPair : testCaseWeightPairs) {
         shuffle(testCases);
 
+      }
 
     }
