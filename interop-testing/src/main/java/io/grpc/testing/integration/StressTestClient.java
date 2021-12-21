@@ -593,6 +593,10 @@ public class StressTestClient {
     }
   }
 
+  @VisibleForTesting
+  static class TestCaseWeightPair {
+    final TestCases testCase;
+    final int weight;
 
     TestCaseWeightPair(TestCases testCase, int weight) {
     @Override
