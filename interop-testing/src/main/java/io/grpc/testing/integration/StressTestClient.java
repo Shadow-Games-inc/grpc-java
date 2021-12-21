@@ -605,6 +605,9 @@ public class StressTestClient {
     }
 
     @Override
+    public boolean equals(Object other) {
+      if (!(other instanceof TestCaseWeightPair)) {
+        return false;
       }
 
     }
