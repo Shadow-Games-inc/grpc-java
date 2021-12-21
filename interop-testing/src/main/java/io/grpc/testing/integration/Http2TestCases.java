@@ -23,3 +23,18 @@ import com.google.common.base.Preconditions;
  */
 public enum Http2TestCases {
   RST_AFTER_HEADER("server resets stream after sending header"),
+  RST_AFTER_DATA("server resets stream after sending data"),
+  RST_DURING_DATA("server resets stream in the middle of sending data"),
+  GOAWAY("server sends goaway after first request and asserts second request uses new connection"),
+  PING("server sends pings during request and verifies client response"),
+  MAX_STREAMS("server verifies that the client respects MAX_STREAMS setting");
+
+  private final String description;
+
+  Http2TestCases(String description) {
+    this.description = description;
+  }
+
+  /**
+   * Returns a description of the test case.
+   */
