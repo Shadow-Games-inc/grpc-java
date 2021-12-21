@@ -355,3 +355,17 @@ public class StressTestClient {
         .build();
   }
 
+  private static String serverAddressesToString(List<InetSocketAddress> addresses) {
+    List<String> tmp = new ArrayList<>();
+    for (InetSocketAddress address : addresses) {
+      URI uri;
+      try {
+        uri = new URI(null, null, address.getHostName(), address.getPort(), null, null, null);
+      } catch (URISyntaxException e) {
+        throw new RuntimeException(e);
+      }
+      tmp.add(uri.getAuthority());
+    }
+    return Joiner.on(',').join(tmp);
+  }
+
