@@ -493,6 +493,7 @@ public class StressTestClient {
           break;
 
     class Tester extends AbstractInteropTest {
+      @Override
       protected ManagedChannel createChannel() {
         return Worker.this.channel;
       }
