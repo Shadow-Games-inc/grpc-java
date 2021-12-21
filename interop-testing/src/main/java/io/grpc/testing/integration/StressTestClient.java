@@ -493,5 +493,6 @@ public class StressTestClient {
           break;
 
     class Tester extends AbstractInteropTest {
+        throw new UnsupportedOperationException();
       }
     }
