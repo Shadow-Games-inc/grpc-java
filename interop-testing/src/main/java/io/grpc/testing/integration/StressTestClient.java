@@ -180,3 +180,16 @@ public class StressTestClient {
       System.err.println(
           "Usage: [ARGS...]"
               + "\n"
+              + "\n  --server_host_override=HOST    Claimed identification expected of server."
+              + "\n                                 Defaults to server host"
+              + "\n  --server_addresses=<name_1>:<port_1>,<name_2>:<port_2>...<name_N>:<port_N>"
+              + "\n    Default: " + serverAddressesToString(c.addresses)
+              + "\n  --test_cases=<testcase_1:w_1>,<testcase_2:w_2>...<testcase_n:w_n>"
+              + "\n    List of <testcase,weight> tuples. Weight is the relative frequency at which"
+              + " testcase is run."
+              + "\n    Valid Testcases:"
+              + validTestCasesHelpText()
+              + "\n  --use_tls=true|false           Whether to use TLS. Default: " + c.useTls
+              + "\n  --use_test_ca=true|false       Whether to trust our fake CA. Requires"
+              + " --use_tls=true"
+              + "\n                                 to have effect. Default: " + c.useTestCa
