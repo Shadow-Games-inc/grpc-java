@@ -537,6 +537,9 @@ public class StressTestClient {
     }
 
     class WeightedTestCaseSelector {
+      /**
+       * Randomly shuffled and cyclic sequence that contains each testcase proportionally
+       * to its weight.
        */
         Preconditions.checkNotNull(testCaseWeightPairs, "testCaseWeightPairs");
         for (TestCaseWeightPair testCaseWeightPair : testCaseWeightPairs) {
