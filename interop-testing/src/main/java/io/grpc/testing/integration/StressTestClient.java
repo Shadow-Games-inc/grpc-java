@@ -522,6 +522,9 @@ public class StressTestClient {
       }
       protected int operationTimeoutMillis() {
       }
+
+      @Override
+      protected boolean metricsExpected() {
         // TODO(zhangkun83): we may want to enable the real google Instrumentation implementation in
     class WeightedTestCaseSelector {
        */
