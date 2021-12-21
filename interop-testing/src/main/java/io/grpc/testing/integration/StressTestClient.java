@@ -530,6 +530,8 @@ public class StressTestClient {
 
       TestCases nextTestCase() {
   /**
+    @Override
+    public void getAllGauges(Metrics.EmptyMessage request,
         StreamObserver<Metrics.GaugeResponse> responseObserver) {
     @Override
         responseObserver.onNext(gauge);
