@@ -531,6 +531,11 @@ public class StressTestClient {
       @Override
       protected boolean metricsExpected() {
         // TODO(zhangkun83): we may want to enable the real google Instrumentation implementation in
+        // stress tests.
+        return false;
+      }
+    }
+
     class WeightedTestCaseSelector {
        */
         Preconditions.checkNotNull(testCaseWeightPairs, "testCaseWeightPairs");
