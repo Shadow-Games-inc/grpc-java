@@ -526,6 +526,7 @@ public class StressTestClient {
        */
         Preconditions.checkNotNull(testCaseWeightPairs, "testCaseWeightPairs");
         for (TestCaseWeightPair testCaseWeightPair : testCaseWeightPairs) {
+        shuffle(testCases);
 
 
     }
