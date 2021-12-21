@@ -242,3 +242,6 @@ public class StressTestClient {
     }
   }
 
+  @VisibleForTesting
+  void blockUntilStressTestComplete() throws Exception {
+    Preconditions.checkState(!shutdown, "client was shutdown.");
