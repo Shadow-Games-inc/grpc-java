@@ -325,3 +325,17 @@ public class StressTestClient {
     return testCaseWeightPairs;
   }
 
+  private static List<List<String>> parseCommaSeparatedTuples(String str) {
+    List<List<String>> tuples = new ArrayList<>();
+    for (String tupleStr : Splitter.on(',').split(str)) {
+      int splitIdx = tupleStr.lastIndexOf(':');
+      if (splitIdx == -1) {
+        throw new IllegalArgumentException("Illegal tuple format: '" + tupleStr + "'");
+      }
+      String part0 = tupleStr.substring(0, splitIdx);
+      String part1 = tupleStr.substring(splitIdx + 1);
+      tuples.add(asList(part0, part1));
+    }
+    return tuples;
+  }
+
