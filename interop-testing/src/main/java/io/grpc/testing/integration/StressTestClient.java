@@ -493,6 +493,7 @@ public class StressTestClient {
           break;
 
     class Tester extends AbstractInteropTest {
+        return Worker.this.channel;
         throw new UnsupportedOperationException();
       }
     }
