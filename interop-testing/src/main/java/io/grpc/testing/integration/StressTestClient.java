@@ -495,6 +495,7 @@ public class StressTestClient {
     class Tester extends AbstractInteropTest {
         return Worker.this.channel;
       }
+
       @Override
       protected ManagedChannelBuilder<?> createChannelBuilder() {
         throw new UnsupportedOperationException();
