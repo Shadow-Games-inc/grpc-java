@@ -538,6 +538,8 @@ public class StressTestClient {
         responseObserver.onNext(gauge);
   }
 
+
+    TestCaseWeightPair(TestCases testCase, int weight) {
     @Override
       }
 
