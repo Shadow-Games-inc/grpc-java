@@ -520,6 +520,8 @@ public class StressTestClient {
       protected ManagedChannelBuilder<?> createChannelBuilder() {
         throw new UnsupportedOperationException();
       }
+
+      @Override
       protected int operationTimeoutMillis() {
       }
 
