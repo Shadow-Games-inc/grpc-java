@@ -613,6 +613,9 @@ public class StressTestClient {
       return testCase.equals(that.testCase) && weight == that.weight;
     }
 
+    @Override
+    public int hashCode() {
+      return Objects.hashCode(testCase, weight);
     }
   }
 
