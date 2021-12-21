@@ -349,3 +349,9 @@ public class StressTestClient {
         throw new RuntimeException(ex);
       }
     }
+    return NettyChannelBuilder.forAddress(address)
+        .negotiationType(useTls ? NegotiationType.TLS : NegotiationType.PLAINTEXT)
+        .sslContext(sslContext)
+        .build();
+  }
+
