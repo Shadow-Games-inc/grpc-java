@@ -313,3 +313,15 @@ public class StressTestClient {
     return addresses;
   }
 
+  private static List<TestCaseWeightPair> parseTestCases(String testCasesStr) {
+    List<TestCaseWeightPair> testCaseWeightPairs = new ArrayList<>();
+
+    for (List<String> nameWeight : parseCommaSeparatedTuples(testCasesStr)) {
+      TestCases testCase = TestCases.fromString(nameWeight.get(0));
+      int weight = Integer.valueOf(nameWeight.get(1));
+      testCaseWeightPairs.add(new TestCaseWeightPair(testCase, weight));
+    }
+
+    return testCaseWeightPairs;
+  }
+
