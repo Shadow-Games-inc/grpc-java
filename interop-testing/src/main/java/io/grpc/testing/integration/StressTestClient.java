@@ -170,3 +170,8 @@ public class StressTestClient {
       }
     }
 
+    if (!usage && !serverAddresses.isEmpty()) {
+      addresses = parseServerAddresses(serverAddresses);
+      usage = addresses.isEmpty();
+    }
+
