@@ -73,3 +73,24 @@ public class StressTestClient {
    */
   public static void main(String... args) throws Exception {
     final StressTestClient client = new StressTestClient();
+    client.parseArgs(args);
+
+    // Attempt an orderly shutdown, if the JVM is shutdown via a signal.
+    Runtime.getRuntime().addShutdownHook(new Thread() {
+      @Override
+      public void run() {
+        client.shutdown();
+      }
+    });
+
+    try {
+      client.startMetricsService();
+      client.runStressTest();
+      client.blockUntilStressTestComplete();
+    } catch (Exception e) {
+      log.log(Level.WARNING, "The stress test client encountered an error!", e);
+    } finally {
+      client.shutdown();
+    }
+  }
+
