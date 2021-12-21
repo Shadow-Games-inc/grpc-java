@@ -286,3 +286,8 @@ public class StressTestClient {
     }
   }
 
+  @VisibleForTesting
+  int getMetricServerPort() {
+    return metricsServer.getPort();
+  }
+
