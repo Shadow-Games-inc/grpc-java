@@ -100,3 +100,19 @@ public class ReconnectTestClient {
 
   /**
    * The main application allowing this client to be launched from the command line.
+   */
+  public static void main(String[] args) {
+    ReconnectTestClient client = new ReconnectTestClient();
+    client.parseArgs(args);
+    System.out.println("Starting test:");
+    try {
+      client.runTest();
+      System.out.println("Finished successfully");
+      System.exit(0);
+    } catch (Throwable e) {
+      e.printStackTrace();
+      System.err.println("Test failed!");
+      System.exit(1);
+    }
+  }
+}
