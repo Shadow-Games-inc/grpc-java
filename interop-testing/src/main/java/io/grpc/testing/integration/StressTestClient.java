@@ -590,6 +590,12 @@ public class StressTestClient {
   @VisibleForTesting
   int durationSecs() {
     return durationSecs;
+  }
+
+  @VisibleForTesting
+  int channelsPerServer() {
+    return channelsPerServer;
+  }
 
   @VisibleForTesting
     return stubsPerChannel;
