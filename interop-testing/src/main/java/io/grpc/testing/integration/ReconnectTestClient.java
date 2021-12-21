@@ -83,3 +83,20 @@ public class ReconnectTestClient {
 
       long startTimeStamp = System.currentTimeMillis();
       while ((System.currentTimeMillis() - startTimeStamp) < TEST_TIME_MS) {
+        try {
+          retryStub.start(Empty.getDefaultInstance());
+        } catch (StatusRuntimeException expected) {
+          // Make CheckStyle happy.
+        }
+        Thread.sleep(50);
+      }
+      ReconnectInfo info = controlStub.stop(Empty.getDefaultInstance());
+      assertTrue(info.getPassed());
+    } finally {
+      controlChannel.shutdownNow();
+      retryChannel.shutdownNow();
+    }
+  }
+
+  /**
+   * The main application allowing this client to be launched from the command line.
