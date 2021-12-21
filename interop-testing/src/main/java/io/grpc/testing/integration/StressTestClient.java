@@ -595,3 +595,8 @@ public class StressTestClient {
     return stubsPerChannel;
   }
 
+  @VisibleForTesting
+  int metricsPort() {
+    return metricsPort;
+  }
+}
