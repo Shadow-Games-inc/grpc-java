@@ -551,3 +551,6 @@ public class StressTestClient {
   boolean useTestCa() {
     return useTestCa;
   }
+  @VisibleForTesting
+  int durationSecs() {
+    return durationSecs;
