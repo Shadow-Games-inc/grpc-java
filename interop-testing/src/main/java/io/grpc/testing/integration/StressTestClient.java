@@ -575,6 +575,11 @@ public class StressTestClient {
         StreamObserver<Metrics.GaugeResponse> responseObserver) {
       responseObserver.onCompleted();
     @Override
+    public void getGauge(Metrics.GaugeRequest request,
+        StreamObserver<Metrics.GaugeResponse> responseObserver) {
+      String gaugeName = request.getName();
+      Metrics.GaugeResponse gauge = gauges.get(gaugeName);
+      if (gauge != null) {
         responseObserver.onNext(gauge);
         responseObserver.onCompleted();
       } else {
