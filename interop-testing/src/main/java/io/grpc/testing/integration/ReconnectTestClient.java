@@ -30,3 +30,22 @@ import io.grpc.testing.integration.Messages.ReconnectInfo;
  * Verifies the client is reconnecting the server with correct backoffs
  *
  * <p>See the <a href="https://github.com/grpc/grpc/blob/master/doc/connection-backoff-interop-test-description.md">Test Spec</a>.
+ */
+public class ReconnectTestClient {
+  private static final int TEST_TIME_MS = 540 * 1000;
+
+  private int serverControlPort = 8080;
+  private int serverRetryPort = 8081;
+  private boolean useOkhttp = false;
+  private ManagedChannel controlChannel;
+  private ManagedChannel retryChannel;
+  private ReconnectServiceGrpc.ReconnectServiceBlockingStub controlStub;
+  private ReconnectServiceGrpc.ReconnectServiceBlockingStub retryStub;
+
+  private void parseArgs(String[] args) {
+    for (String arg : args) {
+      if (!arg.startsWith("--")) {
+        System.err.println("All arguments must start with '--': " + arg);
+        System.exit(1);
+      }
+      String[] parts = arg.substring(2).split("=", 2);
