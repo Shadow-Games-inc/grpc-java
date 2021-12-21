@@ -587,6 +587,12 @@ public class StressTestClient {
   boolean useTestCa() {
     return useTestCa;
   }
+
+  @VisibleForTesting
+  List<TestCaseWeightPair> testCaseWeightPairs() {
+    return testCaseWeightPairs;
+  }
+
   @VisibleForTesting
   int durationSecs() {
     return durationSecs;
