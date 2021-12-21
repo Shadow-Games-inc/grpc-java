@@ -547,3 +547,6 @@ public class StressTestClient {
 
   @VisibleForTesting
   String serverHostOverride() {
+  boolean useTestCa() {
+    return useTestCa;
+  }
