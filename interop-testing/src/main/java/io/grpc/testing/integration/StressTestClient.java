@@ -429,3 +429,16 @@ public class StressTestClient {
 
         double durationSecs = computeDurationSecs(lastMetricsCollectionTime);
         if (durationSecs >= METRICS_COLLECTION_INTERVAL_SECS) {
+          long qps = (long) Math.ceil(testCasesSinceLastMetricsCollection / durationSecs);
+
+          Metrics.GaugeResponse gauge = Metrics.GaugeResponse
+              .newBuilder()
+              .setName(gaugeName)
+              .setLongValue(qps)
+              .build();
+
+          gauges.put(gaugeName, gauge);
+
+          lastMetricsCollectionTime = System.nanoTime();
+          testCasesSinceLastMetricsCollection = 0;
+        }
