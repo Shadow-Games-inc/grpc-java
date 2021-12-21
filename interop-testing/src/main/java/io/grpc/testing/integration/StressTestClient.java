@@ -549,6 +549,11 @@ public class StressTestClient {
 
         List<TestCases> testCases = new ArrayList<>();
         for (TestCaseWeightPair testCaseWeightPair : testCaseWeightPairs) {
+          for (int i = 0; i < testCaseWeightPair.weight; i++) {
+            testCases.add(testCaseWeightPair.testCase);
+          }
+        }
+
         shuffle(testCases);
 
       TestCases nextTestCase() {
