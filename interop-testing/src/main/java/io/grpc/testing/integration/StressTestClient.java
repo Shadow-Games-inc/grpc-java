@@ -556,3 +556,6 @@ public class StressTestClient {
     return durationSecs;
 
   @VisibleForTesting
+    return stubsPerChannel;
+  }
+
