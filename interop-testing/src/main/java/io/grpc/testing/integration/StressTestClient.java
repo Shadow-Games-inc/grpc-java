@@ -196,3 +196,10 @@ public class StressTestClient {
               + "\n  --test_duration_secs=SECONDS   '-1' for no limit. Default: " + c.durationSecs
               + "\n  --num_channels_per_server=INT  Number of connections to each server address."
               + " Default: " + c.channelsPerServer
+              + "\n  --num_stubs_per_channel=INT    Default: " + c.stubsPerChannel
+              + "\n  --metrics_port=PORT            Listening port of the metrics server."
+              + " Default: " + c.metricsPort
+      );
+      System.exit(1);
+    }
+  }
