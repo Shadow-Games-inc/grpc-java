@@ -536,6 +536,8 @@ public class StressTestClient {
       responseObserver.onCompleted();
     @Override
         responseObserver.onNext(gauge);
+  }
+
     @Override
       }
 
