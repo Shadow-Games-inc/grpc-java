@@ -468,3 +468,18 @@ public class StressTestClient {
           tester.clientStreaming();
           break;
 
+        case SERVER_STREAMING:
+          tester.serverStreaming();
+          break;
+
+        case PING_PONG:
+          tester.pingPong();
+          break;
+
+        case EMPTY_STREAM:
+          tester.emptyStream();
+          break;
+
+        case UNIMPLEMENTED_METHOD: {
+          tester.unimplementedMethod();
+          break;
