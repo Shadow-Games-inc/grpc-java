@@ -54,3 +54,22 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ * A stress test client following the
+ * <a href="https://github.com/grpc/grpc/blob/master/tools/run_tests/stress_test/STRESS_CLIENT_SPEC.md">
+ * specifications</a> of the gRPC stress testing framework.
+ */
+public class StressTestClient {
+
+  private static final Logger log = Logger.getLogger(StressTestClient.class.getName());
+
+  /**
+   * The main application allowing this client to be launched from the command line.
+   */
+  public static void main(String... args) throws Exception {
+    final StressTestClient client = new StressTestClient();
