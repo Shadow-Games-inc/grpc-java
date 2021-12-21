@@ -277,3 +277,12 @@ public class StressTestClient {
       log.log(Level.WARNING, "Error shutting down metrics service!", t);
     }
 
+    try {
+      if (threadpool != null) {
+        threadpool.shutdownNow();
+      }
+    } catch (Throwable t) {
+      log.log(Level.WARNING, "Error shutting down threadpool.", t);
+    }
+  }
+
