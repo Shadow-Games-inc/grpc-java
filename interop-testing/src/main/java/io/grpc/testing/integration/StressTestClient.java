@@ -490,6 +490,8 @@ public class StressTestClient {
           break;
         }
 
+        case CANCEL_AFTER_BEGIN: {
+          tester.cancelAfterBegin();
           break;
         }
 
