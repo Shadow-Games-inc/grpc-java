@@ -339,3 +339,13 @@ public class StressTestClient {
     return tuples;
   }
 
+  private ManagedChannel createChannel(InetSocketAddress address) {
+    SslContext sslContext = null;
+    if (useTestCa) {
+      try {
+        sslContext = GrpcSslContexts.forClient().trustManager(
+            TestUtils.loadCert("ca.pem")).build();
+      } catch (Exception ex) {
+        throw new RuntimeException(ex);
+      }
+    }
