@@ -94,3 +94,22 @@ public class StressTestClient {
     }
   }
 
+  private static final int WORKER_GRACE_PERIOD_SECS = 30;
+
+  private List<InetSocketAddress> addresses =
+      singletonList(new InetSocketAddress("localhost", 8080));
+  private List<TestCaseWeightPair> testCaseWeightPairs = new ArrayList<>();
+
+  private String serverHostOverride;
+  private boolean useTls = false;
+  private boolean useTestCa = false;
+  private int durationSecs = -1;
+  private int channelsPerServer = 1;
+  private int stubsPerChannel = 1;
+  private int metricsPort = 8081;
+
+  private Server metricsServer;
+  private final Map<String, Metrics.GaugeResponse> gauges =
+      new ConcurrentHashMap<>();
+
+  private volatile boolean shutdown;
