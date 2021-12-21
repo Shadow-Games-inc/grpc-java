@@ -38,3 +38,20 @@ public enum Http2TestCases {
   /**
    * Returns a description of the test case.
    */
+  public String description() {
+    return description;
+  }
+
+  /**
+   * Returns the {@link Http2TestCases} matching the string {@code s}. The
+   * matching is case insensitive.
+   */
+  public static Http2TestCases fromString(String s) {
+    Preconditions.checkNotNull(s, "s");
+    try {
+      return Http2TestCases.valueOf(s.toUpperCase());
+    } catch (IllegalArgumentException ex) {
+      throw new IllegalArgumentException("Invalid test case: " + s);
+    }
+  }
+}
