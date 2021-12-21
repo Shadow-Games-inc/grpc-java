@@ -154,3 +154,19 @@ public class StressTestClient {
       } else if ("use_test_ca".equals(key)) {
         useTestCa = Boolean.parseBoolean(value);
       } else if ("test_cases".equals(key)) {
+        testCaseWeightPairs = parseTestCases(value);
+      } else if ("test_duration_secs".equals(key)) {
+        durationSecs = Integer.valueOf(value);
+      } else if ("num_channels_per_server".equals(key)) {
+        channelsPerServer = Integer.valueOf(value);
+      } else if ("num_stubs_per_channel".equals(key)) {
+        stubsPerChannel = Integer.valueOf(value);
+      } else if ("metrics_port".equals(key)) {
+        metricsPort = Integer.valueOf(value);
+      } else {
+        System.err.println("Unknown argument: " + key);
+        usage = true;
+        break;
+      }
+    }
+
