@@ -262,3 +262,12 @@ public class StressTestClient {
     }
     shutdown = true;
 
+    for (ManagedChannel ch : channels) {
+      try {
+        ch.shutdownNow();
+        ch.awaitTermination(1, SECONDS);
+      } catch (Throwable t) {
+        log.log(Level.WARNING, "Error shutting down channel!", t);
+      }
+    }
+
