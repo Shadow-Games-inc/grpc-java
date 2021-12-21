@@ -496,4 +496,5 @@ public class StressTestClient {
         return Worker.this.channel;
         throw new UnsupportedOperationException();
       }
+      protected int operationTimeoutMillis() {
     }
