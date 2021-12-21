@@ -418,3 +418,14 @@ public class StressTestClient {
       long testCasesSinceLastMetricsCollection = 0;
 
       while (!Thread.currentThread().isInterrupted() && !shutdown
+          && (endTime == null || endTime - System.nanoTime() > 0)) {
+        try {
+          runTestCase(tester, testCaseSelector.nextTestCase());
+        } catch (Exception e) {
+          throw new RuntimeException(e);
+        }
+
+        testCasesSinceLastMetricsCollection++;
+
+        double durationSecs = computeDurationSecs(lastMetricsCollectionTime);
+        if (durationSecs >= METRICS_COLLECTION_INTERVAL_SECS) {
