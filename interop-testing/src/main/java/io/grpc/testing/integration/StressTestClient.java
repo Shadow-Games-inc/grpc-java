@@ -175,3 +175,8 @@ public class StressTestClient {
       usage = addresses.isEmpty();
     }
 
+    if (usage) {
+      StressTestClient c = new StressTestClient();
+      System.err.println(
+          "Usage: [ARGS...]"
+              + "\n"
