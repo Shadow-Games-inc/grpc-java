@@ -391,3 +391,12 @@ public class StressTestClient {
 
     private final ManagedChannel channel;
     private final List<TestCaseWeightPair> testCaseWeightPairs;
+    private final Integer durationSec;
+    private final String gaugeName;
+
+    Worker(ManagedChannel channel, List<TestCaseWeightPair> testCaseWeightPairs,
+        int durationSec, String gaugeName) {
+      Preconditions.checkArgument(durationSec >= -1, "durationSec must be gte -1.");
+      this.channel = Preconditions.checkNotNull(channel, "channel");
+      this.testCaseWeightPairs =
+          Preconditions.checkNotNull(testCaseWeightPairs, "testCaseWeightPairs");
