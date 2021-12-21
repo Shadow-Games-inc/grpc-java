@@ -544,3 +544,6 @@ public class StressTestClient {
       }
 
     }
+
+  @VisibleForTesting
+  String serverHostOverride() {
