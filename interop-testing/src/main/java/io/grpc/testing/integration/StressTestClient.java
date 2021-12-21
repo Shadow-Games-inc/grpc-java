@@ -490,6 +490,7 @@ public class StressTestClient {
           break;
         }
 
+          break;
 
       }
     }
