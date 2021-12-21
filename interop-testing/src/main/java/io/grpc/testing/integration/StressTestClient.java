@@ -494,6 +494,7 @@ public class StressTestClient {
 
     class Tester extends AbstractInteropTest {
         return Worker.this.channel;
+      @Override
         throw new UnsupportedOperationException();
       }
       protected int operationTimeoutMillis() {
