@@ -454,3 +454,17 @@ public class StressTestClient {
     }
 
     private void runTestCase(Tester tester, TestCases testCase) throws Exception {
+      // TODO(buchgr): Implement tests requiring auth, once C++ supports it.
+      switch (testCase) {
+        case EMPTY_UNARY:
+          tester.emptyUnary();
+          break;
+
+        case LARGE_UNARY:
+          tester.largeUnary();
+          break;
+
+        case CLIENT_STREAMING:
+          tester.clientStreaming();
+          break;
+
