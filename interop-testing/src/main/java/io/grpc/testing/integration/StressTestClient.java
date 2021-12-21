@@ -572,6 +572,11 @@ public class StressTestClient {
       responseObserver.onCompleted();
     @Override
         responseObserver.onNext(gauge);
+        responseObserver.onCompleted();
+      } else {
+        responseObserver.onError(new StatusException(Status.NOT_FOUND));
+      }
+    }
   }
 
 
