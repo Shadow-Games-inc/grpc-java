@@ -599,6 +599,11 @@ public class StressTestClient {
     final int weight;
 
     TestCaseWeightPair(TestCases testCase, int weight) {
+      Preconditions.checkArgument(weight >= 0, "weight must be positive.");
+      this.testCase = Preconditions.checkNotNull(testCase, "testCase");
+      this.weight = weight;
+    }
+
     @Override
       }
 
