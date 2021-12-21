@@ -493,6 +493,9 @@ public class StressTestClient {
           break;
 
         case TIMEOUT_ON_SLEEPING_SERVER: {
+        default:
+          throw new IllegalArgumentException("Unknown test case: " + testCase);
+      }
 
     class Tester extends AbstractInteropTest {
       @Override
