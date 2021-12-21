@@ -560,6 +560,11 @@ public class StressTestClient {
       }
 
       TestCases nextTestCase() {
+        return testCases.next();
+      }
+    }
+  }
+
   /**
     @Override
     public void getAllGauges(Metrics.EmptyMessage request,
