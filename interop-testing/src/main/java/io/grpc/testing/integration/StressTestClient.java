@@ -245,3 +245,13 @@ public class StressTestClient {
   @VisibleForTesting
   void blockUntilStressTestComplete() throws Exception {
     Preconditions.checkState(!shutdown, "client was shutdown.");
+
+    ListenableFuture<?> f = Futures.allAsList(workerFutures);
+    if (durationSecs == -1) {
+      // '-1' indicates that the stress test runs until terminated by the user.
+      f.get();
+    } else {
+      f.get(durationSecs + WORKER_GRACE_PERIOD_SECS, SECONDS);
+    }
+  }
+
