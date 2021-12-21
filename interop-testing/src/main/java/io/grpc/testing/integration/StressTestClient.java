@@ -483,3 +483,10 @@ public class StressTestClient {
         case UNIMPLEMENTED_METHOD: {
           tester.unimplementedMethod();
           break;
+        }
+
+        case UNIMPLEMENTED_SERVICE: {
+          tester.unimplementedService();
+          break;
+        }
+
