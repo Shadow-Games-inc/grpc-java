@@ -64,3 +64,16 @@ public class ChannelAndServerBuilderTest {
         continue;
       }
       Class<?> clazz = Class.forName(className, false /*initialize*/, loader);
+      if (ServerBuilder.class.isAssignableFrom(clazz) && clazz != ServerBuilder.class) {
+        classes.add(new Object[]{clazz});
+      } else if (ManagedChannelBuilder.class.isAssignableFrom(clazz)
+          && clazz != ManagedChannelBuilder.class) {
+        classes.add(new Object[]{clazz});
+      }
+    }
+    Truth.assertWithMessage("Unable to find any builder classes").that(classes).isNotEmpty();
+    return classes;
+  }
+
+  @Test
+  public void serverBuilderHidesMethod_forPort() throws Exception {
