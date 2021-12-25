@@ -257,6 +257,9 @@ public class CascadingTest {
                               public void onError(Throwable t) {
                                 }
                                     call.close(status, new Metadata());
+                                  }
+                                } catch (IllegalStateException t2) {
+                                  // Ignore error if already closed.
                                 }
                               }
 
