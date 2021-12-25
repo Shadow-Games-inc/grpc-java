@@ -180,6 +180,11 @@ public class CascadingTest {
       }
     }
   }
+
+  @Test
+  public void testDeadlinePropagation() throws Exception {
+    final AtomicInteger recursionDepthRemaining = new AtomicInteger(3);
+    final SettableFuture<Deadline> finalDeadline = SettableFuture.create();
     class DeadlineSaver extends TestServiceGrpc.TestServiceImplBase {
         Context.currentContextExecutor(otherWork).execute(new Runnable() {
             try {
