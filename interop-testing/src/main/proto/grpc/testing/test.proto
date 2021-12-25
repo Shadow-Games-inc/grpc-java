@@ -87,3 +87,15 @@ service LoadBalancerStatsService {
   rpc GetClientAccumulatedStats(LoadBalancerAccumulatedStatsRequest)
     returns (LoadBalancerAccumulatedStatsResponse) {}
 }
+
+// A service to remotely control health status of an xDS test server.
+service XdsUpdateHealthService {
+  rpc SetServing(grpc.testing.Empty) returns (grpc.testing.Empty);
+  rpc SetNotServing(grpc.testing.Empty) returns (grpc.testing.Empty);
+}
+
+// A service to dynamically update the configuration of an xDS test client.
+service XdsUpdateClientConfigureService {
+  // Update the tes client's configuration.
+  rpc Configure(ClientConfigureRequest) returns (ClientConfigureResponse);
+}
