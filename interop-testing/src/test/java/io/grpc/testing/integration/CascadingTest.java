@@ -248,6 +248,11 @@ public class CascadingTest {
   }
    */
               public <ReqT, RespT> ServerCall.Listener<ReqT> interceptCall(
+                  final ServerCall<ReqT, RespT> call,
+                  Metadata headers,
+                  ServerCallHandler<ReqT, RespT> next) {
+                // Respond with the headers but nothing else.
+                call.sendHeaders(new Metadata());
                 call.request(1);
                 return new ServerCall.Listener<ReqT>() {
                   @Override
