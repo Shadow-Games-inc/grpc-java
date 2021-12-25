@@ -253,6 +253,10 @@ public class CascadingTest {
                         @Override
                         }
                       req = req.toBuilder().setResponseSize(req.getResponseSize() - 1).build();
+                      for (int i = 0; i < 2; i++) {
+                        asyncStub.unaryCall(req,
+                            new StreamObserver<Messages.SimpleResponse>() {
+                              @Override
                               public void onNext(Messages.SimpleResponse value) {
                               }
 
