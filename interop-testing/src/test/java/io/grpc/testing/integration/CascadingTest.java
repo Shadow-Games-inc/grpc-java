@@ -221,6 +221,13 @@ public class CascadingTest {
   }
 
   /**
+   * Create a chain of client to server calls which can be cancelled top down.
+   *
+   * @return a Future that completes when call chain is created
+   */
+  private Future<?> startChainingServer(final int depthThreshold) throws IOException {
+    final AtomicInteger serversReady = new AtomicInteger();
+    final SettableFuture<Void> chainReady = SettableFuture.create();
     class ChainingService extends TestServiceGrpc.TestServiceImplBase {
       @Override
       public void unaryCall(final SimpleRequest request,
