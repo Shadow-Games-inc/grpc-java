@@ -58,6 +58,10 @@ import org.junit.runners.JUnit4;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+/**
+ * Integration test for various forms of cancellation and deadline propagation.
+ */
+@RunWith(JUnit4.class)
 public class CascadingTest {
 
   @Mock
