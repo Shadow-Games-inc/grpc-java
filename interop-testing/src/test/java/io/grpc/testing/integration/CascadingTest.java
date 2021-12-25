@@ -108,6 +108,11 @@ public class CascadingTest {
     try {
       future = futureStub.unaryCall(SimpleRequest.getDefaultInstance());
     } finally {
+      context.detach(prevContext);
+    }
+    chainReady.get(5, TimeUnit.SECONDS);
+
+    context.cancel(null);
     try {
       Status status = Status.fromThrowable(ex);
       // Should have observed 2 cancellations responses from downstream servers
