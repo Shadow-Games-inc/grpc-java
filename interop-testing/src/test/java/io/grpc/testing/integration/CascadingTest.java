@@ -254,6 +254,9 @@ public class CascadingTest {
                         }
                       req = req.toBuilder().setResponseSize(req.getResponseSize() - 1).build();
                               public void onNext(Messages.SimpleResponse value) {
+                              }
+
+                              @Override
                               public void onError(Throwable t) {
                                 Status status = Status.fromThrowable(t);
                                 if (status.getCode() == Status.Code.CANCELLED) {
