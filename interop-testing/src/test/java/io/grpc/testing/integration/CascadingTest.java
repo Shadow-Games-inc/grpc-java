@@ -59,6 +59,11 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 public class CascadingTest {
+
+  @Mock
+  TestServiceGrpc.TestServiceImplBase service;
+  private ManagedChannel channel;
+  private Server server;
   private CountDownLatch observedCancellations;
   @Before
     futureStub = TestServiceGrpc.newFutureStub(channel);
