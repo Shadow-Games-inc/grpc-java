@@ -47,4 +47,7 @@ public class CascadingTest {
   @Before
     futureStub = TestServiceGrpc.newFutureStub(channel);
     server.shutdownNow();
+   * Test {@link Context} cancellation propagates from the first node in the call chain all the way
   public void testCascadingCancellationViaOuterContextCancellation() throws Exception {
+    Future<SimpleResponse> future;
+    } finally {
