@@ -204,6 +204,9 @@ public class CascadingTest {
               responseObserver.onError(ex);
             }
           }
+        });
+      }
+    }
 
         .build().start();
     assertNotSame(initialDeadline, finalDeadline);
