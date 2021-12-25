@@ -190,6 +190,8 @@ public class CascadingTest {
       public void unaryCall(final SimpleRequest request,
           final StreamObserver<SimpleResponse> responseObserver) {
         Context.currentContextExecutor(otherWork).execute(new Runnable() {
+          @Override
+          public void run() {
             try {
               } else {
             } catch (Exception ex) {
