@@ -158,6 +158,10 @@ public class CascadingTest {
   @Test
   public void testCascadingCancellationViaLeafFailure() throws Exception {
     // All nodes (15) except one edge of the tree (4) will be cancelled.
+    observedCancellations = new CountDownLatch(11);
+    receivedCancellations = new CountDownLatch(11);
+    startCallTreeServer(3);
+    try {
       // Use response size limit to control tree nodeCount.
     } catch (StatusRuntimeException sre) {
       assertEquals(Status.Code.ABORTED, status.getCode());
