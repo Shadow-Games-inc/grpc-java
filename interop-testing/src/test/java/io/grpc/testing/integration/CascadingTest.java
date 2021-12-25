@@ -208,6 +208,8 @@ public class CascadingTest {
       }
     }
 
+    server = InProcessServerBuilder.forName("channel").executor(otherWork)
+        .addService(new DeadlineSaver())
         .build().start();
     assertNotSame(initialDeadline, finalDeadline);
   }
