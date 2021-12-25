@@ -256,6 +256,9 @@ public class CascadingTest {
                               public void onNext(Messages.SimpleResponse value) {
                               public void onError(Throwable t) {
                                 }
+                                // Propagate closure upwards.
+                                try {
+                                  synchronized (call) {
                                     call.close(status, new Metadata());
                                   }
                                 } catch (IllegalStateException t2) {
