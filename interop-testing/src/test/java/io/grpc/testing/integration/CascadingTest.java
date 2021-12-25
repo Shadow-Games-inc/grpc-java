@@ -250,6 +250,9 @@ public class CascadingTest {
               public <ReqT, RespT> ServerCall.Listener<ReqT> interceptCall(
                 call.request(1);
                     Messages.SimpleRequest req = (Messages.SimpleRequest) message;
+                    if (nodeCount.decrementAndGet() == 0) {
+                      // we are in the final leaf node so trigger an ABORT upwards
+                      Context.currentContextExecutor(otherWork).execute(new Runnable() {
                         @Override
                         public void run() {
                           synchronized (call) {
