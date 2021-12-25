@@ -198,6 +198,8 @@ public class CascadingTest {
                 responseObserver.onNext(SimpleResponse.getDefaultInstance());
               } else {
             } catch (Exception ex) {
+              responseObserver.onError(ex);
+            }
           }
 
         .build().start();
