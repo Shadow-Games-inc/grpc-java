@@ -259,6 +259,9 @@ public class CascadingTest {
                                     call.close(status, new Metadata());
                                 }
                               @Override
+                              public void onCompleted() {
+                              }
+                            });
                       }
                     }
                   }
