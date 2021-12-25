@@ -53,3 +53,23 @@ public class StubConfigTest {
 
   @Mock
   private StreamObserver<SimpleResponse> responseObserver;
+
+  /**
+   * Sets up mocks.
+   */
+  @Before public void setUp() {
+    MockitoAnnotations.initMocks(this);
+    ClientCall<SimpleRequest, SimpleResponse> call =
+        new NoopClientCall<>();
+    when(channel.newCall(
+            ArgumentMatchers.<MethodDescriptor<SimpleRequest, SimpleResponse>>any(),
+            any(CallOptions.class)))
+        .thenReturn(call);
+  }
+
+  @Test
+  public void testConfigureDeadline() {
+    Deadline deadline = Deadline.after(2, NANOSECONDS);
+    // Create a default stub
+    TestServiceGrpc.TestServiceBlockingStub stub = TestServiceGrpc.newBlockingStub(channel);
+    assertNull(stub.getCallOptions().getDeadline());
