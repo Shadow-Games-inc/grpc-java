@@ -247,6 +247,12 @@ public class CascadingTest {
     return chainReady;
   }
    */
+  private void startCallTreeServer(int depthThreshold) throws IOException {
+    final AtomicInteger nodeCount = new AtomicInteger((2 << depthThreshold) - 1);
+    server = InProcessServerBuilder.forName("channel").executor(otherWork).addService(
+        ServerInterceptors.intercept(service,
+            new ServerInterceptor() {
+              @Override
               public <ReqT, RespT> ServerCall.Listener<ReqT> interceptCall(
                   final ServerCall<ReqT, RespT> call,
                   Metadata headers,
