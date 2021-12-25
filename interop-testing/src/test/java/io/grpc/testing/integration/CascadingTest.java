@@ -244,6 +244,8 @@ public class CascadingTest {
                 observedCancellations.countDown();
         });
     server = InProcessServerBuilder.forName("channel").executor(otherWork)
+        .addService(new ChainingService())
+        .build().start();
     return chainReady;
   }
 
