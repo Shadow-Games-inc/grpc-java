@@ -57,3 +57,6 @@ public class CascadingTest {
       }
     }
    * Test that cancellation via call cancellation propagates down the call.
+    receivedCancellations = new CountDownLatch(3);
+    chainReady.get(5, TimeUnit.SECONDS);
+      fail("Expected number of cancellations not observed by clients");
