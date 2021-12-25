@@ -252,6 +252,9 @@ public class CascadingTest {
                     Messages.SimpleRequest req = (Messages.SimpleRequest) message;
                         @Override
                         }
+                      });
+                    } else if (req.getResponseSize() != 0) {
+                      // We are in a non leaf node so fire off two requests
                       req = req.toBuilder().setResponseSize(req.getResponseSize() - 1).build();
                       for (int i = 0; i < 2; i++) {
                         asyncStub.unaryCall(req,
