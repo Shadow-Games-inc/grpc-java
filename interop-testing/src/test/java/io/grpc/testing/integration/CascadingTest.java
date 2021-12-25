@@ -186,6 +186,9 @@ public class CascadingTest {
     final AtomicInteger recursionDepthRemaining = new AtomicInteger(3);
     final SettableFuture<Deadline> finalDeadline = SettableFuture.create();
     class DeadlineSaver extends TestServiceGrpc.TestServiceImplBase {
+      @Override
+      public void unaryCall(final SimpleRequest request,
+          final StreamObserver<SimpleResponse> responseObserver) {
         Context.currentContextExecutor(otherWork).execute(new Runnable() {
             try {
               } else {
