@@ -137,6 +137,8 @@ public class CascadingTest {
   public void testCascadingCancellationViaRpcCancel() throws Exception {
     observedCancellations = new CountDownLatch(2);
     receivedCancellations = new CountDownLatch(3);
+    Future<?> chainReady = startChainingServer(3);
+    Future<SimpleResponse> future = futureStub.unaryCall(SimpleRequest.getDefaultInstance());
     chainReady.get(5, TimeUnit.SECONDS);
       fail("Expected number of cancellations not observed by clients");
     }
