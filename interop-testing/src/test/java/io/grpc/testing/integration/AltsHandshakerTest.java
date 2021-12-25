@@ -66,3 +66,25 @@ public class AltsHandshakerTest {
             .build())
         .start();
   }
+
+  @Before
+  public void setup() throws Exception {
+    // create new EventLoopGroups to avoid deadlock at server side handshake negotiation, e.g.
+    // happens when handshakerServer and testServer child channels are on the same eventloop.
+    handshakerServer = grpcCleanup.register(NettyServerBuilder.forPort(0)
+        .bossEventLoopGroup(
+            new NioEventLoopGroup(0, new DefaultThreadFactory("test-alts-boss")))
+        .workerEventLoopGroup(
+            new NioEventLoopGroup(0, new DefaultThreadFactory("test-alts-worker")))
+        .channelType(NioServerSocketChannel.class)
+        .addService(new AltsHandshakerTestService())
+        .build()).start();
+    startAltsServer();
+
+    ChannelCredentials channelCredentials = AltsChannelCredentials.newBuilder()
+        .enableUntrustedAltsForTesting()
+        .setHandshakerAddressForTesting("localhost:" + handshakerServer.getPort()).build();
+    channel = grpcCleanup.register(
+        Grpc.newChannelBuilderForAddress("localhost", testServer.getPort(), channelCredentials)
+            .build());
+  }
