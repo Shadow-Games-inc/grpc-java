@@ -99,6 +99,10 @@ public class CascadingTest {
    */
   @Test
   public void testCascadingCancellationViaOuterContextCancellation() throws Exception {
+    observedCancellations = new CountDownLatch(2);
+    receivedCancellations = new CountDownLatch(3);
+    Future<?> chainReady = startChainingServer(3);
+    CancellableContext context = Context.current().withCancellation();
     Future<SimpleResponse> future;
     } finally {
     try {
