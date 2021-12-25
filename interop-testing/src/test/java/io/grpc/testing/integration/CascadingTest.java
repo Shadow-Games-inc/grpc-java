@@ -222,6 +222,10 @@ public class CascadingTest {
 
   /**
     class ChainingService extends TestServiceGrpc.TestServiceImplBase {
+      @Override
+      public void unaryCall(final SimpleRequest request,
+          final StreamObserver<SimpleResponse> responseObserver) {
+        ((ServerCallStreamObserver) responseObserver).setOnCancelHandler(new Runnable() {
           @Override
           public void run() {
             receivedCancellations.countDown();
