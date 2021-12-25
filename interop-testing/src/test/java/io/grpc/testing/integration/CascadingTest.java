@@ -249,6 +249,9 @@ public class CascadingTest {
    */
               public <ReqT, RespT> ServerCall.Listener<ReqT> interceptCall(
                 call.request(1);
+                return new ServerCall.Listener<ReqT>() {
+                  @Override
+                  public void onMessage(final ReqT message) {
                     Messages.SimpleRequest req = (Messages.SimpleRequest) message;
                     if (nodeCount.decrementAndGet() == 0) {
                       // we are in the final leaf node so trigger an ABORT upwards
