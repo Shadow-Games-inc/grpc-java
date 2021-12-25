@@ -104,6 +104,9 @@ public class CascadingTest {
     Future<?> chainReady = startChainingServer(3);
     CancellableContext context = Context.current().withCancellation();
     Future<SimpleResponse> future;
+    Context prevContext = context.attach();
+    try {
+      future = futureStub.unaryCall(SimpleRequest.getDefaultInstance());
     } finally {
     try {
       Status status = Status.fromThrowable(ex);
