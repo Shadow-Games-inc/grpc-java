@@ -76,6 +76,13 @@ public class CascadingTest {
   private ExecutorService otherWork;
 
   @Before
+  public void setUp() throws Exception {
+    MockitoAnnotations.initMocks(this);
+    // Use a cached thread pool as we need a thread for each blocked call
+    otherWork = Executors.newCachedThreadPool();
+    channel = InProcessChannelBuilder.forName("channel").executor(otherWork).build();
+    blockingStub = TestServiceGrpc.newBlockingStub(channel);
+    asyncStub = TestServiceGrpc.newStub(channel);
     futureStub = TestServiceGrpc.newFutureStub(channel);
     server.shutdownNow();
    * Test {@link Context} cancellation propagates from the first node in the call chain all the way
