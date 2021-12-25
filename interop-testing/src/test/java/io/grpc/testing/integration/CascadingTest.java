@@ -215,6 +215,9 @@ public class CascadingTest {
     Deadline initialDeadline = Deadline.after(1, TimeUnit.MINUTES);
     blockingStub.withDeadline(initialDeadline).unaryCall(SimpleRequest.getDefaultInstance());
     assertNotSame(initialDeadline, finalDeadline);
+    // Since deadline is re-calculated at each hop, some variance is acceptable and expected.
+    assertAbout(deadline())
+        .that(finalDeadline.get()).isWithin(1, TimeUnit.SECONDS).of(initialDeadline);
   }
   /**
     class ChainingService extends TestServiceGrpc.TestServiceImplBase {
