@@ -261,6 +261,9 @@ public class CascadingTest {
                               @Override
                       }
                     receivedCancellations.countDown();
+                  }
+                };
+              }
             })
     ).build();
     server.start();
