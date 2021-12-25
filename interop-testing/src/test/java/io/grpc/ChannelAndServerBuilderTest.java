@@ -49,3 +49,18 @@ public class ChannelAndServerBuilderTest {
    * Javadoc.
    */
   @Parameters(name = "class={0}")
+  public static Collection<Object[]> params() throws Exception {
+    ClassLoader loader = ChannelAndServerBuilderTest.class.getClassLoader();
+    Collection<ClassInfo> classInfos =
+        ClassPath.from(loader).getTopLevelClassesRecursive("io.grpc");
+    // Java 9 doesn't expose the URLClassLoader, which breaks searching through the classpath
+    if (classInfos.isEmpty()) {
+      return new ArrayList<>();
+    }
+    List<Object[]> classes = new ArrayList<>();
+    for (ClassInfo classInfo : classInfos) {
+      String className = classInfo.getName();
+      if (className.contains("io.grpc.netty.shaded.io.netty")) {
+        continue;
+      }
+      Class<?> clazz = Class.forName(className, false /*initialize*/, loader);
