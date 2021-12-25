@@ -262,3 +262,7 @@ public class CascadingTest {
                       }
                     receivedCancellations.countDown();
             })
+    ).build();
+    server.start();
+  }
+}
