@@ -166,6 +166,10 @@ public class CascadingTest {
       blockingStub.unaryCall(Messages.SimpleRequest.newBuilder().setResponseSize(3).build());
       fail("Expected abort");
     } catch (StatusRuntimeException sre) {
+      // Wait for the workers to finish
+      Status status = sre.getStatus();
+      // Outermost caller observes ABORTED propagating up from the failing leaf,
+      // The descendant RPCs are cancelled so they receive CANCELLED.
       assertEquals(Status.Code.ABORTED, status.getCode());
         fail("Expected number of cancellations not observed by clients");
   }
