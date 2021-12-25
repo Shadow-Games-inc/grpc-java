@@ -193,6 +193,9 @@ public class CascadingTest {
           @Override
           public void run() {
             try {
+              if (recursionDepthRemaining.decrementAndGet() == 0) {
+                finalDeadline.set(Context.current().getDeadline());
+                responseObserver.onNext(SimpleResponse.getDefaultInstance());
               } else {
             } catch (Exception ex) {
           }
