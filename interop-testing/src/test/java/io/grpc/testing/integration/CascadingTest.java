@@ -84,6 +84,11 @@ public class CascadingTest {
     blockingStub = TestServiceGrpc.newBlockingStub(channel);
     asyncStub = TestServiceGrpc.newStub(channel);
     futureStub = TestServiceGrpc.newFutureStub(channel);
+  }
+
+  @After
+  public void tearDown() {
+    channel.shutdownNow();
     server.shutdownNow();
    * Test {@link Context} cancellation propagates from the first node in the call chain all the way
   public void testCascadingCancellationViaOuterContextCancellation() throws Exception {
