@@ -163,6 +163,8 @@ public class CascadingTest {
     startCallTreeServer(3);
     try {
       // Use response size limit to control tree nodeCount.
+      blockingStub.unaryCall(Messages.SimpleRequest.newBuilder().setResponseSize(3).build());
+      fail("Expected abort");
     } catch (StatusRuntimeException sre) {
       assertEquals(Status.Code.ABORTED, status.getCode());
         fail("Expected number of cancellations not observed by clients");
