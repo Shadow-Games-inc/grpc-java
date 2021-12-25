@@ -146,6 +146,13 @@ public class CascadingTest {
     if (!observedCancellations.await(5, TimeUnit.SECONDS)) {
       fail("Expected number of cancellations not observed by clients");
     }
+    if (!receivedCancellations.await(5, TimeUnit.SECONDS)) {
+      fail("Expected number of cancellations to be received by servers not observed");
+    }
+  }
+
+  /**
+   * Test that when RPC cancellation propagates up a call chain, the cancellation of the parent
    * RPC triggers cancellation of all of its children.
     // All nodes (15) except one edge of the tree (4) will be cancelled.
       // Use response size limit to control tree nodeCount.
