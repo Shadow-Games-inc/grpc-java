@@ -246,6 +246,11 @@ public class CascadingTest {
     server = InProcessServerBuilder.forName("channel").executor(otherWork)
     return chainReady;
   }
+
+  /**
+   * Create a tree of client to server calls where each received call on the server
+   * fans out to two downstream calls. Uses SimpleRequest.response_size to limit the nodeCount
+   * of the tree. One of the leaves will ABORT to trigger cancellation back up to tree.
    */
   private void startCallTreeServer(int depthThreshold) throws IOException {
     final AtomicInteger nodeCount = new AtomicInteger((2 << depthThreshold) - 1);
