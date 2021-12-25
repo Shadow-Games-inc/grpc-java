@@ -77,3 +77,14 @@ public class ChannelAndServerBuilderTest {
 
   @Test
   public void serverBuilderHidesMethod_forPort() throws Exception {
+    Assume.assumeTrue(ServerBuilder.class.isAssignableFrom(builderClass));
+    Method method = builderClass.getMethod("forPort", int.class);
+
+    assertTrue(Modifier.isStatic(method.getModifiers()));
+    assertTrue(ServerBuilder.class.isAssignableFrom(method.getReturnType()));
+    assertSame(builderClass, method.getDeclaringClass());
+  }
+
+  @Test
+  public void channelBuilderHidesMethod_forAddress() throws Exception {
+    Assume.assumeTrue(ManagedChannelBuilder.class.isAssignableFrom(builderClass));
