@@ -28,3 +28,21 @@ service TestService {
   // One empty request followed by one empty response.
   rpc EmptyCall(grpc.testing.Empty) returns (grpc.testing.Empty);
 
+  // One request followed by one response.
+  rpc UnaryCall(SimpleRequest) returns (SimpleResponse);
+
+  // One request followed by one response. Response has cache control
+  // headers set such that a caching HTTP proxy (such as GFE) can
+  // satisfy subsequent requests.
+  rpc CacheableUnaryCall(SimpleRequest) returns (SimpleResponse);
+
+  // One request followed by a sequence of responses (streamed download).
+  // The server returns the payload with client desired type and sizes.
+  rpc StreamingOutputCall(StreamingOutputCallRequest)
+      returns (stream StreamingOutputCallResponse);
+
+  // A sequence of requests followed by one response (streamed upload).
+  // The server returns the aggregated size of client payload as the result.
+  rpc StreamingInputCall(stream StreamingInputCallRequest)
+      returns (StreamingInputCallResponse);
+
