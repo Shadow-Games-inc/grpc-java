@@ -88,3 +88,13 @@ public class AltsHandshakerTest {
         Grpc.newChannelBuilderForAddress("localhost", testServer.getPort(), channelCredentials)
             .build());
   }
+
+  @Test
+  public void testAlts() {
+    TestServiceGrpc.TestServiceBlockingStub blockingStub = TestServiceGrpc.newBlockingStub(channel);
+    final SimpleRequest request = SimpleRequest.newBuilder()
+            .setPayload(Payload.newBuilder().setBody(ByteString.copyFrom(new byte[10])))
+            .build();
+    assertEquals(SimpleResponse.getDefaultInstance(), blockingStub.unaryCall(request));
+  }
+}
