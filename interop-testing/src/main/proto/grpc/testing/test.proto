@@ -18,3 +18,13 @@ syntax = "proto3";
 import "grpc/testing/empty.proto";
 import "grpc/testing/messages.proto";
 
+package grpc.testing;
+
+option java_package = "io.grpc.testing.integration";
+
+// A simple service to test the various types of RPCs and experiment with
+// performance with various types of payload.
+service TestService {
+  // One empty request followed by one empty response.
+  rpc EmptyCall(grpc.testing.Empty) returns (grpc.testing.Empty);
+
