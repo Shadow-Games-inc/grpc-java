@@ -219,6 +219,7 @@ public class CascadingTest {
     assertAbout(deadline())
         .that(finalDeadline.get()).isWithin(1, TimeUnit.SECONDS).of(initialDeadline);
   }
+
   /**
     class ChainingService extends TestServiceGrpc.TestServiceImplBase {
           @Override
