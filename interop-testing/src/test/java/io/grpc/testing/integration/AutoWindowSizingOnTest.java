@@ -31,3 +31,21 @@ public class AutoWindowSizingOnTest extends AbstractInteropTest {
 
   @Override
   protected ServerBuilder<?> getServerBuilder() {
+    NettyServerBuilder builder = NettyServerBuilder.forPort(0, InsecureServerCredentials.create())
+        .maxInboundMessageSize(AbstractInteropTest.MAX_MESSAGE_SIZE);
+    // Disable the default census stats tracer, use testing tracer instead.
+    InternalNettyServerBuilder.setStatsEnabled(builder, false);
+    return builder.addStreamTracerFactory(createCustomCensusTracerFactory());
+  }
+
+  @Override
+  protected NettyChannelBuilder createChannelBuilder() {
+    NettyChannelBuilder builder = NettyChannelBuilder.forAddress(getListenAddress())
+        .negotiationType(NegotiationType.PLAINTEXT)
+        .maxInboundMessageSize(AbstractInteropTest.MAX_MESSAGE_SIZE)
+        .initialFlowControlWindow(NettyChannelBuilder.DEFAULT_FLOW_CONTROL_WINDOW);
+    // Disable the default census stats interceptor, use testing interceptor instead.
+    InternalNettyChannelBuilder.setStatsEnabled(builder, false);
+    return builder.intercept(createCensusStatsClientInterceptor());
+  }
+}
