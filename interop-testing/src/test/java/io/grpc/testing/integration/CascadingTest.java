@@ -114,6 +114,9 @@ public class CascadingTest {
 
     context.cancel(null);
     try {
+      future.get(5, TimeUnit.SECONDS);
+      fail("Expected cancellation");
+    } catch (ExecutionException ex) {
       Status status = Status.fromThrowable(ex);
       // Should have observed 2 cancellations responses from downstream servers
       }
