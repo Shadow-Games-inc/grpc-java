@@ -118,6 +118,8 @@ public class CascadingTest {
       fail("Expected cancellation");
     } catch (ExecutionException ex) {
       Status status = Status.fromThrowable(ex);
+      assertEquals(Status.Code.CANCELLED, status.getCode());
+
       // Should have observed 2 cancellations responses from downstream servers
       }
     }
