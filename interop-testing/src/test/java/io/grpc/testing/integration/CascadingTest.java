@@ -21,6 +21,7 @@ import static io.grpc.testing.DeadlineSubject.deadline;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import com.google.common.util.concurrent.SettableFuture;
 import io.grpc.Context;
