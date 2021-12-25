@@ -60,3 +60,11 @@ public class CascadingTest {
     receivedCancellations = new CountDownLatch(3);
     chainReady.get(5, TimeUnit.SECONDS);
       fail("Expected number of cancellations not observed by clients");
+    }
+   * RPC triggers cancellation of all of its children.
+    // All nodes (15) except one edge of the tree (4) will be cancelled.
+      // Use response size limit to control tree nodeCount.
+    } catch (StatusRuntimeException sre) {
+      assertEquals(Status.Code.ABORTED, status.getCode());
+        fail("Expected number of cancellations not observed by clients");
+  }
