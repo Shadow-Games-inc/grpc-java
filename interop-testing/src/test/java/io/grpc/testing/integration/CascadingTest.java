@@ -251,6 +251,10 @@ public class CascadingTest {
                 call.request(1);
                     Messages.SimpleRequest req = (Messages.SimpleRequest) message;
                         @Override
+                        public void run() {
+                          synchronized (call) {
+                            call.close(Status.ABORTED, new Metadata());
+                          }
                         }
                       });
                     } else if (req.getResponseSize() != 0) {
