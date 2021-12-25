@@ -45,3 +45,24 @@ import org.junit.runners.JUnit4;
 public class AltsHandshakerTest {
   @Rule
   public final GrpcCleanupRule grpcCleanup = new GrpcCleanupRule();
+  private Server handshakerServer;
+  private Server testServer;
+  private ManagedChannel channel;
+
+  private void startAltsServer() throws Exception {
+    ServerCredentials serverCredentials = AltsServerCredentials.newBuilder()
+        .enableUntrustedAltsForTesting()
+        .setHandshakerAddressForTesting("localhost:" + handshakerServer.getPort())
+        .build();
+    testServer = grpcCleanup.register(
+        Grpc.newServerBuilderForPort(0, serverCredentials)
+            .addService(new TestServiceGrpc.TestServiceImplBase() {
+              @Override
+              public void unaryCall(SimpleRequest request, StreamObserver<SimpleResponse> so) {
+                so.onNext(SimpleResponse.getDefaultInstance());
+                so.onCompleted();
+              }
+            })
+            .build())
+        .start();
+  }
