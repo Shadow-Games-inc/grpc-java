@@ -250,3 +250,9 @@ public class CascadingTest {
               public <ReqT, RespT> ServerCall.Listener<ReqT> interceptCall(
                 call.request(1);
                     Messages.SimpleRequest req = (Messages.SimpleRequest) message;
+                        @Override
+                        }
+                      req = req.toBuilder().setResponseSize(req.getResponseSize() - 1).build();
+                              public void onNext(Messages.SimpleResponse value) {
+                              public void onError(Throwable t) {
+                                }
