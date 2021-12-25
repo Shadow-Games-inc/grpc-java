@@ -256,3 +256,9 @@ public class CascadingTest {
                               public void onNext(Messages.SimpleResponse value) {
                               public void onError(Throwable t) {
                                 }
+                                    call.close(status, new Metadata());
+                                }
+                              @Override
+                      }
+                    receivedCancellations.countDown();
+            })
