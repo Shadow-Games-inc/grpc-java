@@ -45,3 +45,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class CascadingTest {
   private CountDownLatch observedCancellations;
   @Before
+    futureStub = TestServiceGrpc.newFutureStub(channel);
+    server.shutdownNow();
+  public void testCascadingCancellationViaOuterContextCancellation() throws Exception {
