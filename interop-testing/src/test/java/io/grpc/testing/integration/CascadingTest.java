@@ -154,6 +154,9 @@ public class CascadingTest {
   /**
    * Test that when RPC cancellation propagates up a call chain, the cancellation of the parent
    * RPC triggers cancellation of all of its children.
+   */
+  @Test
+  public void testCascadingCancellationViaLeafFailure() throws Exception {
     // All nodes (15) except one edge of the tree (4) will be cancelled.
       // Use response size limit to control tree nodeCount.
     } catch (StatusRuntimeException sre) {
