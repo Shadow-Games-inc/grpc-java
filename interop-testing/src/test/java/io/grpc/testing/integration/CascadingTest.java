@@ -260,6 +260,11 @@ public class CascadingTest {
                                 }
                               @Override
                       }
+                    }
+                  }
+
+                  @Override
+                  public void onCancel() {
                     receivedCancellations.countDown();
                   }
                 };
