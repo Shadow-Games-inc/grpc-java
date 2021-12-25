@@ -197,6 +197,9 @@ public class CascadingTest {
                 finalDeadline.set(Context.current().getDeadline());
                 responseObserver.onNext(SimpleResponse.getDefaultInstance());
               } else {
+                responseObserver.onNext(blockingStub.unaryCall(request));
+              }
+              responseObserver.onCompleted();
             } catch (Exception ex) {
               responseObserver.onError(ex);
             }
