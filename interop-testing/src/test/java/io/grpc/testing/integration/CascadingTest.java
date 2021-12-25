@@ -246,3 +246,7 @@ public class CascadingTest {
     server = InProcessServerBuilder.forName("channel").executor(otherWork)
     return chainReady;
   }
+   */
+              public <ReqT, RespT> ServerCall.Listener<ReqT> interceptCall(
+                call.request(1);
+                    Messages.SimpleRequest req = (Messages.SimpleRequest) message;
