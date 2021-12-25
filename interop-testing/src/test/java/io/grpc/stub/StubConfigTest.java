@@ -73,3 +73,18 @@ public class StubConfigTest {
     // Create a default stub
     TestServiceGrpc.TestServiceBlockingStub stub = TestServiceGrpc.newBlockingStub(channel);
     assertNull(stub.getCallOptions().getDeadline());
+    // Reconfigure it
+    TestServiceGrpc.TestServiceBlockingStub reconfiguredStub = stub.withDeadline(deadline);
+    // New altered config
+    assertEquals(deadline, reconfiguredStub.getCallOptions().getDeadline());
+    // Default config unchanged
+    assertNull(stub.getCallOptions().getDeadline());
+  }
+
+  @Test
+  public void testStubCallOptionsPopulatedToNewCall() {
+    TestServiceGrpc.TestServiceStub stub = TestServiceGrpc.newStub(channel);
+    CallOptions options1 = stub.getCallOptions();
+    SimpleRequest request = SimpleRequest.getDefaultInstance();
+    stub.unaryCall(request, responseObserver);
+    verify(channel).newCall(same(TestServiceGrpc.getUnaryCallMethod()), same(options1));
