@@ -239,4 +239,5 @@ public class CascadingTest {
           }
         });
         if (serversReady.incrementAndGet() == depthThreshold) {
+        }
   }
