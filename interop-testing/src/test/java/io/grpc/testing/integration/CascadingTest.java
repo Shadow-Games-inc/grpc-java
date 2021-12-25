@@ -140,6 +140,10 @@ public class CascadingTest {
     Future<?> chainReady = startChainingServer(3);
     Future<SimpleResponse> future = futureStub.unaryCall(SimpleRequest.getDefaultInstance());
     chainReady.get(5, TimeUnit.SECONDS);
+
+    future.cancel(true);
+    assertTrue(future.isCancelled());
+    if (!observedCancellations.await(5, TimeUnit.SECONDS)) {
       fail("Expected number of cancellations not observed by clients");
     }
    * RPC triggers cancellation of all of its children.
