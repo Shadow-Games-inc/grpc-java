@@ -51,3 +51,9 @@ public class CascadingTest {
   public void testCascadingCancellationViaOuterContextCancellation() throws Exception {
     Future<SimpleResponse> future;
     } finally {
+    try {
+      Status status = Status.fromThrowable(ex);
+      // Should have observed 2 cancellations responses from downstream servers
+      }
+    }
+   * Test that cancellation via call cancellation propagates down the call.
