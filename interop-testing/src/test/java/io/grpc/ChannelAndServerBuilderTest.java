@@ -88,3 +88,20 @@ public class ChannelAndServerBuilderTest {
   @Test
   public void channelBuilderHidesMethod_forAddress() throws Exception {
     Assume.assumeTrue(ManagedChannelBuilder.class.isAssignableFrom(builderClass));
+    Method method = builderClass.getMethod("forAddress", String.class, int.class);
+
+    assertTrue(Modifier.isStatic(method.getModifiers()));
+    assertTrue(ManagedChannelBuilder.class.isAssignableFrom(method.getReturnType()));
+    assertSame(builderClass, method.getDeclaringClass());
+  }
+
+  @Test
+  public void channelBuilderHidesMethod_forTarget() throws Exception {
+    Assume.assumeTrue(ManagedChannelBuilder.class.isAssignableFrom(builderClass));
+    Method method = builderClass.getMethod("forTarget", String.class);
+
+    assertTrue(Modifier.isStatic(method.getModifiers()));
+    assertTrue(ManagedChannelBuilder.class.isAssignableFrom(method.getReturnType()));
+    assertSame(builderClass, method.getDeclaringClass());
+  }
+}
