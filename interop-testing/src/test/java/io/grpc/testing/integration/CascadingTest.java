@@ -171,6 +171,8 @@ public class CascadingTest {
       // Outermost caller observes ABORTED propagating up from the failing leaf,
       // The descendant RPCs are cancelled so they receive CANCELLED.
       assertEquals(Status.Code.ABORTED, status.getCode());
+
+      if (!observedCancellations.await(5, TimeUnit.SECONDS)) {
         fail("Expected number of cancellations not observed by clients");
   }
     class DeadlineSaver extends TestServiceGrpc.TestServiceImplBase {
