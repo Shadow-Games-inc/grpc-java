@@ -90,6 +90,10 @@ public class CascadingTest {
   public void tearDown() {
     channel.shutdownNow();
     server.shutdownNow();
+    otherWork.shutdownNow();
+  }
+
+  /**
    * Test {@link Context} cancellation propagates from the first node in the call chain all the way
   public void testCascadingCancellationViaOuterContextCancellation() throws Exception {
     Future<SimpleResponse> future;
