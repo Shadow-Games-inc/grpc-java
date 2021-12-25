@@ -95,6 +95,9 @@ public class CascadingTest {
 
   /**
    * Test {@link Context} cancellation propagates from the first node in the call chain all the way
+   * to the last.
+   */
+  @Test
   public void testCascadingCancellationViaOuterContextCancellation() throws Exception {
     Future<SimpleResponse> future;
     } finally {
