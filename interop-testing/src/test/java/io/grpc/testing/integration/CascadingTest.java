@@ -223,5 +223,9 @@ public class CascadingTest {
   /**
     class ChainingService extends TestServiceGrpc.TestServiceImplBase {
           @Override
+          public void run() {
+            receivedCancellations.countDown();
+          }
+        });
         if (serversReady.incrementAndGet() == depthThreshold) {
   }
