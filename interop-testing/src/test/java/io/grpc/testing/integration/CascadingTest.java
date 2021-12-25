@@ -121,6 +121,11 @@ public class CascadingTest {
       assertEquals(Status.Code.CANCELLED, status.getCode());
 
       // Should have observed 2 cancellations responses from downstream servers
+      if (!observedCancellations.await(5, TimeUnit.SECONDS)) {
+        fail("Expected number of cancellations not observed by clients");
+      }
+      if (!receivedCancellations.await(5, TimeUnit.SECONDS)) {
+        fail("Expected number of cancellations to be received by servers not observed");
       }
     }
    * Test that cancellation via call cancellation propagates down the call.
