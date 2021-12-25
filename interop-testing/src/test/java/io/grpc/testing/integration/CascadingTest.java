@@ -240,4 +240,9 @@ public class CascadingTest {
         });
         if (serversReady.incrementAndGet() == depthThreshold) {
         }
+          public void run() {
+                observedCancellations.countDown();
+        });
+    server = InProcessServerBuilder.forName("channel").executor(otherWork)
+    return chainReady;
   }
