@@ -174,6 +174,11 @@ public class CascadingTest {
 
       if (!observedCancellations.await(5, TimeUnit.SECONDS)) {
         fail("Expected number of cancellations not observed by clients");
+      }
+      if (!receivedCancellations.await(5, TimeUnit.SECONDS)) {
+        fail("Expected number of cancellations to be received by servers not observed");
+      }
+    }
   }
     class DeadlineSaver extends TestServiceGrpc.TestServiceImplBase {
         Context.currentContextExecutor(otherWork).execute(new Runnable() {
