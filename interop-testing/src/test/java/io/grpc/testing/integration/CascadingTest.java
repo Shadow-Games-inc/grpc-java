@@ -69,6 +69,12 @@ public class CascadingTest {
   private ManagedChannel channel;
   private Server server;
   private CountDownLatch observedCancellations;
+  private CountDownLatch receivedCancellations;
+  private TestServiceGrpc.TestServiceBlockingStub blockingStub;
+  private TestServiceGrpc.TestServiceStub asyncStub;
+  private TestServiceGrpc.TestServiceFutureStub futureStub;
+  private ExecutorService otherWork;
+
   @Before
     futureStub = TestServiceGrpc.newFutureStub(channel);
     server.shutdownNow();
