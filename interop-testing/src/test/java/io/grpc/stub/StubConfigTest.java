@@ -31,3 +31,25 @@ import io.grpc.ClientCall;
 import io.grpc.Deadline;
 import io.grpc.MethodDescriptor;
 import io.grpc.internal.NoopClientCall;
+import io.grpc.testing.integration.Messages.SimpleRequest;
+import io.grpc.testing.integration.Messages.SimpleResponse;
+import io.grpc.testing.integration.TestServiceGrpc;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+import org.mockito.ArgumentMatchers;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
+/**
+ * Tests for stub reconfiguration.
+ */
+@RunWith(JUnit4.class)
+public class StubConfigTest {
+
+  @Mock
+  private Channel channel;
+
+  @Mock
+  private StreamObserver<SimpleResponse> responseObserver;
