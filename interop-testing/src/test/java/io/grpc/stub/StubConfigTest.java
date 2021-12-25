@@ -88,3 +88,10 @@ public class StubConfigTest {
     SimpleRequest request = SimpleRequest.getDefaultInstance();
     stub.unaryCall(request, responseObserver);
     verify(channel).newCall(same(TestServiceGrpc.getUnaryCallMethod()), same(options1));
+    stub = stub.withDeadlineAfter(2, NANOSECONDS);
+    CallOptions options2 = stub.getCallOptions();
+    assertNotSame(options1, options2);
+    stub.unaryCall(request, responseObserver);
+    verify(channel).newCall(same(TestServiceGrpc.getUnaryCallMethod()), same(options2));
+  }
+}
