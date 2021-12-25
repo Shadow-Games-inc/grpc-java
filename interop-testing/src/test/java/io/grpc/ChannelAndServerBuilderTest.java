@@ -36,3 +36,16 @@ import org.junit.runners.Parameterized.Parameters;
 
 /**
  * Tests that Channel and Server builders properly hide the static constructors.
+ *
+ * <p>This test does nothing on Java 9.
+ */
+@RunWith(Parameterized.class)
+public class ChannelAndServerBuilderTest {
+
+  @Parameter
+  public Class<?> builderClass;
+
+  /**
+   * Javadoc.
+   */
+  @Parameters(name = "class={0}")
