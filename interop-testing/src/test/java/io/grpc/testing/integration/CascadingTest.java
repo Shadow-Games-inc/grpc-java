@@ -239,10 +239,29 @@ public class CascadingTest {
           }
         });
         if (serversReady.incrementAndGet() == depthThreshold) {
+          // Stop recursion
+          chainReady.set(null);
+          return;
         }
+
+        Context.currentContextExecutor(otherWork).execute(new Runnable() {
+          @Override
           public void run() {
+            try {
+              blockingStub.unaryCall(request);
+            } catch (StatusRuntimeException e) {
+              Status status = e.getStatus();
+              if (status.getCode() == Status.Code.CANCELLED) {
                 observedCancellations.countDown();
+              } else {
+                responseObserver.onError(e);
+              }
+            }
+          }
         });
+      }
+    }
+
     server = InProcessServerBuilder.forName("channel").executor(otherWork)
         .addService(new ChainingService())
         .build().start();
