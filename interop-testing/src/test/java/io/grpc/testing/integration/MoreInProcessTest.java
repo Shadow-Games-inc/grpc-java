@@ -17,3 +17,8 @@
 package io.grpc.testing.integration;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
+import io.grpc.ManagedChannel;
+import io.grpc.Server;
