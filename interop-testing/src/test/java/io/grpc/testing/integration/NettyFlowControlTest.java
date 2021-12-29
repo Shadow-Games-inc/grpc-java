@@ -217,4 +217,7 @@ public class NettyFlowControlTest {
     }
 
     @Override
+    public void onNext(StreamingOutputCallResponse value) {
+      GrpcHttp2ConnectionHandler grpcHandler = grpcHandlerRef.get();
+      Http2Stream connectionStream = grpcHandler.connection().connectionStream();
     }
