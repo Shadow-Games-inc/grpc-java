@@ -88,3 +88,10 @@ public class ProxyTest {
     for (int i = 0; i < 3; i++) {
       long start = System.nanoTime();
       clientOut.write(message, 0, 1);
+      clientIn.read(message);
+      rtts.add(System.nanoTime() - start);
+    }
+    Collections.sort(rtts);
+    long rtt = rtts.get(0);
+    assertEquals(latency, rtt, .5 * latency);
+  }
