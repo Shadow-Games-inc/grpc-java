@@ -208,3 +208,11 @@ public class Http2OkHttpTest extends AbstractInteropTest {
       blockingStub.emptyCall(Empty.getDefaultInstance());
     } catch (Throwable t) {
       actualThrown = t;
+    }
+    assertNotNull("The rpc should have been failed due to hostname verification", actualThrown);
+    Throwable cause = Throwables.getRootCause(actualThrown);
+    assertTrue(
+        "Failed by unexpected exception: " + cause, cause instanceof SSLPeerUnverifiedException);
+    channel.shutdown();
+  }
+}
