@@ -79,3 +79,10 @@ public class NettyFlowControlTest {
 
   private int proxyPort;
   private int serverPort;
+
+  private static final ThreadPoolExecutor executor =
+      new ThreadPoolExecutor(1, 10, 1, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(),
+          new DefaultThreadFactory("flowcontrol-test-pool", true));
+
+
+  @AfterClass
