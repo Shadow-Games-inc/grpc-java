@@ -167,3 +167,10 @@ public class NettyFlowControlTest {
         lastWindow < 2 * expectedWindow);
     assertTrue("Window was " + lastWindow + " expecting " + expectedWindow,
         expectedWindow < 2 * lastWindow);
+  }
+
+  /**
+   * Resets client/server and their flow control windows.
+   */
+  private void createAndStartChannel(int clientFlowControlWindow) {
+    NettyChannelBuilder channelBuilder =
