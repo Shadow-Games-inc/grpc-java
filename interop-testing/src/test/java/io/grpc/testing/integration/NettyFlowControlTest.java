@@ -149,3 +149,12 @@ public class NettyFlowControlTest {
         .addResponseParameters(ResponseParameters.newBuilder().setSize(streamSize / 16))
         .addResponseParameters(ResponseParameters.newBuilder().setSize(streamSize / 16))
         .addResponseParameters(ResponseParameters.newBuilder().setSize(streamSize / 8))
+        .addResponseParameters(ResponseParameters.newBuilder().setSize(streamSize / 4))
+        .addResponseParameters(ResponseParameters.newBuilder().setSize(streamSize / 2));
+    StreamingOutputCallRequest request = builder.build();
+
+    TestStreamObserver observer =
+        new TestStreamObserver(capturingPnFactory.grpcHandlerRef, expectedWindow);
+    stub.streamingOutputCall(request, observer);
+    int lastWindow = observer.waitFor(5, TimeUnit.SECONDS);
+
