@@ -116,3 +116,13 @@ public class Http2OkHttpTest extends AbstractInteropTest {
     }
     // Disable the default census stats interceptor, use testing interceptor instead.
     InternalOkHttpChannelBuilder.setStatsEnabled(builder, false);
+    return builder.intercept(createCensusStatsClientInterceptor());
+  }
+
+  @Test
+  public void receivedDataForFinishedStream() throws Exception {
+    Messages.ResponseParameters.Builder responseParameters =
+        Messages.ResponseParameters.newBuilder()
+        .setSize(1);
+    Messages.StreamingOutputCallRequest.Builder requestBuilder =
+        Messages.StreamingOutputCallRequest.newBuilder();
