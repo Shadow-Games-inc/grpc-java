@@ -13,3 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+package io.grpc.testing.integration;
+
+import static org.junit.Assert.assertTrue;
+
+import com.google.common.collect.ImmutableList;
+import io.grpc.ManagedChannel;
+import io.grpc.Server;
