@@ -66,3 +66,7 @@ public class InProcessTest extends AbstractInteropTest {
   }
 
   @Override
+  public void maxOutboundSize_tooBig() {
+    // noop, not enforced.
+  }
+}
