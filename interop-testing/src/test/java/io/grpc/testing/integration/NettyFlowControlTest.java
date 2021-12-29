@@ -97,3 +97,13 @@ public class NettyFlowControlTest {
   }
 
   @After
+  public void endTest() throws IOException {
+    if (proxy != null) {
+      proxy.shutDown();
+    }
+    server.shutdownNow();
+    if (channel != null) {
+      channel.shutdownNow();
+    }
+  }
+
