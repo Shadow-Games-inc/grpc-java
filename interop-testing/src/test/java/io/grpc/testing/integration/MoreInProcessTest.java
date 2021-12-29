@@ -45,3 +45,13 @@ import org.junit.runners.JUnit4;
 /**
  * Unit tests for {@link io.grpc.inprocess}.
  * Test more corner usecases, client not playing by the rules, server not playing by the rules, etc.
+ */
+@RunWith(JUnit4.class)
+public class MoreInProcessTest {
+  private static final String UNIQUE_SERVER_NAME =
+      "in-process server for " + MoreInProcessTest.class;
+
+  // Use a fairly large timeout to work around classloading slowness.
+  @Rule
+  public final Timeout globalTimeout = new Timeout(10, TimeUnit.SECONDS);
+  // use a mutable service registry for later registering the service impl for each test case.
