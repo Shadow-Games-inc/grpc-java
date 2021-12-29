@@ -136,3 +136,14 @@ public class MoreInProcessTest {
 
   @Test
   public void asyncClientStreaming_serverErrorPriorToRequest() throws Exception {
+    // implement a service
+    final Status fakeError = Status.INVALID_ARGUMENT;
+    TestServiceImplBase clientStreamingImpl = new TestServiceImplBase() {
+      @Override
+      public StreamObserver<StreamingInputCallRequest> streamingInputCall(
+          StreamObserver<StreamingInputCallResponse> responseObserver) {
+        // send error directly
+        responseObserver.onError(new StatusRuntimeException(fakeError));
+        responseObserver.onCompleted();
+        return new StreamObserver<StreamingInputCallRequest>() {
+          @Override
