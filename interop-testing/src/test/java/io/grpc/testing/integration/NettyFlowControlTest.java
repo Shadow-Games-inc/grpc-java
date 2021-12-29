@@ -242,3 +242,14 @@ public class NettyFlowControlTest {
     }
 
     public int waitFor(long duration, TimeUnit unit) throws InterruptedException {
+      latch.await(duration, unit);
+      return lastWindow;
+    }
+  }
+
+  private static class CapturingProtocolNegotiationFactory implements ProtocolNegotiatorFactory {
+
+    AtomicReference<GrpcHttp2ConnectionHandler> grpcHandlerRef = new AtomicReference<>();
+
+    @Override
+    public ProtocolNegotiator buildProtocolNegotiator() {
