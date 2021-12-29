@@ -232,3 +232,13 @@ public class NettyFlowControlTest {
       throw new RuntimeException(t);
     }
 
+    @Override
+    public void onCompleted() {
+      latch.countDown();
+    }
+
+    public long getElapsedTime() {
+      return endRequestNanos - startRequestNanos;
+    }
+
+    public int waitFor(long duration, TimeUnit unit) throws InterruptedException {
