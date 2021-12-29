@@ -68,3 +68,15 @@ public class Http2NettyTest extends AbstractInteropTest {
   protected NettyChannelBuilder createChannelBuilder() {
     try {
       ChannelCredentials channelCreds = TlsChannelCredentials.newBuilder()
+          .keyManager(TestUtils.loadCert("client.pem"), TestUtils.loadCert("client.key"))
+          .trustManager(TestUtils.loadCert("ca.pem"))
+          .build();
+      NettyChannelBuilder builder = NettyChannelBuilder
+          .forAddress("localhost", ((InetSocketAddress) getListenAddress()).getPort(), channelCreds)
+          .overrideAuthority(TestUtils.TEST_SERVER_HOST)
+          .flowControlWindow(AbstractInteropTest.TEST_FLOW_CONTROL_WINDOW)
+          .maxInboundMessageSize(AbstractInteropTest.MAX_MESSAGE_SIZE);
+      // Disable the default census stats interceptor, use testing interceptor instead.
+      InternalNettyChannelBuilder.setStatsEnabled(builder, false);
+      return builder.intercept(createCensusStatsClientInterceptor());
+    } catch (Exception ex) {
