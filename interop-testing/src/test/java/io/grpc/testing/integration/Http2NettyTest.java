@@ -89,3 +89,13 @@ public class Http2NettyTest extends AbstractInteropTest {
     InetSocketAddress isa = (InetSocketAddress) obtainRemoteClientAddr();
     assertEquals(InetAddress.getLoopbackAddress(), isa.getAddress());
     // It should not be the same as the server
+    assertNotEquals(((InetSocketAddress) getListenAddress()).getPort(), isa.getPort());
+  }
+
+  @Test
+  public void localAddr() throws Exception {
+    InetSocketAddress isa = (InetSocketAddress) obtainLocalServerAddr();
+    assertEquals(InetAddress.getLoopbackAddress(), isa.getAddress());
+    assertEquals(((InetSocketAddress) getListenAddress()).getPort(), isa.getPort());
+  }
+
