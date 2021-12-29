@@ -86,3 +86,14 @@ public class NettyFlowControlTest {
 
 
   @AfterClass
+  public static void shutDownTests() {
+    executor.shutdown();
+  }
+
+  @Before
+  public void initTest() {
+    startServer(REGULAR_WINDOW);
+    serverPort = server.getPort();
+  }
+
+  @After
