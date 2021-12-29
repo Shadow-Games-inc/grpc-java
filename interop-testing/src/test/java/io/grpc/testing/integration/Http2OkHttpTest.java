@@ -83,3 +83,21 @@ public class Http2OkHttpTest extends AbstractInteropTest {
   @Override
   protected OkHttpChannelBuilder createChannelBuilder() {
     int port = ((InetSocketAddress) getListenAddress()).getPort();
+    ChannelCredentials channelCreds;
+    try {
+      channelCreds = TlsChannelCredentials.newBuilder()
+          .trustManager(TestUtils.loadCert("ca.pem"))
+          .build();
+    } catch (IOException ex) {
+      throw new RuntimeException(ex);
+    }
+    OkHttpChannelBuilder builder = OkHttpChannelBuilder.forAddress("localhost", port, channelCreds)
+        .maxInboundMessageSize(AbstractInteropTest.MAX_MESSAGE_SIZE)
+        .overrideAuthority(GrpcUtil.authorityFromHostAndPort(
+            TestUtils.TEST_SERVER_HOST, port));
+    // Disable the default census stats interceptor, use testing interceptor instead.
+    InternalOkHttpChannelBuilder.setStatsEnabled(builder, false);
+    return builder.intercept(createCensusStatsClientInterceptor());
+  }
+
+  private OkHttpChannelBuilder createChannelBuilderPreCredentialsApi() {
