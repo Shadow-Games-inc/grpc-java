@@ -116,3 +116,12 @@ public class NettyFlowControlTest {
     doTest(HIGH_BAND, MED_LAT);
   }
 
+  @Test
+  public void smallBdp() throws InterruptedException, IOException {
+    proxy = new TrafficControlProxy(serverPort, LOW_BAND, MED_LAT, TimeUnit.MILLISECONDS);
+    proxy.start();
+    proxyPort = proxy.getPort();
+    createAndStartChannel(REGULAR_WINDOW);
+    doTest(LOW_BAND, MED_LAT);
+  }
+
