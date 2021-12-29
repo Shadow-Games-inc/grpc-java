@@ -80,3 +80,11 @@ public class ProxyTest {
     // warmup
     for (int i = 0; i < 5; i++) {
       clientOut.write(message, 0, 1);
+    }
+    clientIn.readFully(new byte[5]);
+
+    // test
+    List<Long> rtts = new ArrayList<>();
+    for (int i = 0; i < 3; i++) {
+      long start = System.nanoTime();
+      clientOut.write(message, 0, 1);
