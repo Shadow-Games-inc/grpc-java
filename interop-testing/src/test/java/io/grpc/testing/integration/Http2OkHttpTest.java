@@ -198,3 +198,13 @@ public class Http2OkHttpTest extends AbstractInteropTest {
           public boolean verify(String hostname, SSLSession session) {
             return false;
           }
+        })
+        .build();
+    TestServiceGrpc.TestServiceBlockingStub blockingStub =
+        TestServiceGrpc.newBlockingStub(channel);
+
+    Throwable actualThrown = null;
+    try {
+      blockingStub.emptyCall(Empty.getDefaultInstance());
+    } catch (Throwable t) {
+      actualThrown = t;
