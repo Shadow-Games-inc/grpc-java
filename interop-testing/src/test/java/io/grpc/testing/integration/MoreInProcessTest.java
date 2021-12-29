@@ -128,3 +128,11 @@ public class MoreInProcessTest {
 
     // make a gRPC call
     TestServiceGrpc.newStub(inProcessChannel).streamingInputCall(responseObserver);
+
+    assertTrue(finishLatch.await(900, TimeUnit.MILLISECONDS));
+    assertEquals(fakeResponse, responseRef.get());
+    assertNull(throwableRef.get());
+  }
+
+  @Test
+  public void asyncClientStreaming_serverErrorPriorToRequest() throws Exception {
