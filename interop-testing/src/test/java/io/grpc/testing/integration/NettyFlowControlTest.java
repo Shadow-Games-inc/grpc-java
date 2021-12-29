@@ -158,3 +158,12 @@ public class NettyFlowControlTest {
     stub.streamingOutputCall(request, observer);
     int lastWindow = observer.waitFor(5, TimeUnit.SECONDS);
 
+    // deal with cases that either don't cause a window update or hit max window
+    expectedWindow = Math.min(MAX_WINDOW, Math.max(expectedWindow, REGULAR_WINDOW));
+
+    // Range looks large, but this allows for only one extra/missed window update
+    // (one extra update causes a 2x difference and one missed update causes a .5x difference)
+    assertTrue("Window was " + lastWindow + " expecting " + expectedWindow,
+        lastWindow < 2 * expectedWindow);
+    assertTrue("Window was " + lastWindow + " expecting " + expectedWindow,
+        expectedWindow < 2 * lastWindow);
