@@ -95,3 +95,9 @@ public class MoreInProcessTest {
           public void onError(Throwable t) {
           }
 
+          @Override
+          public void onCompleted() {
+          }
+        };
+      }
+    };
