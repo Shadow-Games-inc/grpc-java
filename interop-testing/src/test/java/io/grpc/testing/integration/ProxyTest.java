@@ -66,3 +66,11 @@ public class ProxyTest {
   public void smallLatency() throws Exception {
     server = new Server();
     int serverPort = server.init();
+    executor.execute(server);
+
+    int latency = (int) TimeUnit.MILLISECONDS.toNanos(50);
+    proxy = new TrafficControlProxy(serverPort, 1024 * 1024, latency, TimeUnit.NANOSECONDS);
+    proxy.start();
+    client = new Socket("localhost", proxy.getPort());
+    client.setReuseAddress(true);
+    OutputStream clientOut = client.getOutputStream();
