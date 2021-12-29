@@ -160,3 +160,14 @@ public class Http2OkHttpTest extends AbstractInteropTest {
       actualThrown = t;
     }
     assertNotNull("The rpc should have been failed due to hostname verification", actualThrown);
+    Throwable cause = Throwables.getRootCause(actualThrown);
+    assertTrue(
+        "Failed by unexpected exception: " + cause, cause instanceof SSLPeerUnverifiedException);
+    channel.shutdown();
+  }
+
+  @Test
+  public void hostnameVerifierWithBadHostname() throws Exception {
+    int port = ((InetSocketAddress) getListenAddress()).getPort();
+    ManagedChannel channel = createChannelBuilderPreCredentialsApi()
+        .overrideAuthority(GrpcUtil.authorityFromHostAndPort(
