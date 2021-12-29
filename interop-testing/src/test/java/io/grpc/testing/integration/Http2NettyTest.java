@@ -64,3 +64,7 @@ public class Http2NettyTest extends AbstractInteropTest {
     }
   }
 
+  @Override
+  protected NettyChannelBuilder createChannelBuilder() {
+    try {
+      ChannelCredentials channelCreds = TlsChannelCredentials.newBuilder()
