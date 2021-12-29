@@ -180,3 +180,16 @@ public class Http2OkHttpTest extends AbstractInteropTest {
         })
         .build();
     TestServiceGrpc.TestServiceBlockingStub blockingStub =
+        TestServiceGrpc.newBlockingStub(channel);
+
+    blockingStub.emptyCall(Empty.getDefaultInstance());
+
+    channel.shutdown();
+  }
+
+  @Test
+  public void hostnameVerifierWithCorrectHostname() throws Exception {
+    int port = ((InetSocketAddress) getListenAddress()).getPort();
+    ManagedChannel channel = createChannelBuilderPreCredentialsApi()
+        .overrideAuthority(GrpcUtil.authorityFromHostAndPort(
+            TestUtils.TEST_SERVER_HOST, port))
