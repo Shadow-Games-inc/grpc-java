@@ -202,3 +202,13 @@ public class MoreInProcessTest {
           StreamObserver<StreamingInputCallResponse> responseObserver) {
         StreamObserver<StreamingInputCallRequest> requestObserver =
             new StreamObserver<StreamingInputCallRequest>() {
+              @Override
+              public void onNext(StreamingInputCallRequest value) {
+                throw new RuntimeException(
+                    "unexpected error due to careless implementation of serviceImpl");
+              }
+
+              @Override
+              public void onError(Throwable t) {
+              }
+
