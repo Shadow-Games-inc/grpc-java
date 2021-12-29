@@ -135,3 +135,15 @@ public class Http2OkHttpTest extends AbstractInteropTest {
         asyncStub.fullDuplexCall(recorder);
     Messages.StreamingOutputCallRequest request = requestBuilder.build();
     requestStream.onNext(request);
+    recorder.firstValue().get();
+    requestStream.onError(new Exception("failed"));
+
+    recorder.awaitCompletion();
+
+    assertEquals(EMPTY, blockingStub.emptyCall(EMPTY));
+  }
+
+  @Test
+  public void wrongHostNameFailHostnameVerification() throws Exception {
+    int port = ((InetSocketAddress) getListenAddress()).getPort();
+    ManagedChannel channel = createChannelBuilderPreCredentialsApi()
