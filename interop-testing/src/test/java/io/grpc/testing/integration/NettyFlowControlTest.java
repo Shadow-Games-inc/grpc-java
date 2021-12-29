@@ -73,3 +73,9 @@ public class NettyFlowControlTest {
 
   private final CapturingProtocolNegotiationFactory capturingPnFactory
       = new CapturingProtocolNegotiationFactory();
+  private ManagedChannel channel;
+  private Server server;
+  private TrafficControlProxy proxy;
+
+  private int proxyPort;
+  private int serverPort;
