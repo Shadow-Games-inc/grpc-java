@@ -90,3 +90,8 @@ public class MoreInProcessTest {
           @Override
           public void onNext(StreamingInputCallRequest value) {
           }
+
+          @Override
+          public void onError(Throwable t) {
+          }
+
