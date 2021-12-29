@@ -253,3 +253,14 @@ public class NettyFlowControlTest {
 
     @Override
     public ProtocolNegotiator buildProtocolNegotiator() {
+      return new CapturingProtocolNegotiator();
+    }
+
+    private class CapturingProtocolNegotiator implements ProtocolNegotiator {
+
+      final ProtocolNegotiator delegate = InternalProtocolNegotiators.plaintext();
+
+      @Override
+      public AsciiString scheme() {
+        return delegate.scheme();
+      }
