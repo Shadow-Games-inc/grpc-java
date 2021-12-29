@@ -80,3 +80,12 @@ public class Http2NettyTest extends AbstractInteropTest {
       InternalNettyChannelBuilder.setStatsEnabled(builder, false);
       return builder.intercept(createCensusStatsClientInterceptor());
     } catch (Exception ex) {
+      throw new RuntimeException(ex);
+    }
+  }
+
+  @Test
+  public void remoteAddr() {
+    InetSocketAddress isa = (InetSocketAddress) obtainRemoteClientAddr();
+    assertEquals(InetAddress.getLoopbackAddress(), isa.getAddress());
+    // It should not be the same as the server
