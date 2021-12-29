@@ -225,3 +225,10 @@ public class NettyFlowControlTest {
         onCompleted();
       }
     }
+
+    @Override
+    public void onError(Throwable t) {
+      latch.countDown();
+      throw new RuntimeException(t);
+    }
+
