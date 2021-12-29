@@ -126,3 +126,12 @@ public class Http2OkHttpTest extends AbstractInteropTest {
         .setSize(1);
     Messages.StreamingOutputCallRequest.Builder requestBuilder =
         Messages.StreamingOutputCallRequest.newBuilder();
+    for (int i = 0; i < 1000; i++) {
+      requestBuilder.addResponseParameters(responseParameters);
+    }
+
+    StreamRecorder<Messages.StreamingOutputCallResponse> recorder = StreamRecorder.create();
+    StreamObserver<Messages.StreamingOutputCallRequest> requestStream =
+        asyncStub.fullDuplexCall(recorder);
+    Messages.StreamingOutputCallRequest request = requestBuilder.build();
+    requestStream.onNext(request);
