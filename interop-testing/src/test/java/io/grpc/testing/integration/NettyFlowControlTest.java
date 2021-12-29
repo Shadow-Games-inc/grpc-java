@@ -174,3 +174,14 @@ public class NettyFlowControlTest {
    */
   private void createAndStartChannel(int clientFlowControlWindow) {
     NettyChannelBuilder channelBuilder =
+        NettyChannelBuilder
+            .forAddress(new InetSocketAddress("localhost", proxyPort))
+            .initialFlowControlWindow(clientFlowControlWindow)
+            .negotiationType(NegotiationType.PLAINTEXT);
+    InternalNettyChannelBuilder.setProtocolNegotiatorFactory(channelBuilder, capturingPnFactory);
+    channel = channelBuilder.build();
+  }
+
+  private void startServer(int serverFlowControlWindow) {
+    ServerBuilder<?> builder =
+        NettyServerBuilder
