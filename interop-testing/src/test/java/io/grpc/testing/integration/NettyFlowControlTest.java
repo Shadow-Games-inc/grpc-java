@@ -264,3 +264,11 @@ public class NettyFlowControlTest {
       public AsciiString scheme() {
         return delegate.scheme();
       }
+
+      @Override
+      public ChannelHandler newHandler(GrpcHttp2ConnectionHandler grpcHandler) {
+        CapturingProtocolNegotiationFactory.this.grpcHandlerRef.set(grpcHandler);
+        return delegate.newHandler(grpcHandler);
+      }
+
+      @Override
