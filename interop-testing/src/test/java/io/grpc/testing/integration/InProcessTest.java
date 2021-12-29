@@ -31,3 +31,20 @@ public class InProcessTest extends AbstractInteropTest {
   private static final String SERVER_NAME = "test";
 
   @Override
+  protected ServerBuilder<?> getServerBuilder() {
+    // Starts the in-process server.
+    InProcessServerBuilder builder = InProcessServerBuilder.forName(SERVER_NAME);
+    // Disable the default census stats tracer, use testing tracer instead.
+    InternalInProcessServerBuilder.setStatsEnabled(builder, false);
+    return builder.addStreamTracerFactory(createCustomCensusTracerFactory());
+  }
+
+  @Override
+  protected InProcessChannelBuilder createChannelBuilder() {
+    InProcessChannelBuilder builder = InProcessChannelBuilder.forName(SERVER_NAME);
+    // Disable the default census stats interceptor, use testing interceptor instead.
+    InternalInProcessChannelBuilder.setStatsEnabled(builder, false);
+    return builder.intercept(createCensusStatsClientInterceptor());
+  }
+
+  @Override
