@@ -157,3 +157,16 @@ public class MoreInProcessTest {
           @Override
           public void onCompleted() {
           }
+        };
+      }
+    };
+    serviceRegistry.addService(clientStreamingImpl);
+    // implement a client
+    final CountDownLatch finishLatch = new CountDownLatch(1);
+    final AtomicReference<StreamingInputCallResponse> responseRef =
+        new AtomicReference<>();
+    final AtomicReference<Throwable> throwableRef = new AtomicReference<>();
+    StreamObserver<StreamingInputCallResponse> responseObserver =
+        new StreamObserver<StreamingInputCallResponse>() {
+          @Override
+          public void onNext(StreamingInputCallResponse response) {
