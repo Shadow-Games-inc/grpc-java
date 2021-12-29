@@ -229,3 +229,7 @@ public class MoreInProcessTest {
         new StreamObserver<StreamingInputCallResponse>() {
           @Override
           public void onNext(StreamingInputCallResponse response) {
+            responseRef.set(response);
+          }
+
+          @Override
