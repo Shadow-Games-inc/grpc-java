@@ -104,3 +104,11 @@ public class ProxyTest {
 
     int latency = (int) TimeUnit.MILLISECONDS.toNanos(250);
     proxy = new TrafficControlProxy(serverPort, 1024 * 1024, latency, TimeUnit.NANOSECONDS);
+    proxy.start();
+    client = new Socket("localhost", proxy.getPort());
+    OutputStream clientOut = client.getOutputStream();
+    DataInputStream clientIn = new DataInputStream(client.getInputStream());
+    byte[] message = new byte[1];
+
+    // warmup
+    for (int i = 0; i < 5; i++) {
