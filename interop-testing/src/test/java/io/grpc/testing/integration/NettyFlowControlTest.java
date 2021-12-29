@@ -185,3 +185,15 @@ public class NettyFlowControlTest {
   private void startServer(int serverFlowControlWindow) {
     ServerBuilder<?> builder =
         NettyServerBuilder
+            .forAddress(new InetSocketAddress("localhost", 0))
+            .initialFlowControlWindow(serverFlowControlWindow);
+    builder.addService(ServerInterceptors.intercept(
+        new TestServiceImpl(Executors.newScheduledThreadPool(2)),
+        ImmutableList.<ServerInterceptor>of()));
+    try {
+      server = builder.build().start();
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
