@@ -32,3 +32,21 @@ import io.grpc.netty.NettyChannelBuilder;
 import io.grpc.netty.NettyServerBuilder;
 import io.grpc.stub.MetadataUtils;
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+
+/**
+ * Integration tests for GRPC over HTTP2 using the Netty framework.
+ */
+@RunWith(JUnit4.class)
+public class Http2NettyTest extends AbstractInteropTest {
+
+  @Override
+  protected ServerBuilder<?> getServerBuilder() {
+    // Starts the server with HTTPS.
+    try {
+      ServerCredentials serverCreds = TlsServerCredentials.newBuilder()
+          .keyManager(TestUtils.loadCert("server1.pem"), TestUtils.loadCert("server1.key"))
