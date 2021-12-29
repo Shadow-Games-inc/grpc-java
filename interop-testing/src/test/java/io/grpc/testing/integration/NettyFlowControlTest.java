@@ -197,3 +197,13 @@ public class NettyFlowControlTest {
     }
   }
 
+  /**
+   * Simple stream observer to measure elapsed time of the call.
+   */
+  private static class TestStreamObserver implements StreamObserver<StreamingOutputCallResponse> {
+
+    final AtomicReference<GrpcHttp2ConnectionHandler> grpcHandlerRef;
+    final long startRequestNanos;
+    long endRequestNanos;
+    final CountDownLatch latch = new CountDownLatch(1);
+    final long expectedWindow;
