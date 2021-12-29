@@ -38,3 +38,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.Timeout;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+
+/**
+ * Unit tests for {@link io.grpc.inprocess}.
+ * Test more corner usecases, client not playing by the rules, server not playing by the rules, etc.
