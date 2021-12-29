@@ -189,3 +189,9 @@ public class MoreInProcessTest {
     TestServiceGrpc.newStub(inProcessChannel).streamingInputCall(responseObserver);
 
     assertTrue(finishLatch.await(900, TimeUnit.MILLISECONDS));
+    assertEquals(fakeError.getCode(), Status.fromThrowable(throwableRef.get()).getCode());
+    assertNull(responseRef.get());
+  }
+
+  @Test
+  public void asyncClientStreaming_erroneousServiceImpl() throws Exception {
