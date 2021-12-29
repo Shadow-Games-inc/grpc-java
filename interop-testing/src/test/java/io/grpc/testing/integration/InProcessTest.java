@@ -48,3 +48,13 @@ public class InProcessTest extends AbstractInteropTest {
   }
 
   @Override
+  protected boolean customCensusModulePresent() {
+    // Metrics values are not expected, but custom census module is still used.
+    return true;
+  }
+
+  @Override
+  protected boolean metricsExpected() {
+    // TODO(zhangkun83): InProcessTransport by-passes framer and deframer, thus message sizes are
+    // not counted. (https://github.com/grpc/grpc-java/issues/2284)
+    return false;
