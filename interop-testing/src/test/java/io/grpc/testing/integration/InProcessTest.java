@@ -19,3 +19,15 @@ package io.grpc.testing.integration;
 import io.grpc.ServerBuilder;
 import io.grpc.inprocess.InProcessChannelBuilder;
 import io.grpc.inprocess.InProcessServerBuilder;
+import io.grpc.inprocess.InternalInProcessChannelBuilder;
+import io.grpc.inprocess.InternalInProcessServerBuilder;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+
+/** Unit tests for {@link io.grpc.inprocess}. */
+@RunWith(JUnit4.class)
+public class InProcessTest extends AbstractInteropTest {
+
+  private static final String SERVER_NAME = "test";
+
+  @Override
