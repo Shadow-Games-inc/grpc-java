@@ -177,3 +177,15 @@ public class MoreInProcessTest {
           public void onError(Throwable t) {
             throwableRef.set(t);
             finishLatch.countDown();
+          }
+
+          @Override
+          public void onCompleted() {
+            finishLatch.countDown();
+          }
+        };
+
+    // make a gRPC call
+    TestServiceGrpc.newStub(inProcessChannel).streamingInputCall(responseObserver);
+
+    assertTrue(finishLatch.await(900, TimeUnit.MILLISECONDS));
