@@ -170,3 +170,10 @@ public class MoreInProcessTest {
         new StreamObserver<StreamingInputCallResponse>() {
           @Override
           public void onNext(StreamingInputCallResponse response) {
+            responseRef.set(response);
+          }
+
+          @Override
+          public void onError(Throwable t) {
+            throwableRef.set(t);
+            finishLatch.countDown();
