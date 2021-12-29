@@ -252,3 +252,4 @@ public class MoreInProcessTest {
     assertEquals(Status.UNKNOWN, Status.fromThrowable(throwableRef.get()));
     assertNull(responseRef.get());
   }
+}
