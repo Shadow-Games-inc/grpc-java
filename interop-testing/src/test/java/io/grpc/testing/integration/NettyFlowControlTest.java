@@ -136,3 +136,16 @@ public class NettyFlowControlTest {
   }
 
   /**
+   * Main testing method. Streams 2 MB of data from a server and records the final window and
+   * average bandwidth usage.
+   */
+  private void doTest(int bandwidth, int latency) throws InterruptedException {
+
+    int streamSize = 1 * 1024 * 1024;
+    long expectedWindow = latency * (bandwidth / TimeUnit.SECONDS.toMillis(1));
+
+    TestServiceGrpc.TestServiceStub stub = TestServiceGrpc.newStub(channel);
+    StreamingOutputCallRequest.Builder builder = StreamingOutputCallRequest.newBuilder()
+        .addResponseParameters(ResponseParameters.newBuilder().setSize(streamSize / 16))
+        .addResponseParameters(ResponseParameters.newBuilder().setSize(streamSize / 16))
+        .addResponseParameters(ResponseParameters.newBuilder().setSize(streamSize / 8))
