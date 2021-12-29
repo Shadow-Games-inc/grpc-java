@@ -109,3 +109,9 @@ public class MoreInProcessTest {
     final AtomicReference<Throwable> throwableRef = new AtomicReference<>();
     StreamObserver<StreamingInputCallResponse> responseObserver =
         new StreamObserver<StreamingInputCallResponse>() {
+          @Override
+          public void onNext(StreamingInputCallResponse response) {
+            responseRef.set(response);
+          }
+
+          @Override
