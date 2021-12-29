@@ -58,3 +58,11 @@ public class InProcessTest extends AbstractInteropTest {
     // TODO(zhangkun83): InProcessTransport by-passes framer and deframer, thus message sizes are
     // not counted. (https://github.com/grpc/grpc-java/issues/2284)
     return false;
+  }
+
+  @Override
+  public void maxInboundSize_tooBig() {
+    // noop, not enforced.
+  }
+
+  @Override
