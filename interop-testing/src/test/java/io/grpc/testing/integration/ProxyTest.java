@@ -38,3 +38,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+@RunWith(JUnit4.class)
+public class ProxyTest {
+
+  private static ThreadPoolExecutor executor =
+      new ThreadPoolExecutor(8, 8, 1, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(),
+          new DefaultThreadFactory("proxy-test-pool", true));
+
+  private TrafficControlProxy proxy;
+  private Socket client;
+  private Server server;
+
