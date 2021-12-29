@@ -241,3 +241,14 @@ public class MoreInProcessTest {
           @Override
           public void onCompleted() {
             finishLatch.countDown();
+          }
+        };
+
+    // make a gRPC call
+    TestServiceGrpc.newStub(inProcessChannel).streamingInputCall(responseObserver)
+        .onNext(StreamingInputCallRequest.getDefaultInstance());
+
+    assertTrue(finishLatch.await(900, TimeUnit.MILLISECONDS));
+    assertEquals(Status.UNKNOWN, Status.fromThrowable(throwableRef.get()));
+    assertNull(responseRef.get());
+  }
