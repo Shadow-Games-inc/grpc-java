@@ -58,3 +58,18 @@ import org.junit.runners.JUnit4;
 
 @RunWith(JUnit4.class)
 public class NettyFlowControlTest {
+
+  // in bytes
+  private static final int LOW_BAND = 2 * 1024 * 1024;
+  private static final int HIGH_BAND = 30 * 1024 * 1024;
+
+  // in milliseconds
+  private static final int MED_LAT = 10;
+
+  // in bytes
+  private static final int TINY_WINDOW = 1;
+  private static final int REGULAR_WINDOW = 64 * 1024;
+  private static final int MAX_WINDOW = 8 * 1024 * 1024;
+
+  private final CapturingProtocolNegotiationFactory capturingPnFactory
+      = new CapturingProtocolNegotiationFactory();
