@@ -107,3 +107,12 @@ public class NettyFlowControlTest {
     }
   }
 
+  @Test
+  public void largeBdp() throws InterruptedException, IOException {
+    proxy = new TrafficControlProxy(serverPort, HIGH_BAND, MED_LAT, TimeUnit.MILLISECONDS);
+    proxy.start();
+    proxyPort = proxy.getPort();
+    createAndStartChannel(REGULAR_WINDOW);
+    doTest(HIGH_BAND, MED_LAT);
+  }
+
