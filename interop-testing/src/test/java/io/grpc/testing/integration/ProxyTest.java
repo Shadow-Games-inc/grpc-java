@@ -57,3 +57,12 @@ public class ProxyTest {
   @After
   public void shutdownTest() throws IOException {
     proxy.shutDown();
+    server.shutDown();
+    client.close();
+  }
+
+  @Test
+  @org.junit.Ignore // flaky. latency commonly too high
+  public void smallLatency() throws Exception {
+    server = new Server();
+    int serverPort = server.init();
