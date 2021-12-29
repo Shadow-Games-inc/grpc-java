@@ -63,3 +63,11 @@ public class MoreInProcessTest {
 
   @Before
   public void setUp() throws Exception {
+    inProcessServer.start();
+  }
+
+  @After
+  public void tearDown() throws Exception {
+    inProcessChannel.shutdown();
+    inProcessServer.shutdown();
+    assertTrue(inProcessChannel.awaitTermination(900, TimeUnit.MILLISECONDS));
