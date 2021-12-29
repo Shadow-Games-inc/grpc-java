@@ -107,3 +107,13 @@ public class Http2NettyTest extends AbstractInteropTest {
   @Test
   public void contentLengthPermitted() throws Exception {
     // Some third-party gRPC implementations (e.g., ServiceTalk) include Content-Length. The HTTP/2
+    // code starting in Netty 4.1.60.Final has special-cased handling of Content-Length, and may
+    // call uncommon methods on our custom headers implementation.
+    // https://github.com/grpc/grpc-java/issues/7953
+    Metadata contentLength = new Metadata();
+    contentLength.put(Metadata.Key.of("content-length", Metadata.ASCII_STRING_MARSHALLER), "5");
+    blockingStub
+        .withInterceptors(MetadataUtils.newAttachHeadersInterceptor(contentLength))
+        .emptyCall(EMPTY);
+  }
+}
