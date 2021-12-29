@@ -101,3 +101,11 @@ public class MoreInProcessTest {
         };
       }
     };
+    serviceRegistry.addService(clientStreamingImpl);
+    // implement a client
+    final CountDownLatch finishLatch = new CountDownLatch(1);
+    final AtomicReference<StreamingInputCallResponse> responseRef =
+        new AtomicReference<>();
+    final AtomicReference<Throwable> throwableRef = new AtomicReference<>();
+    StreamObserver<StreamingInputCallResponse> responseObserver =
+        new StreamObserver<StreamingInputCallResponse>() {
