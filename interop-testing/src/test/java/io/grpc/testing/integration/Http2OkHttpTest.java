@@ -171,3 +171,12 @@ public class Http2OkHttpTest extends AbstractInteropTest {
     int port = ((InetSocketAddress) getListenAddress()).getPort();
     ManagedChannel channel = createChannelBuilderPreCredentialsApi()
         .overrideAuthority(GrpcUtil.authorityFromHostAndPort(
+            BAD_HOSTNAME, port))
+        .hostnameVerifier(new HostnameVerifier() {
+          @Override
+          public boolean verify(String hostname, SSLSession session) {
+            return true;
+          }
+        })
+        .build();
+    TestServiceGrpc.TestServiceBlockingStub blockingStub =
