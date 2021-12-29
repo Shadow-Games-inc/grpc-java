@@ -95,3 +95,12 @@ public class ProxyTest {
     long rtt = rtts.get(0);
     assertEquals(latency, rtt, .5 * latency);
   }
+
+  @Test
+  public void bigLatency() throws Exception {
+    server = new Server();
+    int serverPort = server.init();
+    executor.execute(server);
+
+    int latency = (int) TimeUnit.MILLISECONDS.toNanos(250);
+    proxy = new TrafficControlProxy(serverPort, 1024 * 1024, latency, TimeUnit.NANOSECONDS);
