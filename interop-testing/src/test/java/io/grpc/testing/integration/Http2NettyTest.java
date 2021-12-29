@@ -99,3 +99,11 @@ public class Http2NettyTest extends AbstractInteropTest {
     assertEquals(((InetSocketAddress) getListenAddress()).getPort(), isa.getPort());
   }
 
+  @Test
+  public void tlsInfo() {
+    assertX500SubjectDn("CN=testclient, O=Internet Widgits Pty Ltd, ST=Some-State, C=AU");
+  }
+
+  @Test
+  public void contentLengthPermitted() throws Exception {
+    // Some third-party gRPC implementations (e.g., ServiceTalk) include Content-Length. The HTTP/2
