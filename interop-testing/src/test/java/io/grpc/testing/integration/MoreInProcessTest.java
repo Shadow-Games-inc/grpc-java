@@ -233,3 +233,11 @@ public class MoreInProcessTest {
           }
 
           @Override
+          public void onError(Throwable t) {
+            throwableRef.set(t);
+            finishLatch.countDown();
+          }
+
+          @Override
+          public void onCompleted() {
+            finishLatch.countDown();
