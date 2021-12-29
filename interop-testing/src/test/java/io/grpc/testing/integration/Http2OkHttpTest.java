@@ -101,3 +101,18 @@ public class Http2OkHttpTest extends AbstractInteropTest {
   }
 
   private OkHttpChannelBuilder createChannelBuilderPreCredentialsApi() {
+    int port = ((InetSocketAddress) getListenAddress()).getPort();
+    OkHttpChannelBuilder builder = OkHttpChannelBuilder.forAddress("localhost", port)
+        .maxInboundMessageSize(AbstractInteropTest.MAX_MESSAGE_SIZE)
+        .connectionSpec(new ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS)
+            .build())
+        .overrideAuthority(GrpcUtil.authorityFromHostAndPort(
+            TestUtils.TEST_SERVER_HOST, port));
+    try {
+      builder.sslSocketFactory(TestUtils.newSslSocketFactoryForCa(Platform.get().getProvider(),
+          TestUtils.loadCert("ca.pem")));
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+    // Disable the default census stats interceptor, use testing interceptor instead.
+    InternalOkHttpChannelBuilder.setStatsEnabled(builder, false);
