@@ -147,3 +147,13 @@ public class MoreInProcessTest {
         responseObserver.onCompleted();
         return new StreamObserver<StreamingInputCallRequest>() {
           @Override
+          public void onNext(StreamingInputCallRequest value) {
+          }
+
+          @Override
+          public void onError(Throwable t) {
+          }
+
+          @Override
+          public void onCompleted() {
+          }
