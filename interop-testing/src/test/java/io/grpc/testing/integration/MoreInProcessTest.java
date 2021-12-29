@@ -77,3 +77,10 @@ public class MoreInProcessTest {
   @Test
   public void asyncClientStreaming_serverResponsePriorToRequest() throws Exception {
     // implement a service
+    final StreamingInputCallResponse fakeResponse =
+        StreamingInputCallResponse.newBuilder().setAggregatedPayloadSize(100).build();
+    TestServiceImplBase clientStreamingImpl = new TestServiceImplBase() {
+      @Override
+      public StreamObserver<StreamingInputCallRequest> streamingInputCall(
+          StreamObserver<StreamingInputCallResponse> responseObserver) {
+        // send response directly
