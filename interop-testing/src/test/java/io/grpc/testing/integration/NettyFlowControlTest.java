@@ -220,4 +220,8 @@ public class NettyFlowControlTest {
     public void onNext(StreamingOutputCallResponse value) {
       GrpcHttp2ConnectionHandler grpcHandler = grpcHandlerRef.get();
       Http2Stream connectionStream = grpcHandler.connection().connectionStream();
+      lastWindow = grpcHandler.decoder().flowController().initialWindowSize(connectionStream);
+      if (lastWindow >= expectedWindow) {
+        onCompleted();
+      }
     }
