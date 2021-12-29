@@ -195,3 +195,10 @@ public class MoreInProcessTest {
 
   @Test
   public void asyncClientStreaming_erroneousServiceImpl() throws Exception {
+    // implement a service
+    TestServiceImplBase clientStreamingImpl = new TestServiceImplBase() {
+      @Override
+      public StreamObserver<StreamingInputCallRequest> streamingInputCall(
+          StreamObserver<StreamingInputCallResponse> responseObserver) {
+        StreamObserver<StreamingInputCallRequest> requestObserver =
+            new StreamObserver<StreamingInputCallRequest>() {
