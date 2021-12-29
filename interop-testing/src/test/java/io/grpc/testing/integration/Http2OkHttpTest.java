@@ -147,3 +147,16 @@ public class Http2OkHttpTest extends AbstractInteropTest {
   public void wrongHostNameFailHostnameVerification() throws Exception {
     int port = ((InetSocketAddress) getListenAddress()).getPort();
     ManagedChannel channel = createChannelBuilderPreCredentialsApi()
+        .overrideAuthority(GrpcUtil.authorityFromHostAndPort(
+            BAD_HOSTNAME, port))
+        .build();
+    TestServiceGrpc.TestServiceBlockingStub blockingStub =
+        TestServiceGrpc.newBlockingStub(channel);
+
+    Throwable actualThrown = null;
+    try {
+      blockingStub.emptyCall(Empty.getDefaultInstance());
+    } catch (Throwable t) {
+      actualThrown = t;
+    }
+    assertNotNull("The rpc should have been failed due to hostname verification", actualThrown);
