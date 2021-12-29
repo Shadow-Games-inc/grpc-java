@@ -84,3 +84,9 @@ public class MoreInProcessTest {
       public StreamObserver<StreamingInputCallRequest> streamingInputCall(
           StreamObserver<StreamingInputCallResponse> responseObserver) {
         // send response directly
+        responseObserver.onNext(fakeResponse);
+        responseObserver.onCompleted();
+        return new StreamObserver<StreamingInputCallRequest>() {
+          @Override
+          public void onNext(StreamingInputCallRequest value) {
+          }
