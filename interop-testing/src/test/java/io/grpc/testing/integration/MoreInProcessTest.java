@@ -122,3 +122,9 @@ public class MoreInProcessTest {
 
           @Override
           public void onCompleted() {
+            finishLatch.countDown();
+          }
+        };
+
+    // make a gRPC call
+    TestServiceGrpc.newStub(inProcessChannel).streamingInputCall(responseObserver);
