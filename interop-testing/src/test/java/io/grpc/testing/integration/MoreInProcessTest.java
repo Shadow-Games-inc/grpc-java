@@ -55,3 +55,11 @@ public class MoreInProcessTest {
   @Rule
   public final Timeout globalTimeout = new Timeout(10, TimeUnit.SECONDS);
   // use a mutable service registry for later registering the service impl for each test case.
+  private final MutableHandlerRegistry serviceRegistry = new MutableHandlerRegistry();
+  private final Server inProcessServer = InProcessServerBuilder.forName(UNIQUE_SERVER_NAME)
+      .fallbackHandlerRegistry(serviceRegistry).directExecutor().build();
+  private final ManagedChannel inProcessChannel =
+      InProcessChannelBuilder.forName(UNIQUE_SERVER_NAME).directExecutor().build();
+
+  @Before
+  public void setUp() throws Exception {
