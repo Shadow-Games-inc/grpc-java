@@ -125,3 +125,14 @@ public class NettyFlowControlTest {
     doTest(LOW_BAND, MED_LAT);
   }
 
+  @Test
+  @Ignore("enable once 2 pings between data is no longer necessary")
+  public void verySmallWindowMakesProgress() throws InterruptedException, IOException {
+    proxy = new TrafficControlProxy(serverPort, HIGH_BAND, MED_LAT, TimeUnit.MILLISECONDS);
+    proxy.start();
+    proxyPort = proxy.getPort();
+    createAndStartChannel(TINY_WINDOW);
+    doTest(HIGH_BAND, MED_LAT);
+  }
+
+  /**
