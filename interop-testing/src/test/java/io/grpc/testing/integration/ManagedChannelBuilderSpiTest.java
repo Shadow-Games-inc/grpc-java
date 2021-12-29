@@ -22,3 +22,15 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 /** Tests for integration between {@link ManagedChannelBuilder} and providers. */
+@RunWith(JUnit4.class)
+public final class ManagedChannelBuilderSpiTest {
+  @Test
+  public void forAddress_isntObviouslyBroken() {
+    ManagedChannelBuilder.forAddress("localhost", 443).build().shutdownNow();
+  }
+
+  @Test
+  public void forTarget_isntObviouslyBroken() {
+    ManagedChannelBuilder.forTarget("localhost:443").build().shutdownNow();
+  }
+}
