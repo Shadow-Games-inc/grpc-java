@@ -193,3 +193,8 @@ public class Http2OkHttpTest extends AbstractInteropTest {
     ManagedChannel channel = createChannelBuilderPreCredentialsApi()
         .overrideAuthority(GrpcUtil.authorityFromHostAndPort(
             TestUtils.TEST_SERVER_HOST, port))
+        .hostnameVerifier(new HostnameVerifier() {
+          @Override
+          public boolean verify(String hostname, SSLSession session) {
+            return false;
+          }
