@@ -27,3 +27,8 @@ import io.grpc.StatusRuntimeException;
 import io.grpc.inprocess.InProcessChannelBuilder;
 import io.grpc.inprocess.InProcessServerBuilder;
 import io.grpc.stub.StreamObserver;
+import io.grpc.testing.integration.Messages.StreamingInputCallRequest;
+import io.grpc.testing.integration.Messages.StreamingInputCallResponse;
+import io.grpc.testing.integration.TestServiceGrpc.TestServiceImplBase;
+import io.grpc.util.MutableHandlerRegistry;
+import java.util.concurrent.CountDownLatch;
