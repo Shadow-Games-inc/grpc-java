@@ -50,3 +50,17 @@ public class Http2NettyTest extends AbstractInteropTest {
     try {
       ServerCredentials serverCreds = TlsServerCredentials.newBuilder()
           .keyManager(TestUtils.loadCert("server1.pem"), TestUtils.loadCert("server1.key"))
+          .trustManager(TestUtils.loadCert("ca.pem"))
+          .clientAuth(TlsServerCredentials.ClientAuth.REQUIRE)
+          .build();
+      NettyServerBuilder builder = NettyServerBuilder.forPort(0, serverCreds)
+          .flowControlWindow(AbstractInteropTest.TEST_FLOW_CONTROL_WINDOW)
+          .maxInboundMessageSize(AbstractInteropTest.MAX_MESSAGE_SIZE);
+      // Disable the default census stats tracer, use testing tracer instead.
+      InternalNettyServerBuilder.setStatsEnabled(builder, false);
+      return builder.addStreamTracerFactory(createCustomCensusTracerFactory());
+    } catch (IOException ex) {
+      throw new RuntimeException(ex);
+    }
+  }
+
