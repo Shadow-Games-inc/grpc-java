@@ -207,3 +207,13 @@ public class NettyFlowControlTest {
     long endRequestNanos;
     final CountDownLatch latch = new CountDownLatch(1);
     final long expectedWindow;
+    int lastWindow;
+
+    public TestStreamObserver(
+        AtomicReference<GrpcHttp2ConnectionHandler> grpcHandlerRef, long window) {
+      this.grpcHandlerRef = grpcHandlerRef;
+      startRequestNanos = System.nanoTime();
+      expectedWindow = window;
+    }
+
+    @Override
