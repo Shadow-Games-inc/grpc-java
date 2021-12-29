@@ -74,3 +74,9 @@ public class ProxyTest {
     client = new Socket("localhost", proxy.getPort());
     client.setReuseAddress(true);
     OutputStream clientOut = client.getOutputStream();
+    DataInputStream clientIn = new DataInputStream(client.getInputStream());
+    byte[] message = new byte[1];
+
+    // warmup
+    for (int i = 0; i < 5; i++) {
+      clientOut.write(message, 0, 1);
