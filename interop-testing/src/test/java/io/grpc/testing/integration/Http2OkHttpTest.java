@@ -66,3 +66,20 @@ public class Http2OkHttpTest extends AbstractInteropTest {
   @Override
   protected ServerBuilder<?> getServerBuilder() {
     // Starts the server with HTTPS.
+    try {
+      ServerCredentials serverCreds = TlsServerCredentials.create(
+          TestUtils.loadCert("server1.pem"), TestUtils.loadCert("server1.key"));
+      NettyServerBuilder builder = NettyServerBuilder.forPort(0, serverCreds)
+          .flowControlWindow(AbstractInteropTest.TEST_FLOW_CONTROL_WINDOW)
+          .maxInboundMessageSize(AbstractInteropTest.MAX_MESSAGE_SIZE);
+      // Disable the default census stats tracer, use testing tracer instead.
+      InternalNettyServerBuilder.setStatsEnabled(builder, false);
+      return builder.addStreamTracerFactory(createCustomCensusTracerFactory());
+    } catch (IOException ex) {
+      throw new RuntimeException(ex);
+    }
+  }
+
+  @Override
+  protected OkHttpChannelBuilder createChannelBuilder() {
+    int port = ((InetSocketAddress) getListenAddress()).getPort();
