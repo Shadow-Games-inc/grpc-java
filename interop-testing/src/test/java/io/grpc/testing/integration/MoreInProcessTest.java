@@ -71,3 +71,9 @@ public class MoreInProcessTest {
     inProcessChannel.shutdown();
     inProcessServer.shutdown();
     assertTrue(inProcessChannel.awaitTermination(900, TimeUnit.MILLISECONDS));
+    assertTrue(inProcessServer.awaitTermination(900, TimeUnit.MILLISECONDS));
+  }
+
+  @Test
+  public void asyncClientStreaming_serverResponsePriorToRequest() throws Exception {
+    // implement a service
