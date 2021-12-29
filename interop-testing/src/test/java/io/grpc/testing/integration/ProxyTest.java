@@ -49,3 +49,11 @@ public class ProxyTest {
   private Socket client;
   private Server server;
 
+  @AfterClass
+  public static void stopExecutor() {
+    executor.shutdown();
+  }
+
+  @After
+  public void shutdownTest() throws IOException {
+    proxy.shutDown();
