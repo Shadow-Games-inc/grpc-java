@@ -77,3 +77,6 @@ public class TransportCompressionTest extends AbstractInteropTest {
     FZIPPER.anyRead = false;
     FZIPPER.anyWritten = false;
   }
+
+  @BeforeClass
+  public static void registerCompressors() {
