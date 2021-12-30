@@ -274,3 +274,6 @@ public class RetryTest {
     retryPolicy = ImmutableMap.<String, Object>builder()
         .put("maxAttempts", 4D)
         .put("initialBackoff", "10s")
+        .put("maxBackoff", "10s")
+        .put("backoffMultiplier", 1D)
+        .put("retryableStatusCodes", Arrays.<Object>asList("UNAVAILABLE"))
