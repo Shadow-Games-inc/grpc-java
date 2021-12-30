@@ -78,3 +78,6 @@ def _java_rpc_library_impl(ctx):
 
     toolchain = ctx.attr._toolchain[_JavaRpcToolchainInfo]
     srcs = ctx.attr.srcs[0][ProtoInfo].direct_sources
+    descriptor_set_in = ctx.attr.srcs[0][ProtoInfo].transitive_descriptor_sets
+
+    srcjar = ctx.actions.declare_file("%s-proto-gensrc.jar" % ctx.label.name)
