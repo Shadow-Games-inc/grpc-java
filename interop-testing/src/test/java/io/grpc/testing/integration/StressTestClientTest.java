@@ -99,3 +99,6 @@ public class StressTestClientTest {
     assertTrue(client.useTestCa());
     assertEquals(20, client.durationSecs());
     assertEquals(10, client.channelsPerServer());
+    assertEquals(5, client.stubsPerChannel());
+    assertEquals(9090, client.metricsPort());
+  }
