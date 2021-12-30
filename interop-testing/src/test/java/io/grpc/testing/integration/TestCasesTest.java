@@ -43,3 +43,6 @@ public class TestCasesTest {
       "empty_unary",
       "cacheable_unary",
       "large_unary",
+      "client_compressed_unary",
+      "server_compressed_unary",
+      "client_streaming",
