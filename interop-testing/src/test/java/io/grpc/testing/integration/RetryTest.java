@@ -463,3 +463,6 @@ public class RetryTest {
   @Test
   public void transparentRetryStatsRecorded() throws Exception {
     startNewServer();
+    createNewChannel();
+
+    final AtomicBoolean transparentRetryTriggered = new AtomicBoolean();
