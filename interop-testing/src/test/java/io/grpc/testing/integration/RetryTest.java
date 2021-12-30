@@ -498,3 +498,6 @@ public class RetryTest {
         return new TransparentRetryTriggeringTracer();
       }
     }
+
+    CallOptions callOptions = CallOptions.DEFAULT
+        .withWaitForReady()
