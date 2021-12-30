@@ -13,3 +13,6 @@ plugins {
 
 description = "gRPC: Netty Shaded"
 
+sourceSets { testShadow {} }
+
+dependencies {
