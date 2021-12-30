@@ -223,3 +223,6 @@ public final class TrafficControlProxy {
       while (bytesQueued == queueLength) {
         wait();
       }
+      return Math.max(0, Math.min(chunkSize, queueLength - bytesQueued));
+    }
+
