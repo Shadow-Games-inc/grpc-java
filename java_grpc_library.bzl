@@ -33,3 +33,6 @@ java_rpc_toolchain = rule(
             cfg = "host",
             executable = True,
         ),
+        "plugin_arg": attr.string(),
+        "_protoc": attr.label(
+            cfg = "host",
