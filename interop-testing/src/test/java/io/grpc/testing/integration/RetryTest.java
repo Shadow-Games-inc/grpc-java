@@ -343,3 +343,7 @@ public class RetryTest {
     message = "new message";
     call.sendMessage(message);
     assertOutboundMessageRecorded();
+    assertOutboundWireSizeRecorded(message.length());
+    // retry attempt latency
+    fakeClock.forwardTime(2, SECONDS);
+    serverCall.sendHeaders(new Metadata());
