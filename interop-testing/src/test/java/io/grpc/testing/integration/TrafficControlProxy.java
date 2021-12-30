@@ -46,3 +46,6 @@ public final class TrafficControlProxy {
   private final int chunkSize;
   private final int bandwidth;
   private final long latency;
+  private volatile boolean shutDown;
+  private ServerSocket clientAcceptor;
+  private Socket serverSock;
