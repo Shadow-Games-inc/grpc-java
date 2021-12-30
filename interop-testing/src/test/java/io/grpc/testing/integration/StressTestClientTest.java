@@ -159,3 +159,6 @@ public class StressTestClientTest {
       assertTrue("qps: " + gauge1.getLongValue(), gauge1.getLongValue() > 0);
     }
 
+    assertTrue("gauges: " + gaugeNames, gaugeNames.isEmpty());
+
+    client.shutdown();
