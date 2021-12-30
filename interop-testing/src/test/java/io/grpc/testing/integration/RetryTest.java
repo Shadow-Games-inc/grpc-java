@@ -91,3 +91,13 @@ public class RetryTest {
       new FakeTagContextBinarySerializer();
   private static final MeasureLong RETRIES_PER_CALL =
       Measure.MeasureLong.create(
+          "grpc.io/client/retries_per_call", "Number of retries per call", "1");
+  private static final MeasureLong TRANSPARENT_RETRIES_PER_CALL =
+      Measure.MeasureLong.create(
+          "grpc.io/client/transparent_retries_per_call", "Transparent retries per call", "1");
+  private static final MeasureDouble RETRY_DELAY_PER_CALL =
+      Measure.MeasureDouble.create(
+          "grpc.io/client/retry_delay_per_call", "Retry delay per call", "ms");
+
+  @Rule
+  public final MockitoRule mocks = MockitoJUnit.rule();
