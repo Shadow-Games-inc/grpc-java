@@ -177,3 +177,6 @@ def java_grpc_library(
       name: A unique name for this rule.
       srcs: (List of `labels`) a single proto_library target that contains the
         schema of the service.
+      deps: (List of `labels`) a single java_proto_library or
+        java_lite_proto_library target for the proto_library in srcs.
+      flavor: (str) "normal" (default) for normal proto runtime. "lite"
