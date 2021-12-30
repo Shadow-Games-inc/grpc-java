@@ -101,3 +101,14 @@ public class RetryTest {
 
   @Rule
   public final MockitoRule mocks = MockitoJUnit.rule();
+  @Rule
+  public final GrpcCleanupRule cleanupRule = new GrpcCleanupRule();
+  private final FakeClock fakeClock = new FakeClock();
+  @Mock
+  private ClientCall.Listener<Integer> mockCallListener;
+  private CountDownLatch backoffLatch = new CountDownLatch(1);
+  private final EventLoopGroup group = new DefaultEventLoopGroup() {
+    @SuppressWarnings("FutureReturnValueIgnored")
+    @Override
+    public ScheduledFuture<?> schedule(
+        final Runnable command, final long delay, final TimeUnit unit) {
