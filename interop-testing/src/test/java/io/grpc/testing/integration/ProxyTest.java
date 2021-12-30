@@ -218,3 +218,9 @@ public class ProxyTest {
         throw new RuntimeException(e);
       }
     }
+
+    private void handleSocket(Socket rcv) throws IOException {
+      InputStream serverIn = rcv.getInputStream();
+      OutputStream serverOut = rcv.getOutputStream();
+      if (mode.equals("echo")) {
+        ByteStreams.copy(serverIn, serverOut);
