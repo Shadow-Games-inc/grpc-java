@@ -205,3 +205,6 @@ public final class TrafficControlProxy {
 
     /**
      * Read bytes from an endpoint and add them as a message to the queue. Blocks if the queue is
+     * full.
+     */
+    void readIn() throws InterruptedException, IOException {
