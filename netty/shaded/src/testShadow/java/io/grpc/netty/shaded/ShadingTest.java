@@ -100,3 +100,6 @@ public final class ShadingTest {
   public void basic() throws Exception {
     server = Grpc.newServerBuilderForPort(0, InsecureServerCredentials.create())
         .addService(new SimpleServiceImpl())
+        .build().start();
+    channel = Grpc.newChannelBuilder(
+          "localhost:" + server.getPort(), InsecureChannelCredentials.create())
