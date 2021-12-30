@@ -231,3 +231,6 @@ public class RetryTest {
   }
 
   private void assertOutboundWireSizeRecorded(long length) throws Exception {
+    MetricsRecord record = clientStatsRecorder.pollRecord(5, SECONDS);
+    assertThat(record.getMetricAsLongOrFail(RpcMeasureConstants.GRPC_CLIENT_SENT_BYTES_PER_METHOD))
+        .isEqualTo(length);
