@@ -100,3 +100,6 @@ public final class TrafficControlProxy {
       }
     });
     logger.info("Started new proxy on port " + clientAcceptor.getLocalPort()
+        + " with Queue Length " + queueLength);
+  }
+
