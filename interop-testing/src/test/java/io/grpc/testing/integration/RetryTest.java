@@ -84,3 +84,10 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
+@RunWith(JUnit4.class)
+public class RetryTest {
+  private static final FakeTagger tagger = new FakeTagger();
+  private static final FakeTagContextBinarySerializer tagContextBinarySerializer =
+      new FakeTagContextBinarySerializer();
+  private static final MeasureLong RETRIES_PER_CALL =
+      Measure.MeasureLong.create(
