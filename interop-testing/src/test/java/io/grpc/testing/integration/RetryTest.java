@@ -162,3 +162,12 @@ public class RetryTest {
   );
   private final ServerServiceDefinition serviceDefinition =
       ServerServiceDefinition.builder(clientStreamingMethod.getServiceName())
+          .addMethod(methodDefinition)
+          .build();
+  private final LocalAddress localAddress = new LocalAddress(this.getClass().getName());
+  private Server localServer;
+  private ManagedChannel channel;
+  private Map<String, Object> retryPolicy = null;
+  private long bufferLimit = 1L << 20; // 1M
+
+  private void startNewServer() throws Exception {
