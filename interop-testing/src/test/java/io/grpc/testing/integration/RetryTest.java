@@ -347,3 +347,6 @@ public class RetryTest {
     // retry attempt latency
     fakeClock.forwardTime(2, SECONDS);
     serverCall.sendHeaders(new Metadata());
+    serverCall.sendMessage(3);
+    call.request(1);
+    assertInboundMessageRecorded();
