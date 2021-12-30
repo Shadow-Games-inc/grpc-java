@@ -93,3 +93,6 @@ public class StressTestClientTest {
         new TestCaseWeightPair(TestCases.LARGE_UNARY, 50),
         new TestCaseWeightPair(TestCases.SERVER_STREAMING, 30));
     assertEquals(testCases, client.testCaseWeightPairs());
+
+    assertEquals("foo.test.google.fr", client.serverHostOverride());
+    assertTrue(client.useTls());
