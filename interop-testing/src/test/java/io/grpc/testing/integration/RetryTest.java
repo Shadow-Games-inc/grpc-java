@@ -333,3 +333,7 @@ public class RetryTest {
     serverCall.close(
         Status.UNAVAILABLE.withDescription("original attempt failed"),
         new Metadata());
+    assertRpcStatusRecorded(Status.Code.UNAVAILABLE, 1000, 1);
+    elapseBackoff(10, SECONDS);
+    assertRpcStartedRecorded();
+    assertOutboundMessageRecorded();
