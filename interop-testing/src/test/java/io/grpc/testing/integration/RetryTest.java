@@ -112,3 +112,11 @@ public class RetryTest {
     @Override
     public ScheduledFuture<?> schedule(
         final Runnable command, final long delay, final TimeUnit unit) {
+      if (!command.getClass().getName().contains("RetryBackoffRunnable")) {
+        return super.schedule(command, delay, unit);
+      }
+      fakeClock.getScheduledExecutorService().schedule(
+          new Runnable() {
+            @Override
+            public void run() {
+              group.execute(command);
