@@ -88,3 +88,6 @@ public class TestCasesTest {
       testCaseSet.add(TestCases.fromString(testCase));
     }
 
+    assertEquals(TestCases.values().length, testCaseSet.size());
+  }
+}
