@@ -73,3 +73,6 @@ public final class TrafficControlProxy {
     bandwidth = targetBps;
     // divide by 2 because latency is applied in both directions
     latency = latencyUnits.toNanos(targetLatency) / 2;
+    queueLength = (int) Math.max(bandwidth * latency / TimeUnit.SECONDS.toNanos(1), 1);
+    chunkSize = Math.max(1, queueLength);
+  }
