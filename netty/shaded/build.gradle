@@ -103,3 +103,6 @@ class NettyResourceTransformer implements Transformer {
     // A map of resource file paths to be modified
     private Map<String, String> resources = [:]
 
+    @Override
+    boolean canTransformResource(FileTreeElement fileTreeElement) {
+        fileTreeElement.name.startsWith("META-INF/native-image/io.netty")
