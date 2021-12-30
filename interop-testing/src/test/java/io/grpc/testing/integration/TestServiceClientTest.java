@@ -28,3 +28,6 @@ public class TestServiceClientTest {
   public void emptyArgumentListShouldNotThrowException() throws Exception {
     TestServiceClient client = new TestServiceClient();
     client.parseArgs(new String[0]);
+    client.setUp();
+  }
+}
