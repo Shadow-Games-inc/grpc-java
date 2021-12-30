@@ -49,3 +49,6 @@ javadoc {
 
 project.sourceSets {
     main { java { srcDir "${projectDir}/third_party/netty/java" } }
+}
+
+test {
