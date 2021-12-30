@@ -146,3 +146,6 @@ public class TransportCompressionTest extends AbstractInteropTest {
 
               @Override
               public void start(
+                  final ClientCall.Listener<RespT> responseListener, Metadata headers) {
+                ClientCall.Listener<RespT> listener = new ForwardingClientCallListener<RespT>() {
+
