@@ -34,3 +34,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 public final class TrafficControlProxy {
+
+  private static final int DEFAULT_BAND_BPS = 1024 * 1024;
+  private static final int DEFAULT_DELAY_NANOS = 200 * 1000 * 1000;
