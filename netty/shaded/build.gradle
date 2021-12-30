@@ -4,3 +4,6 @@ import org.gradle.api.file.FileTreeElement
 import shadow.org.apache.tools.zip.ZipOutputStream
 import shadow.org.apache.tools.zip.ZipEntry
 
+plugins {
+    id "java"
+    id "maven-publish"
