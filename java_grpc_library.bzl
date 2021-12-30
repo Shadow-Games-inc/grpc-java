@@ -114,3 +114,6 @@ _java_grpc_library = rule(
     attrs = {
         "srcs": attr.label_list(
             mandatory = True,
+            allow_empty = False,
+            providers = [ProtoInfo],
+        ),
