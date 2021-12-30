@@ -55,3 +55,6 @@ public class TestCasesTest {
       "compute_engine_creds",
       "service_account_creds",
       "jwt_token_creds",
+      "oauth2_auth_token",
+      "per_rpc_creds",
+      "google_default_credentials",
