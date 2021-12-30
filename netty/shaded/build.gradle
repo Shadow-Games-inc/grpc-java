@@ -43,3 +43,6 @@ shadowJar {
     relocate 'io.grpc.netty', 'io.grpc.netty.shaded.io.grpc.netty'
     relocate 'io.netty', 'io.grpc.netty.shaded.io.netty'
     // We have to be careful with these replacements as they must not match any
+    // string in NativeLibraryLoader, else they cause corruption. Note that
+    // this includes concatenation of string literals and constants.
+    relocate 'META-INF/native/libnetty', 'META-INF/native/libio_grpc_netty_shaded_netty'
