@@ -161,3 +161,6 @@ public class TransportCompressionTest extends AbstractInteropTest {
                       String encoding = headers.get(GrpcUtil.MESSAGE_ENCODING_KEY);
                       assertEquals(encoding, FZIPPER.getMessageEncoding());
                     }
+                  }
+                };
+                super.start(listener, headers);
