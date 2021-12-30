@@ -75,3 +75,6 @@ public class StressTestClientTest {
     client.parseArgs(new String[] {
         "--server_addresses=localhost:8080,localhost:8081,localhost:8082",
         "--test_cases=empty_unary:20,large_unary:50,server_streaming:30",
+        "--test_duration_secs=20",
+        "--num_channels_per_server=10",
+        "--num_stubs_per_channel=5",
