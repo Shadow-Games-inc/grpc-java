@@ -220,3 +220,6 @@ public final class TrafficControlProxy {
      * the queue
      */
     synchronized int getNextChunk() throws InterruptedException {
+      while (bytesQueued == queueLength) {
+        wait();
+      }
