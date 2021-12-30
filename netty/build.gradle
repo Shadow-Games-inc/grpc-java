@@ -22,3 +22,6 @@ dependencies {
             libraries.guava,
             libraries.errorprone,
             libraries.perfmark
+
+    // Tests depend on base class defined by core module.
+    testImplementation project(':grpc-core').sourceSets.test.output,
