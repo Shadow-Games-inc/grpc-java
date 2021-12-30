@@ -13,3 +13,6 @@ configurations {
     alpnagent
 }
 
+evaluationDependsOn(project(':grpc-core').path)
+
+dependencies {
