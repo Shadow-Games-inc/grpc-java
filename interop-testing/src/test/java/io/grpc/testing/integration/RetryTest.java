@@ -492,3 +492,6 @@ public class RetryTest {
       }
     }
 
+    class TransparentRetryTracerFactory extends ClientStreamTracer.InternalLimitedInfoFactory {
+      @Override
+      public ClientStreamTracer newClientStreamTracer(StreamInfo info, Metadata headers) {
