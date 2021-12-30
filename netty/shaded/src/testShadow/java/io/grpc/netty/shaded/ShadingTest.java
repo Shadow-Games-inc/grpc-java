@@ -116,4 +116,5 @@ public final class ShadingTest {
     server = Grpc.newServerBuilderForPort(0, serverCreds)
             .trustManager(TestUtils.loadCert("ca.pem")).build());
     SimpleServiceBlockingStub stub = SimpleServiceGrpc.newBlockingStub(channel);
+    assertThat(SimpleResponse.getDefaultInstance())
         .isEqualTo(stub.unaryRpc(SimpleRequest.getDefaultInstance()));
