@@ -67,3 +67,6 @@ public final class ShadingTest {
       server.awaitTermination(1, TimeUnit.SECONDS);
     }
   }
+
+  /** Verify that normal Netty didn't leak into the test runtime. */
+  @Test(expected = ClassNotFoundException.class)
