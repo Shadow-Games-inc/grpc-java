@@ -115,6 +115,7 @@ public final class ShadingTest {
         TestUtils.loadCert("server1.pem"), TestUtils.loadCert("server1.key"));
     server = Grpc.newServerBuilderForPort(0, serverCreds)
             .trustManager(TestUtils.loadCert("ca.pem")).build());
+    channel = Grpc.newChannelBuilder("localhost:" + server.getPort(), creds)
         .overrideAuthority("foo.test.google.fr")
         .build();
     SimpleServiceBlockingStub stub = SimpleServiceGrpc.newBlockingStub(channel);
