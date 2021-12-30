@@ -486,3 +486,6 @@ public class RetryTest {
           startNewServer();
           channel.resetConnectBackoff();
           channel.getState(true);
+        } catch (Exception e) {
+          throw new AssertionError("local server can not be restarted", e);
+        }
