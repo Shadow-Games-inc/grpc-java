@@ -31,3 +31,6 @@ dependencies {
 jar {
     // Must use a different classifier to avoid conflicting with shadowJar
     classifier = 'original'
+}
+
+shadowJar {
