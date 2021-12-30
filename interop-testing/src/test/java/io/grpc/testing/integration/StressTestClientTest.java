@@ -53,3 +53,6 @@ public class StressTestClientTest {
     client.parseArgs(new String[] {"--server_addresses=[0:0:0:0:0:0:0:1]:8080,"
         + "[1:2:3:4:f:e:a:b]:8083"});
 
+    assertEquals(2, client.addresses().size());
+    assertEquals(new InetSocketAddress("0:0:0:0:0:0:0:1", 8080), client.addresses().get(0));
+    assertEquals(new InetSocketAddress("1:2:3:4:f:e:a:b", 8083), client.addresses().get(1));
