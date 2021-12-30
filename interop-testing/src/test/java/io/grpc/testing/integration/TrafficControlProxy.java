@@ -43,3 +43,6 @@ public final class TrafficControlProxy {
   private final String localhost = "localhost";
   private final int serverPort;
   private final int queueLength;
+  private final int chunkSize;
+  private final int bandwidth;
+  private final long latency;
