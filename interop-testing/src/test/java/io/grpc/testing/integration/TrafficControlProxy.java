@@ -112,3 +112,6 @@ public final class TrafficControlProxy {
     // TODO: Handle case where a socket fails to close, therefore blocking the others from closing
     logger.info("Proxy shutting down... ");
     shutDown = true;
+    executor.shutdown();
+    clientAcceptor.close();
+    clientSock.close();
