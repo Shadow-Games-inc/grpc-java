@@ -111,3 +111,6 @@ public class StressTestClientTest {
         "--server_host_override=foo.test.google.fr",
     });
 
+    assertEquals("foo.test.google.fr", client.addresses().get(0).getHostName());
+  }
+
