@@ -178,3 +178,11 @@ public class ProxyTest {
       long duration = System.nanoTime() - start;
       double actualBandwidth = sample / (((double) duration) / TimeUnit.SECONDS.toNanos(1));
       bandwidths.add(actualBandwidth);
+    }
+    Collections.sort(bandwidths);
+    double bandUsed = bandwidths.get(bandwidths.size() - 1);
+    assertEquals(bandwidth, bandUsed, .5 * bandwidth);
+  }
+
+  // server with echo and streaming modes
+  private static class Server implements Runnable {
