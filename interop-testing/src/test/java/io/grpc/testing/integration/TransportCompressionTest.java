@@ -52,3 +52,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.runner.RunWith;
