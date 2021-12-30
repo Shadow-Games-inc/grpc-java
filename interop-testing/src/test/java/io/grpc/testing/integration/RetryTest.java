@@ -473,3 +473,7 @@ public class RetryTest {
         if (transparentRetryTriggered.get()) {
           return;
         }
+        localServer.shutdownNow();
+      }
+
+      @Override
