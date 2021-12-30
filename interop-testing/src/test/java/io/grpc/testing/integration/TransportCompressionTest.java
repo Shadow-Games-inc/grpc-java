@@ -95,3 +95,6 @@ public class TransportCompressionTest extends AbstractInteropTest {
             public <ReqT, RespT> Listener<ReqT> interceptCall(ServerCall<ReqT, RespT> call,
                 Metadata headers, ServerCallHandler<ReqT, RespT> next) {
               Listener<ReqT> listener = next.startCall(call, headers);
+              // TODO(carl-mastrangelo): check that encoding was set.
+              call.setMessageCompression(true);
+              return listener;
