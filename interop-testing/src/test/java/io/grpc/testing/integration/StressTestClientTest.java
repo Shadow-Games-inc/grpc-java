@@ -78,3 +78,6 @@ public class StressTestClientTest {
         "--test_duration_secs=20",
         "--num_channels_per_server=10",
         "--num_stubs_per_channel=5",
+        "--metrics_port=9090",
+        "--server_host_override=foo.test.google.fr",
+        "--use_tls=true",
