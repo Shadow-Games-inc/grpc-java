@@ -501,3 +501,6 @@ public class RetryTest {
 
     CallOptions callOptions = CallOptions.DEFAULT
         .withWaitForReady()
+        .withStreamTracerFactory(new TransparentRetryTracerFactory());
+    ClientCall<String, Integer> call = channel.newCall(clientStreamingMethod, callOptions);
+    call.start(mockCallListener, new Metadata());
