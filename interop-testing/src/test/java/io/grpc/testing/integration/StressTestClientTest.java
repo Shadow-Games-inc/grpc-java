@@ -120,3 +120,6 @@ public class StressTestClientTest {
     TestServiceServer server = new TestServiceServer();
     server.parseArgs(new String[]{"--port=" + 0, "--use_tls=false"});
     server.start();
+
+    StressTestClient client = new StressTestClient();
+    client.parseArgs(new String[] {"--test_cases=empty_unary:1",
