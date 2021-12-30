@@ -28,3 +28,6 @@ import io.grpc.ServerCredentials;
 import io.grpc.TlsServerCredentials;
 import io.grpc.internal.testing.TestUtils;
 import io.grpc.netty.shaded.io.grpc.netty.GrpcSslContexts;
+import io.grpc.netty.shaded.io.grpc.netty.NettyChannelBuilder;
+import io.grpc.netty.shaded.io.grpc.netty.NettyServerBuilder;
+import io.grpc.netty.shaded.io.grpc.netty.NettySslContextChannelCredentials;
