@@ -76,3 +76,6 @@ public class TestCasesTest {
       "pick_first_unary",
       "channel_soak",
       "rpc_soak"
+    };
+
+    assertEquals(testCases.length + additionalTestCases.length, TestCases.values().length);
