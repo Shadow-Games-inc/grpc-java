@@ -116,3 +116,6 @@ public class TransportCompressionTest extends AbstractInteropTest {
         .build();
     final SimpleResponse goldenResponse = SimpleResponse.newBuilder()
         .setPayload(Payload.newBuilder()
+            .setBody(ByteString.copyFrom(new byte[314159])))
+        .build();
+
