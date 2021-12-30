@@ -9,3 +9,6 @@ _JavaRpcToolchainInfo = provider(
         "runtime",
     ],
 )
+
+def _java_rpc_toolchain_impl(ctx):
+    return [
