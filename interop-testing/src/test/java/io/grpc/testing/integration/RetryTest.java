@@ -319,3 +319,9 @@ public class RetryTest {
     createNewChannel();
 
     ClientCall<String, Integer> call = channel.newCall(clientStreamingMethod, CallOptions.DEFAULT);
+    call.start(mockCallListener, new Metadata());
+    assertRpcStartedRecorded();
+    String message = "String of length 20.";
+    call.sendMessage(message);
+    assertOutboundMessageRecorded();
+    ServerCall<String, Integer> serverCall = serverCalls.poll(5, SECONDS);
