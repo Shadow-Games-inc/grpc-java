@@ -225,3 +225,6 @@ public class RetryTest {
   private void assertInboundMessageRecorded() throws Exception {
     MetricsRecord record = clientStatsRecorder.pollRecord(5, SECONDS);
     assertThat(
+            record.getMetricAsLongOrFail(
+                RpcMeasureConstants.GRPC_CLIENT_RECEIVED_MESSAGES_PER_METHOD))
+        .isEqualTo(1);
