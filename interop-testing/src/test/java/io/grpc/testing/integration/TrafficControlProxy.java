@@ -91,3 +91,6 @@ public final class TrafficControlProxy {
       public void run() {
         try {
           clientSock = clientAcceptor.accept();
+          serverSock = new Socket();
+          serverSock.connect(new InetSocketAddress(localhost, serverPort));
+          startWorkers();
