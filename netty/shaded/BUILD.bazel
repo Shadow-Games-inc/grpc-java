@@ -1,3 +1,6 @@
 # Publicly exposed in //netty package. Purposefully does not export any symbols.
 java_library(
     name = "shaded",
+    visibility = ["//netty:__pkg__"],
+    runtime_deps = [
+        "//netty",
