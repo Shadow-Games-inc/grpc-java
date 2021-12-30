@@ -3,3 +3,6 @@
 _JavaRpcToolchainInfo = provider(
     fields = [
         "java_toolchain",
+        "plugin",
+        "plugin_arg",
+        "protoc",
