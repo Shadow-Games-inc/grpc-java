@@ -64,3 +64,6 @@ publishing {
             // io.grpc.internal.AbstractServerImplBuilder not found"
             // (https://github.com/grpc/grpc-java/issues/5881). This can be
             // removed after https://github.com/grpc/grpc-java/issues/7211 is
+            // resolved.
+            pom.withXml {
+                asNode().dependencies.'*'.findAll() { dep ->
