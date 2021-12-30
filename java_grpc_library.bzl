@@ -24,3 +24,6 @@ def _java_rpc_toolchain_impl(ctx):
 
 java_rpc_toolchain = rule(
     attrs = {
+        # This attribute has a "magic" name recognized by the native DexArchiveAspect (b/78647825).
+        "runtime": attr.label_list(
+            cfg = "target",
