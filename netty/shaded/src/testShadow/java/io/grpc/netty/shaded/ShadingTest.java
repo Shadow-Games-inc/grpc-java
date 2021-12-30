@@ -115,3 +115,4 @@ public final class ShadingTest {
         TestUtils.loadCert("server1.pem"), TestUtils.loadCert("server1.key"));
     server = Grpc.newServerBuilderForPort(0, serverCreds)
             .trustManager(TestUtils.loadCert("ca.pem")).build());
+        .isEqualTo(stub.unaryRpc(SimpleRequest.getDefaultInstance()));
