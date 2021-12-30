@@ -450,3 +450,6 @@ public class RetryTest {
               }
             }))
         .withStreamTracerFactory(new CloseDelayedTracerFactory());
+    ClientCall<String, Integer> call = channel.newCall(clientStreamingMethod, callOptions);
+    call.start(mockCallListener, new Metadata());
+    assertRpcStartedRecorded();
