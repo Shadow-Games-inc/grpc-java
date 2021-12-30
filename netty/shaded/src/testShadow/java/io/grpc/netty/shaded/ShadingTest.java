@@ -91,3 +91,6 @@ public final class ShadingTest {
   @Test
   public void serviceLoaderFindsNetty() throws Exception {
     assertThat(Grpc.newServerBuilderForPort(0, InsecureServerCredentials.create()))
+        .isInstanceOf(NettyServerBuilder.class);
+    assertThat(Grpc.newChannelBuilder("localhost:1234", InsecureChannelCredentials.create()))
+        .isInstanceOf(NettyChannelBuilder.class);
