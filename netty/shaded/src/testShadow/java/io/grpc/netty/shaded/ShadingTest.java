@@ -70,3 +70,6 @@ public final class ShadingTest {
 
   /** Verify that normal Netty didn't leak into the test runtime. */
   @Test(expected = ClassNotFoundException.class)
+  public void noNormalNetty() throws Exception {
+    Class.forName("io.grpc.netty.NettyServerBuilder");
+  }
