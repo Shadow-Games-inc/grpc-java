@@ -214,3 +214,6 @@ public final class TrafficControlProxy {
       queue.put(new Message(sendTime, request, readableBytes));
       incrementBytes(readableBytes);
     }
+
+    /**
+     * Block until space on the queue becomes available. Returns how many bytes can be read on to
