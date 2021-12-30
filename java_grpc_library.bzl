@@ -30,3 +30,6 @@ java_rpc_toolchain = rule(
             providers = [JavaInfo],
         ),
         "plugin": attr.label(
+            cfg = "host",
+            executable = True,
+        ),
