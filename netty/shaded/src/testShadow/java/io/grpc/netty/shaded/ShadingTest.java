@@ -112,3 +112,5 @@ public final class ShadingTest {
   @Test
   public void tcnative() throws Exception {
     ServerCredentials serverCreds = TlsServerCredentials.create(
+        TestUtils.loadCert("server1.pem"), TestUtils.loadCert("server1.key"));
+    server = Grpc.newServerBuilderForPort(0, serverCreds)
