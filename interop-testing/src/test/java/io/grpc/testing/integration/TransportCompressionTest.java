@@ -46,3 +46,6 @@ import io.grpc.testing.integration.Messages.BoolValue;
 import io.grpc.testing.integration.Messages.Payload;
 import io.grpc.testing.integration.Messages.SimpleRequest;
 import io.grpc.testing.integration.Messages.SimpleResponse;
+import java.io.FilterInputStream;
+import java.io.FilterOutputStream;
+import java.io.IOException;
