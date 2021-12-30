@@ -186,3 +186,6 @@ def java_grpc_library(
 
     if len(deps) > 1:
         print("Multiple values in 'deps' is deprecated in " + name)
+
+    if flavor == None or flavor == "normal":
+        _java_grpc_library(
