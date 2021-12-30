@@ -96,3 +96,6 @@ public class StressTestClientTest {
 
     assertEquals("foo.test.google.fr", client.serverHostOverride());
     assertTrue(client.useTls());
+    assertTrue(client.useTestCa());
+    assertEquals(20, client.durationSecs());
+    assertEquals(10, client.channelsPerServer());
