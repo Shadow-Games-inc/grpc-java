@@ -40,3 +40,6 @@ public class TestCasesTest {
   public void testCaseNamesShouldMapToEnums() {
     // names of testcases as defined in the interop spec
     String[] testCases = {
+      "empty_unary",
+      "cacheable_unary",
+      "large_unary",
