@@ -150,3 +150,6 @@ public class StressTestClientTest {
       String gaugeName = gauge.getName();
 
       assertTrue("gaugeName: " + gaugeName, gaugeNames.contains(gaugeName));
+      assertTrue("qps: " + gauge.getLongValue(), gauge.getLongValue() > 0);
+      gaugeNames.remove(gauge.getName());
+
