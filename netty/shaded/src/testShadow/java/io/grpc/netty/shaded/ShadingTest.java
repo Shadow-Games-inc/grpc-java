@@ -82,3 +82,6 @@ public final class ShadingTest {
             "META-INF/native-image/io.grpc.netty.shaded.io.netty/transport/reflection-config.json");
     assertThat(inputStream).isNotNull();
 
+    Scanner s = new Scanner(inputStream, StandardCharsets.UTF_8.name()).useDelimiter("\\A");
+    String reflectionConfig = s.hasNext() ? s.next() : "";
+
