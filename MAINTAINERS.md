@@ -25,3 +25,6 @@ for general contribution guidelines.
 - [jiangtaoli2016](https://github.com/jiangtaoli2016), Google LLC
 - [jtattermusch](https://github.com/jtattermusch), Google LLC
 - [louiscryan](https://github.com/louiscryan), Google LLC
+- [nicolasnoble](https://github.com/nicolasnoble), Google LLC
+- [nmittler](https://github.com/nmittler), Google LLC
+- [zpencer](https://github.com/zpencer), Google LLC
