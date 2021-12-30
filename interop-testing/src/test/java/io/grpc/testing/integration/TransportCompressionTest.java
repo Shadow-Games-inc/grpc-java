@@ -119,3 +119,6 @@ public class TransportCompressionTest extends AbstractInteropTest {
             .setBody(ByteString.copyFrom(new byte[314159])))
         .build();
 
+
+    assertEquals(goldenResponse, blockingStub.unaryCall(request));
+    // Assert that compression took place
