@@ -124,6 +124,7 @@ public final class ShadingTest {
     assertThat(SimpleResponse.getDefaultInstance())
         .isEqualTo(stub.unaryRpc(SimpleRequest.getDefaultInstance()));
   }
+    @Override public void unaryRpc(SimpleRequest req, StreamObserver<SimpleResponse> obs) {
       obs.onNext(SimpleResponse.getDefaultInstance());
       obs.onCompleted();
     }
