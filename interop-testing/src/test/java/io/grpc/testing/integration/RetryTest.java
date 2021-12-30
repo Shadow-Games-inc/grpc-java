@@ -188,3 +188,10 @@ public class RetryTest {
     if (retryPolicy != null) {
       methodConfig.put("retryPolicy", retryPolicy);
     }
+    Map<String, Object> rawServiceConfig = new HashMap<>();
+    rawServiceConfig.put("methodConfig", Arrays.<Object>asList(methodConfig));
+    channel = cleanupRule.register(
+        NettyChannelBuilder.forAddress(localAddress)
+            .channelType(LocalChannel.class)
+            .eventLoopGroup(group)
+            .usePlaintext()
