@@ -70,3 +70,6 @@ publishing {
                     dep.artifactId.text() == 'grpc-core'
                 }.each() { core ->
                     core.scope*.value = "compile"
+                }
+            }
+
