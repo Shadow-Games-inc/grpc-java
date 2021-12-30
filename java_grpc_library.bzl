@@ -54,3 +54,6 @@ java_rpc_toolchain = rule(
 def _path_ignoring_repository(f):
     # Bazel creates a _virtual_imports directory in case the .proto source files
     # need to be accessed at a path that's different from their source path:
+    # https://github.com/bazelbuild/bazel/blob/0.27.1/src/main/java/com/google/devtools/build/lib/rules/proto/ProtoCommon.java#L289
+    #
+    # In that case, the import path of the .proto file is the path relative to
