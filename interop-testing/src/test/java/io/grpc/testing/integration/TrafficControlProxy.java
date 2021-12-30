@@ -67,3 +67,6 @@ public final class TrafficControlProxy {
    */
   public TrafficControlProxy(int serverPort, int targetBps, int targetLatency,
       TimeUnit latencyUnits) {
+    checkArgument(targetBps > 0);
+    checkArgument(targetLatency > 0);
+    this.serverPort = serverPort;
