@@ -39,3 +39,6 @@ java_rpc_toolchain = rule(
             default = Label("@com_google_protobuf//:protoc"),
             executable = True,
         ),
+        "_java_toolchain": attr.label(
+            default = Label("@bazel_tools//tools/jdk:current_java_toolchain"),
+        ),
