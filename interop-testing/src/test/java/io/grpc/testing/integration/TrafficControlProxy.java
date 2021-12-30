@@ -169,3 +169,6 @@ public final class TrafficControlProxy {
     public void run() {
       while (!shutDown) {
         try {
+          queue.writeOut();
+        } catch (IOException e) {
+          shutDown = true;
