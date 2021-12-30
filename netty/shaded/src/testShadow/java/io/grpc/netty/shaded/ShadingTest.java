@@ -108,3 +108,5 @@ public final class ShadingTest {
     assertThat(SimpleResponse.getDefaultInstance())
         .isEqualTo(stub.unaryRpc(SimpleRequest.getDefaultInstance()));
   }
+
+  @Test
