@@ -101,3 +101,6 @@ public class TransportCompressionTest extends AbstractInteropTest {
             }
           });
     // Disable the default census stats tracer, use testing tracer instead.
+    InternalNettyServerBuilder.setStatsEnabled(builder, false);
+    return builder.addStreamTracerFactory(createCustomCensusTracerFactory());
+  }
