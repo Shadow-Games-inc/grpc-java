@@ -193,3 +193,6 @@ public final class TrafficControlProxy {
       outStream = outputStream;
     }
 
+    /**
+     * Take a message off the queue and write it to an endpoint. Blocks until a message becomes
+     * available.
