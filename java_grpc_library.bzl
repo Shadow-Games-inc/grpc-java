@@ -6,3 +6,6 @@ _JavaRpcToolchainInfo = provider(
         "plugin",
         "plugin_arg",
         "protoc",
+        "runtime",
+    ],
+)
