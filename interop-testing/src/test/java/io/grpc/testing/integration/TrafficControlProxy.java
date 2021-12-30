@@ -211,3 +211,6 @@ public final class TrafficControlProxy {
       byte[] request = new byte[getNextChunk()];
       int readableBytes = inStream.read(request);
       long sendTime = System.nanoTime() + latency;
+      queue.put(new Message(sendTime, request, readableBytes));
+      incrementBytes(readableBytes);
+    }
