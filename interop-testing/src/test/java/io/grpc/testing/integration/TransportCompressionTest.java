@@ -74,3 +74,6 @@ public class TransportCompressionTest extends AbstractInteropTest {
 
   @Before
   public void beforeTests() {
+    FZIPPER.anyRead = false;
+    FZIPPER.anyWritten = false;
+  }
