@@ -470,3 +470,6 @@ public class RetryTest {
 
       @Override
       public void streamCreated(Attributes transportAttrs, Metadata metadata) {
+        if (transparentRetryTriggered.get()) {
+          return;
+        }
