@@ -203,3 +203,6 @@ public class TransportCompressionTest extends AbstractInteropTest {
           super.write(b);
           anyWritten = true;
         }
+      };
+    }
+
