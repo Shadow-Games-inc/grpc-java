@@ -132,3 +132,6 @@ public class StressTestClientTest {
     ManagedChannel ch = Grpc.newChannelBuilder(
           "localhost:" + client.getMetricServerPort(), InsecureChannelCredentials.create())
         .build();
+
+    MetricsServiceGrpc.MetricsServiceBlockingStub stub = MetricsServiceGrpc.newBlockingStub(ch);
+
