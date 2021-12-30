@@ -165,3 +165,6 @@ def java_grpc_library(
         name,
         srcs,
         deps,
+        flavor = None,
+        **kwargs):
+    """Generates gRPC Java code for services in a `proto_library`.
