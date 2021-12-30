@@ -304,3 +304,7 @@ public class RetryTest {
     ArgumentCaptor<Status> statusCaptor = ArgumentCaptor.forClass(null);
     verify(mockCallListener, timeout(5000)).onClose(statusCaptor.capture(), any(Metadata.class));
     assertThat(statusCaptor.getValue().getDescription()).contains("2nd attempt failed");
+  }
+
+  @Test
+  public void statsRecorded() throws Exception {
