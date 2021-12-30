@@ -62,6 +62,9 @@ public class StressTestClientTest {
   public void defaults() {
     StressTestClient client = new StressTestClient();
     assertEquals(singletonList(new InetSocketAddress("localhost", 8080)), client.addresses());
+    assertEquals(8081, client.metricsPort());
+  }
+
   @Test
   public void allCommandlineSwitchesAreSupported() {
     StressTestClient client = new StressTestClient();
