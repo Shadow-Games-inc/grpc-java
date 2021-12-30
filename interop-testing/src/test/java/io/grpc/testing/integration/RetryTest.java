@@ -156,3 +156,9 @@ public class RetryTest {
             @Override
             public Listener<String> startCall(ServerCall<String, Integer> call, Metadata headers) {
               serverCalls.offer(call);
+              return new Listener<String>() {};
+            }
+          }
+  );
+  private final ServerServiceDefinition serviceDefinition =
+      ServerServiceDefinition.builder(clientStreamingMethod.getServiceName())
