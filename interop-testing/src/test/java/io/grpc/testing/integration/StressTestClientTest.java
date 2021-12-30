@@ -123,3 +123,6 @@ public class StressTestClientTest {
 
     StressTestClient client = new StressTestClient();
     client.parseArgs(new String[] {"--test_cases=empty_unary:1",
+        "--server_addresses=localhost:" + server.getPort(), "--metrics_port=" + 0,
+        "--num_stubs_per_channel=2"});
+    client.startMetricsService();
