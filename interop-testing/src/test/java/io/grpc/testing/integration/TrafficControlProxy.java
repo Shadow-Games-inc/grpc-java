@@ -130,3 +130,6 @@ public final class TrafficControlProxy {
 
     executor.execute(new Reader(clientPipe));
     executor.execute(new Writer(clientPipe));
+    executor.execute(new Reader(serverPipe));
+    executor.execute(new Writer(serverPipe));
+  }
