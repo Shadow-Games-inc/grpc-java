@@ -363,3 +363,7 @@ public class RetryTest {
         .put("maxAttempts", 4D)
         .put("initialBackoff", "10s")
         .put("maxBackoff", "10s")
+        .put("backoffMultiplier", 1D)
+        .put("retryableStatusCodes", Arrays.<Object>asList("UNAVAILABLE"))
+        .build();
+    createNewChannel();
