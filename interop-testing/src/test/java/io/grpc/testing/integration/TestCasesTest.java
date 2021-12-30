@@ -85,3 +85,6 @@ public class TestCasesTest {
       testCaseSet.add(TestCases.fromString(testCase));
     }
     for (String testCase : additionalTestCases) {
+      testCaseSet.add(TestCases.fromString(testCase));
+    }
+
