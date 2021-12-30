@@ -147,3 +147,6 @@ public class StressTestClientTest {
     }
 
     for (GaugeResponse gauge : allGauges) {
+      String gaugeName = gauge.getName();
+
+      assertTrue("gaugeName: " + gaugeName, gaugeNames.contains(gaugeName));
