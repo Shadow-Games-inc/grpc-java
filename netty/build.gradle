@@ -7,3 +7,6 @@ plugins {
     id "ru.vyarus.animalsniffer"
 }
 
+description = "gRPC: Netty"
+
+configurations {
