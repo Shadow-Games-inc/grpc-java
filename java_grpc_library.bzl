@@ -102,3 +102,6 @@ def _java_rpc_library_impl(ctx):
         java_toolchain = toolchain.java_toolchain[java_common.JavaToolchainInfo],
         source_jars = [srcjar],
         output = ctx.outputs.jar,
+        output_source_jar = ctx.outputs.srcjar,
+        deps = [
+            java_common.make_non_strict(deps_java_info),
