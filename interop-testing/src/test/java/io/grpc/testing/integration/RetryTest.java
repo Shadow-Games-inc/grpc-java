@@ -152,3 +152,7 @@ public class RetryTest {
   private final ServerMethodDefinition<String, Integer> methodDefinition =
       ServerMethodDefinition.create(
           clientStreamingMethod,
+          new ServerCallHandler<String, Integer>() {
+            @Override
+            public Listener<String> startCall(ServerCall<String, Integer> call, Metadata headers) {
+              serverCalls.offer(call);
