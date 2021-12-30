@@ -504,3 +504,6 @@ public class RetryTest {
         .withStreamTracerFactory(new TransparentRetryTracerFactory());
     ClientCall<String, Integer> call = channel.newCall(clientStreamingMethod, callOptions);
     call.start(mockCallListener, new Metadata());
+    assertRpcStartedRecorded();
+    assertRpcStatusRecorded(Code.UNAVAILABLE, 0, 0);
+    assertRpcStartedRecorded();
