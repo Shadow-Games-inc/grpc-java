@@ -52,3 +52,6 @@ public class TestCasesTest {
       "server_compressed_streaming",
       "ping_pong",
       "empty_stream",
+      "compute_engine_creds",
+      "service_account_creds",
+      "jwt_token_creds",
