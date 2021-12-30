@@ -447,3 +447,6 @@ public class RetryTest {
               @Override
               public long nanoTime() {
                 return fakeClock.getTicker().read();
+              }
+            }))
+        .withStreamTracerFactory(new CloseDelayedTracerFactory());
