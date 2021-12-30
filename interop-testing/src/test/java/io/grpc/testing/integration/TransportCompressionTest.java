@@ -68,3 +68,6 @@ public class TransportCompressionTest extends AbstractInteropTest {
   private volatile boolean expectFzip;
 
   private static final DecompressorRegistry decompressors = DecompressorRegistry.emptyInstance()
+      .with(Codec.Identity.NONE, false)
+      .with(FZIPPER, true);
+  private static final CompressorRegistry compressors = CompressorRegistry.newEmptyInstance();
