@@ -227,3 +227,10 @@ public class ProxyTest {
       } else if (mode.equals("stream")) {
         byte[] message = new byte[1024];
         while (true) {
+          try {
+            serverOut.write(message);
+          } catch (IOException ignored) {
+            // Client closed
+            break;
+          }
+        }
