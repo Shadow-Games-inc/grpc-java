@@ -379,3 +379,7 @@ public class RetryTest {
             if (status.getCode().equals(Code.CANCELLED)) {
               try {
                 streamClosedLatch.await();
+              } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                throw new AssertionError("streamClosedLatch interrupted", e);
+              }
