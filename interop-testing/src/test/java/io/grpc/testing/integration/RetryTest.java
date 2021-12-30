@@ -395,3 +395,7 @@ public class RetryTest {
     fakeClock.forwardTime(5, SECONDS);
     String message = "String of length 20.";
     call.sendMessage(message);
+    assertOutboundMessageRecorded();
+    ServerCall<String, Integer> serverCall = serverCalls.poll(5, SECONDS);
+    serverCall.request(2);
+    assertOutboundWireSizeRecorded(message.length());
