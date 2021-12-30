@@ -234,3 +234,9 @@ public class ProxyTest {
             break;
           }
         }
+      } else {
+        throw new RuntimeException("Unknown mode: use 'echo' or 'stream'");
+      }
+    }
+  }
+}
