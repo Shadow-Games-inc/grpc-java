@@ -61,3 +61,6 @@ public final class TrafficControlProxy {
     this(serverPort, DEFAULT_BAND_BPS, DEFAULT_DELAY_NANOS, TimeUnit.NANOSECONDS);
   }
 
+  /**
+   * Returns a new TrafficControlProxy with bandwidth set to targetBPS, and latency set to
+   * targetLatency in latencyUnits.
