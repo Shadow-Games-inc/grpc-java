@@ -162,3 +162,6 @@ _java_lite_grpc_library = rule(
 )
 
 def java_grpc_library(
+        name,
+        srcs,
+        deps,
