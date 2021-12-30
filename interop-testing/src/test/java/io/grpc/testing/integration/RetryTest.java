@@ -171,3 +171,10 @@ public class RetryTest {
   private long bufferLimit = 1L << 20; // 1M
 
   private void startNewServer() throws Exception {
+    localServer = cleanupRule.register(NettyServerBuilder.forAddress(localAddress)
+        .channelType(LocalServerChannel.class)
+        .bossEventLoopGroup(group)
+        .workerEventLoopGroup(group)
+        .addService(serviceDefinition)
+        .build());
+    localServer.start();
