@@ -40,3 +40,6 @@ public final class TrafficControlProxy {
   private static final Logger logger = Logger.getLogger(TrafficControlProxy.class.getName());
 
   // TODO: make host and ports arguments
+  private final String localhost = "localhost";
+  private final int serverPort;
+  private final int queueLength;
