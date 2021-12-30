@@ -156,3 +156,6 @@ public class StressTestClientTest {
       GaugeResponse gauge1 =
           stub.getGauge(Metrics.GaugeRequest.newBuilder().setName(gaugeName).build());
       assertEquals(gaugeName, gauge1.getName());
+      assertTrue("qps: " + gauge1.getLongValue(), gauge1.getLongValue() > 0);
+    }
+
