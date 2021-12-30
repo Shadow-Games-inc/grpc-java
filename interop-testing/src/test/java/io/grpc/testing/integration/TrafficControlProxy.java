@@ -187,3 +187,6 @@ public final class TrafficControlProxy {
     DataOutputStream outStream;
     int bytesQueued;
     BlockingQueue<Message> queue = new DelayQueue<>();
+
+    MessageQueue(DataInputStream inputStream, DataOutputStream outputStream) {
+      inStream = inputStream;
