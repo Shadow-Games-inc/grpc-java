@@ -459,3 +459,7 @@ public class RetryTest {
     assertRetryStatsRecorded(0, 0, 0);
   }
 
+  @Ignore("flaky because old transportReportStatus() is not completely migrated yet")
+  @Test
+  public void transparentRetryStatsRecorded() throws Exception {
+    startNewServer();
