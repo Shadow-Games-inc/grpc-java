@@ -128,3 +128,6 @@ public class TransportCompressionTest extends AbstractInteropTest {
 
   @Override
   protected NettyChannelBuilder createChannelBuilder() {
+    NettyChannelBuilder builder = NettyChannelBuilder.forAddress(getListenAddress())
+        .maxInboundMessageSize(AbstractInteropTest.MAX_MESSAGE_SIZE)
+        .decompressorRegistry(decompressors)
