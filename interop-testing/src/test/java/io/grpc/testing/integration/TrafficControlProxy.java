@@ -157,3 +157,6 @@ public final class TrafficControlProxy {
 
   }
 
+  private final class Writer implements Runnable {
+
+    private final MessageQueue queue;
