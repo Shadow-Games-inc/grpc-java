@@ -241,3 +241,6 @@ public class RetryTest {
     assertThat(
             record.getMetricAsLongOrFail(RpcMeasureConstants.GRPC_CLIENT_RECEIVED_BYTES_PER_METHOD))
         .isEqualTo(length);
+  }
+
+  private void assertRpcStatusRecorded(
