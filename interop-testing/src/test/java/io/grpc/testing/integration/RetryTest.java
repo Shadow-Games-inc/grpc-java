@@ -456,3 +456,6 @@ public class RetryTest {
     ServerCall<String, Integer> serverCall = serverCalls.poll(5, SECONDS);
     serverCall.close(Status.CANCELLED, new Metadata());
     assertRpcStatusRecorded(Code.DEADLINE_EXCEEDED, 10_000, 0);
+    assertRetryStatsRecorded(0, 0, 0);
+  }
+
