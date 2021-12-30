@@ -109,3 +109,6 @@ public final class TrafficControlProxy {
 
   /** Interrupt all workers and close sockets. */
   public void shutDown() throws IOException {
+    // TODO: Handle case where a socket fails to close, therefore blocking the others from closing
+    logger.info("Proxy shutting down... ");
+    shutDown = true;
