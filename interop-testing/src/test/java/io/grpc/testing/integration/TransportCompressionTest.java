@@ -179,3 +179,6 @@ public class TransportCompressionTest extends AbstractInteropTest {
    * Fzip is a custom compressor.
    */
   static class Fzip implements Codec {
+    volatile boolean anyRead;
+    volatile boolean anyWritten;
+    volatile Codec delegate;
