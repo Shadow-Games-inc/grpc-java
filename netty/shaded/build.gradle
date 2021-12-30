@@ -34,3 +34,6 @@ jar {
 }
 
 shadowJar {
+    classifier = null
+    dependencies {
+        include(project(':grpc-netty'))
