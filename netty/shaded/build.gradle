@@ -16,3 +16,6 @@ description = "gRPC: Netty Shaded"
 sourceSets { testShadow {} }
 
 dependencies {
+    implementation project(':grpc-netty')
+    runtimeOnly libraries.netty_tcnative,
+            libraries.netty_epoll
