@@ -483,3 +483,6 @@ public class RetryTest {
         }
         transparentRetryTriggered.set(true);
         try {
+          startNewServer();
+          channel.resetConnectBackoff();
+          channel.getState(true);
