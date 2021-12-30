@@ -97,3 +97,6 @@ public final class ShadingTest {
   }
 
   @Test
+  public void basic() throws Exception {
+    server = Grpc.newServerBuilderForPort(0, InsecureServerCredentials.create())
+        .addService(new SimpleServiceImpl())
