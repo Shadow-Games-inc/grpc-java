@@ -477,3 +477,6 @@ public class RetryTest {
       }
 
       @Override
+      public void streamClosed(Status status) {
+        if (transparentRetryTriggered.get()) {
+          return;
