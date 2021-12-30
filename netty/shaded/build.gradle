@@ -127,3 +127,6 @@ class NettyResourceTransformer implements Transformer {
             entry.time = TransformerContext.getEntryTimestamp(preserveFileTimestamps, entry.time)
 
             outputStream.putNextEntry(entry)
+            outputStream.write(resourceEntry.value.getBytes())
+            outputStream.closeEntry()
+        }
