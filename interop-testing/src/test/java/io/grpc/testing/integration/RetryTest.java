@@ -386,3 +386,6 @@ public class RetryTest {
             }
           }
         };
+      }
+    };
+    ClientCall<String, Integer> call = channel.newCall(
