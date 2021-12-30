@@ -15,4 +15,5 @@
  */
 
 package io.grpc.netty;
+import io.netty.handler.codec.http2.Http2Headers;
 import org.openjdk.jmh.annotations.BenchmarkMode;
