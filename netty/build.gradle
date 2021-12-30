@@ -43,3 +43,6 @@ import net.ltgt.gradle.errorprone.CheckSeverity
 }
 
 javadoc {
+    options.links 'http://netty.io/4.1/api/'
+    exclude 'io/grpc/netty/Internal*'
+}
