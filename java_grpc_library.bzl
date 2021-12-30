@@ -18,3 +18,6 @@ def _java_rpc_toolchain_impl(ctx):
             plugin_arg = ctx.attr.plugin_arg,
             protoc = ctx.executable._protoc,
             runtime = ctx.attr.runtime,
+        ),
+        platform_common.ToolchainInfo(),  # Magic for b/78647825
+    ]
