@@ -293,3 +293,5 @@ public class RetryTest {
     // 2nd attempt received
     serverCall = serverCalls.poll(5, SECONDS);
     serverCall.request(2);
+    verify(mockCallListener, never()).onClose(any(Status.class), any(Metadata.class));
+    // send one more message, should exceed buffer limit
