@@ -399,3 +399,6 @@ public class RetryTest {
     ServerCall<String, Integer> serverCall = serverCalls.poll(5, SECONDS);
     serverCall.request(2);
     assertOutboundWireSizeRecorded(message.length());
+    // trigger retry
+    serverCall.close(
+        Status.UNAVAILABLE.withDescription("original attempt failed"),
