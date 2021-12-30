@@ -97,3 +97,6 @@ test.dependsOn testShadow
 /**
  * A Transformer which updates the Netty JAR META-INF/ resources to accurately
  * reference shaded class names.
+ */
+class NettyResourceTransformer implements Transformer {
+
