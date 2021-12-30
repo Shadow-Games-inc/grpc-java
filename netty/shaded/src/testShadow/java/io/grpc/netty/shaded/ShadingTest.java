@@ -76,3 +76,6 @@ public final class ShadingTest {
 
   /** Verify that resources under META-INF/native-image reference shaded class names. */
   @Test
+  public void nettyResourcesUpdated() throws IOException {
+    InputStream inputStream = NettyChannelBuilder.class.getClassLoader()
+        .getResourceAsStream(
