@@ -45,3 +45,6 @@ java_rpc_toolchain = rule(
     },
     provides = [
         _JavaRpcToolchainInfo,
+        platform_common.ToolchainInfo,
+    ],
+    implementation = _java_rpc_toolchain_impl,
