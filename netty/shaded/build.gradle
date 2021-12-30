@@ -46,3 +46,6 @@ shadowJar {
     // string in NativeLibraryLoader, else they cause corruption. Note that
     // this includes concatenation of string literals and constants.
     relocate 'META-INF/native/libnetty', 'META-INF/native/libio_grpc_netty_shaded_netty'
+    relocate 'META-INF/native/netty', 'META-INF/native/io_grpc_netty_shaded_netty'
+    transform(NettyResourceTransformer.class)
+    mergeServiceFiles()
