@@ -417,3 +417,6 @@ public class RetryTest {
     // Let the netty substream listener be closed.
     streamClosedLatch.countDown();
     assertRetryStatsRecorded(1, 0, 10_000);
+    assertRpcStatusRecorded(Code.CANCELLED, 7_000, 1);
+  }
+
