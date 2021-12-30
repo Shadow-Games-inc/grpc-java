@@ -84,3 +84,6 @@ public class StressTestClientTest {
         "--use_test_ca=true"
     });
 
+    List<InetSocketAddress> addresses = Arrays.asList(new InetSocketAddress("localhost", 8080),
+        new InetSocketAddress("localhost", 8081), new InetSocketAddress("localhost", 8082));
+    assertEquals(addresses, client.addresses());
