@@ -423,3 +423,6 @@ public class RetryTest {
   @Test
   public void serverCancelledAndClientDeadlineExceeded() throws Exception {
     startNewServer();
+    createNewChannel();
+
+    class CloseDelayedTracer extends ClientStreamTracer {
