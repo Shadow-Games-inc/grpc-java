@@ -247,3 +247,6 @@ public final class TrafficControlProxy {
 
     @Override
     public int compareTo(Delayed o) {
+      return ((Long) sendTime).compareTo(((Message) o).sendTime);
+    }
+
