@@ -139,3 +139,6 @@ public final class TrafficControlProxy {
     private final MessageQueue queue;
 
     Reader(MessageQueue queue) {
+      this.queue = queue;
+    }
+
