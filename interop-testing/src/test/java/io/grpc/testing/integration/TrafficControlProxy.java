@@ -82,3 +82,6 @@ public final class TrafficControlProxy {
    */
   public void start() throws IOException {
     // ClientAcceptor uses a ServerSocket server so that the client can connect to the proxy as it
+    // normally would a server. serverSock then connects the server using a regular Socket as a
+    // client normally would.
+    clientAcceptor = new ServerSocket();
