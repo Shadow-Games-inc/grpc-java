@@ -356,3 +356,7 @@ public class RetryTest {
     assertRetryStatsRecorded(1, 0, 10_000);
   }
 
+  @Test
+  public void statsRecorde_callCancelledBeforeCommit() throws Exception {
+    startNewServer();
+    retryPolicy = ImmutableMap.<String, Object>builder()
