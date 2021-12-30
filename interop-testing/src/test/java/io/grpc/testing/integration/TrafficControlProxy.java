@@ -241,3 +241,6 @@ public final class TrafficControlProxy {
 
     Message(long sendTime, byte[] message, int messageLength) {
       this.sendTime = sendTime;
+      this.message = message;
+      this.messageLength = messageLength;
+    }
