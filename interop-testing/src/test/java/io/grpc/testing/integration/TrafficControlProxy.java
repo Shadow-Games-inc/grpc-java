@@ -181,3 +181,6 @@ public final class TrafficControlProxy {
 
   /**
    * A Delay Queue that counts by number of bytes instead of the number of elements.
+   */
+  private class MessageQueue {
+    DataInputStream inStream;
