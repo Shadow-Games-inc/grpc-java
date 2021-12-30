@@ -22,3 +22,6 @@ for general contribution guidelines.
 ## Emeritus Maintainers (in alphabetical order)
 - [carl-mastrangelo](https://github.com/carl-mastrangelo), Google LLC
 - [creamsoup](https://github.com/creamsoup), Google LLC
+- [jiangtaoli2016](https://github.com/jiangtaoli2016), Google LLC
+- [jtattermusch](https://github.com/jtattermusch), Google LLC
+- [louiscryan](https://github.com/louiscryan), Google LLC
