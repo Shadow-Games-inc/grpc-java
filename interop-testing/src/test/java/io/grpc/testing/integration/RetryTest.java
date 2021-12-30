@@ -284,3 +284,9 @@ public class RetryTest {
     call.sendMessage(message);
 
     ServerCall<String, Integer> serverCall = serverCalls.poll(5, SECONDS);
+    serverCall.request(2);
+    // trigger retry
+    serverCall.close(
+        Status.UNAVAILABLE.withDescription("original attempt failed"),
+        new Metadata());
+    elapseBackoff(10, SECONDS);
