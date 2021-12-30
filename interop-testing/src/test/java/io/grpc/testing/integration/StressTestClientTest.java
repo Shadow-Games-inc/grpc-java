@@ -59,3 +59,6 @@ public class StressTestClientTest {
   }
 
   @Test
+  public void defaults() {
+    StressTestClient client = new StressTestClient();
+    assertEquals(singletonList(new InetSocketAddress("localhost", 8080)), client.addresses());
