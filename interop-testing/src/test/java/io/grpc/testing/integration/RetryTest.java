@@ -426,3 +426,6 @@ public class RetryTest {
     createNewChannel();
 
     class CloseDelayedTracer extends ClientStreamTracer {
+      @Override
+      public void streamClosed(Status status) {
+        fakeClock.forwardTime(10, SECONDS);
