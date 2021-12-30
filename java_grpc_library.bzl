@@ -63,3 +63,6 @@ def _path_ignoring_repository(f):
         return f.path.split(virtual_imports)[1].split("/", 1)[1]
     elif len(f.owner.workspace_root) == 0:
         # |f| is in the main repository
+        return f.short_path
+    else:
+        # If |f| is a generated file, it will have "bazel-out/*/genfiles" prefix
