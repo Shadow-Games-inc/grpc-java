@@ -70,3 +70,6 @@ public final class TrafficControlProxy {
     checkArgument(targetBps > 0);
     checkArgument(targetLatency > 0);
     this.serverPort = serverPort;
+    bandwidth = targetBps;
+    // divide by 2 because latency is applied in both directions
+    latency = latencyUnits.toNanos(targetLatency) / 2;
