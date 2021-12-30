@@ -192,3 +192,6 @@ def java_grpc_library(
             name = name,
             srcs = srcs,
             deps = deps,
+            **kwargs
+        )
+    elif flavor == "lite":
