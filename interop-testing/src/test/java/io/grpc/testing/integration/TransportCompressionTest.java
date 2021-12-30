@@ -40,3 +40,6 @@ import io.grpc.ServerInterceptor;
 import io.grpc.internal.GrpcUtil;
 import io.grpc.netty.InternalNettyChannelBuilder;
 import io.grpc.netty.InternalNettyServerBuilder;
+import io.grpc.netty.NettyChannelBuilder;
+import io.grpc.netty.NettyServerBuilder;
+import io.grpc.testing.integration.Messages.BoolValue;
