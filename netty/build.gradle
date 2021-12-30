@@ -10,3 +10,6 @@ plugins {
 description = "gRPC: Netty"
 
 configurations {
+    alpnagent
+}
+
