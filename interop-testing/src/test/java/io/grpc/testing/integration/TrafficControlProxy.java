@@ -64,3 +64,6 @@ public final class TrafficControlProxy {
   /**
    * Returns a new TrafficControlProxy with bandwidth set to targetBPS, and latency set to
    * targetLatency in latencyUnits.
+   */
+  public TrafficControlProxy(int serverPort, int targetBps, int targetLatency,
+      TimeUnit latencyUnits) {
