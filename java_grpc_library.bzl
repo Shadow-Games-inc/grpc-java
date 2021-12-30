@@ -96,3 +96,6 @@ def _java_rpc_library_impl(ctx):
     )
 
     deps_java_info = java_common.merge([dep[JavaInfo] for dep in ctx.attr.deps])
+
+    java_info = java_common.compile(
+        ctx,
