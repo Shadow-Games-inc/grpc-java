@@ -4,3 +4,6 @@ plugins {
 
     id "me.champeau.gradle.japicmp"
     id "me.champeau.gradle.jmh"
+    id "ru.vyarus.animalsniffer"
+}
+
