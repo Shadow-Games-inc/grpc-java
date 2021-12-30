@@ -158,3 +158,6 @@ public class TransportCompressionTest extends AbstractInteropTest {
                   public void onHeaders(Metadata headers) {
                     super.onHeaders(headers);
                     if (expectFzip) {
+                      String encoding = headers.get(GrpcUtil.MESSAGE_ENCODING_KEY);
+                      assertEquals(encoding, FZIPPER.getMessageEncoding());
+                    }
