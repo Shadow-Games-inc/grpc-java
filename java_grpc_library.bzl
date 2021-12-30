@@ -135,3 +135,6 @@ _java_grpc_library = rule(
     implementation = _java_rpc_library_impl,
 )
 
+_java_lite_grpc_library = rule(
+    attrs = {
+        "srcs": attr.label_list(
