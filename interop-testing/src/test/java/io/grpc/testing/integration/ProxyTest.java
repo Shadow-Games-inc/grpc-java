@@ -186,3 +186,12 @@ public class ProxyTest {
 
   // server with echo and streaming modes
   private static class Server implements Runnable {
+    private ServerSocket server;
+    private String mode = "echo";
+
+    public void setMode(String mode) {
+      this.mode = mode;
+    }
+
+    /**
+     * Initializes server and returns its listening port.
