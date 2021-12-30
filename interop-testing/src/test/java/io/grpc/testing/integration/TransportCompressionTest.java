@@ -83,3 +83,6 @@ public class TransportCompressionTest extends AbstractInteropTest {
     compressors.register(FZIPPER);
     compressors.register(Codec.Identity.NONE);
   }
+
+  @Override
+  protected ServerBuilder<?> getServerBuilder() {
