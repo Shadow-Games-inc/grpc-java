@@ -4,3 +4,6 @@ PR.
 
 See [GOVERNANCE.md](https://github.com/grpc/grpc-community/blob/master/governance.md)
 for governance guidelines and how to become a maintainer.
+See [CONTRIBUTING.md](https://github.com/grpc/grpc-community/blob/master/CONTRIBUTING.md)
+for general contribution guidelines.
+
