@@ -350,3 +350,6 @@ public class RetryTest {
     serverCall.sendMessage(3);
     call.request(1);
     assertInboundMessageRecorded();
+    assertInboundWireSizeRecorded(1);
+    serverCall.close(Status.OK, new Metadata());
+    assertRpcStatusRecorded(Status.Code.OK, 2000, 2);
