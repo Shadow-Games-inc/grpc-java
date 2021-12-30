@@ -183,3 +183,6 @@ def java_grpc_library(
         for the lite runtime.
       **kwargs: Other common attributes
     """
+
+    if len(deps) > 1:
+        print("Multiple values in 'deps' is deprecated in " + name)
