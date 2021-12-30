@@ -81,3 +81,6 @@ public class StressTestClientTest {
         "--metrics_port=9090",
         "--server_host_override=foo.test.google.fr",
         "--use_tls=true",
+        "--use_test_ca=true"
+    });
+
