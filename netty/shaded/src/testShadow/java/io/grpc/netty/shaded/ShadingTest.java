@@ -40,3 +40,6 @@ import io.grpc.testing.protobuf.SimpleServiceGrpc;
 import io.grpc.testing.protobuf.SimpleServiceGrpc.SimpleServiceBlockingStub;
 import io.grpc.testing.protobuf.SimpleServiceGrpc.SimpleServiceImplBase;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
