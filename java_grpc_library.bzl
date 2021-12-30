@@ -21,3 +21,6 @@ def _java_rpc_toolchain_impl(ctx):
         ),
         platform_common.ToolchainInfo(),  # Magic for b/78647825
     ]
+
+java_rpc_toolchain = rule(
+    attrs = {
