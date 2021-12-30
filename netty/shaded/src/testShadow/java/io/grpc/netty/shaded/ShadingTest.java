@@ -106,3 +106,5 @@ public final class ShadingTest {
         .build();
     SimpleServiceBlockingStub stub = SimpleServiceGrpc.newBlockingStub(channel);
     assertThat(SimpleResponse.getDefaultInstance())
+        .isEqualTo(stub.unaryRpc(SimpleRequest.getDefaultInstance()));
+  }
