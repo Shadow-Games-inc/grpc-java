@@ -106,3 +106,6 @@ public final class TrafficControlProxy {
   public int getPort() {
     return clientAcceptor.getLocalPort();
   }
+
+  /** Interrupt all workers and close sockets. */
+  public void shutDown() throws IOException {
