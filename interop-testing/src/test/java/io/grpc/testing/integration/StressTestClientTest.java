@@ -162,3 +162,7 @@ public class StressTestClientTest {
     assertTrue("gauges: " + gaugeNames, gaugeNames.isEmpty());
 
     client.shutdown();
+    server.stop();
+  }
+
+}
