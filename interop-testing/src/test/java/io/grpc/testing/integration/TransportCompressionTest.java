@@ -191,3 +191,6 @@ public class TransportCompressionTest extends AbstractInteropTest {
     }
 
     @Override
+    public String getMessageEncoding() {
+      return actualName;
+    }
