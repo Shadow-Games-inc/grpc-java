@@ -441,3 +441,6 @@ public class RetryTest {
 
     CallOptions callOptions = CallOptions.DEFAULT
         .withDeadline(Deadline.after(
+            10,
+            SECONDS,
+            new Ticker() {
