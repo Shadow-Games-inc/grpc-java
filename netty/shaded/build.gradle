@@ -106,3 +106,6 @@ class NettyResourceTransformer implements Transformer {
     @Override
     boolean canTransformResource(FileTreeElement fileTreeElement) {
         fileTreeElement.name.startsWith("META-INF/native-image/io.netty")
+    }
+
+    @Override
