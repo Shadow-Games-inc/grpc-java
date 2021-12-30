@@ -144,3 +144,6 @@ _java_lite_grpc_library = rule(
         ),
         "deps": attr.label_list(
             mandatory = True,
+            allow_empty = False,
+            providers = [JavaInfo],
+        ),
