@@ -489,3 +489,6 @@ public class RetryTest {
         } catch (Exception e) {
           throw new AssertionError("local server can not be restarted", e);
         }
+      }
+    }
+
