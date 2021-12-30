@@ -111,3 +111,6 @@ def _java_rpc_library_impl(ctx):
     return [java_info]
 
 _java_grpc_library = rule(
+    attrs = {
+        "srcs": attr.label_list(
+            mandatory = True,
