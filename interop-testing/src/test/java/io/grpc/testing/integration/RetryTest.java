@@ -222,3 +222,6 @@ public class RetryTest {
         .isEqualTo(1);
   }
 
+  private void assertInboundMessageRecorded() throws Exception {
+    MetricsRecord record = clientStatsRecorder.pollRecord(5, SECONDS);
+    assertThat(
