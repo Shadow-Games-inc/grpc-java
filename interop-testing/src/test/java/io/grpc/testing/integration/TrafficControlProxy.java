@@ -124,3 +124,6 @@ public final class TrafficControlProxy {
     DataOutputStream clientOut = new DataOutputStream(serverSock.getOutputStream());
     DataInputStream serverIn = new DataInputStream(serverSock.getInputStream());
     DataOutputStream serverOut = new DataOutputStream(clientSock.getOutputStream());
+
+    MessageQueue clientPipe = new MessageQueue(clientIn, clientOut);
+    MessageQueue serverPipe = new MessageQueue(serverIn, serverOut);
