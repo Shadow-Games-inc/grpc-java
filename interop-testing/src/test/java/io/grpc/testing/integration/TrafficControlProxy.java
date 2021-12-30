@@ -151,3 +151,6 @@ public final class TrafficControlProxy {
           shutDown = true;
         } catch (InterruptedException e) {
           shutDown = true;
+        }
+      }
+    }
