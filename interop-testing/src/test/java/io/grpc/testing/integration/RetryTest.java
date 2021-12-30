@@ -373,3 +373,6 @@ public class RetryTest {
     ClientStreamTracer.Factory streamTracerFactory = new ClientStreamTracer.Factory() {
       @Override
       public ClientStreamTracer newClientStreamTracer(StreamInfo info, Metadata headers) {
+        return new ClientStreamTracer() {
+          @Override
+          public void streamClosed(Status status) {
