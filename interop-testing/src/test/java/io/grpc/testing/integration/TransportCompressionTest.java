@@ -185,3 +185,6 @@ public class TransportCompressionTest extends AbstractInteropTest {
 
     private final String actualName;
 
+    public Fzip(String actualName, Codec delegate) {
+      this.actualName = actualName;
+      this.delegate = delegate;
