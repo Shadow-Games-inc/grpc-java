@@ -48,3 +48,6 @@ java_rpc_toolchain = rule(
         platform_common.ToolchainInfo,
     ],
     implementation = _java_rpc_toolchain_impl,
+)
+
+# "repository" here is for Bazel builds that span multiple WORKSPACES.
