@@ -67,3 +67,6 @@ publishing {
             // resolved.
             pom.withXml {
                 asNode().dependencies.'*'.findAll() { dep ->
+                    dep.artifactId.text() == 'grpc-core'
+                }.each() { core ->
+                    core.scope*.value = "compile"
