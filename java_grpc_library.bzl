@@ -108,3 +108,6 @@ def _java_rpc_library_impl(ctx):
         ] + [dep[JavaInfo] for dep in toolchain.runtime],
     )
 
+    return [java_info]
+
+_java_grpc_library = rule(
