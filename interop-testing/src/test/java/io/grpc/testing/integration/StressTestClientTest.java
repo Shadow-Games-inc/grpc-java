@@ -26,3 +26,6 @@ import io.grpc.Grpc;
 import io.grpc.InsecureChannelCredentials;
 import io.grpc.ManagedChannel;
 import io.grpc.testing.integration.Metrics.EmptyMessage;
+import io.grpc.testing.integration.Metrics.GaugeResponse;
+import io.grpc.testing.integration.StressTestClient.TestCaseWeightPair;
+import java.net.InetSocketAddress;
