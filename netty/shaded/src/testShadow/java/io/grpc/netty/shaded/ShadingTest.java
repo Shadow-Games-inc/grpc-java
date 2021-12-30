@@ -88,3 +88,6 @@ public final class ShadingTest {
     assertThat(reflectionConfig).contains("io.grpc.netty.shaded.io.netty");
   }
 
+  @Test
+  public void serviceLoaderFindsNetty() throws Exception {
+    assertThat(Grpc.newServerBuilderForPort(0, InsecureServerCredentials.create()))
