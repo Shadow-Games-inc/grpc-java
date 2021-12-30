@@ -244,3 +244,9 @@ public class RetryTest {
   }
 
   private void assertRpcStatusRecorded(
+      Status.Code code, long roundtripLatencyMs, long outboundMessages) throws Exception {
+    MetricsRecord record = clientStatsRecorder.pollRecord(5, SECONDS);
+    TagValue statusTag = record.tags.get(RpcMeasureConstants.GRPC_CLIENT_STATUS);
+    assertThat(statusTag.asString()).isEqualTo(code.toString());
+    assertThat(record.getMetricAsLongOrFail(DeprecatedCensusConstants.RPC_CLIENT_FINISHED_COUNT))
+        .isEqualTo(1);
