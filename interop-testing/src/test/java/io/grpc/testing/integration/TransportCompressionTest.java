@@ -140,3 +140,6 @@ public class TransportCompressionTest extends AbstractInteropTest {
             return new ForwardingClientCall<ReqT, RespT>() {
 
               @Override
+              protected ClientCall<ReqT, RespT> delegate() {
+                return call;
+              }
