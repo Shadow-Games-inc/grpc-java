@@ -435,3 +435,6 @@ public class RetryTest {
     class CloseDelayedTracerFactory extends ClientStreamTracer.InternalLimitedInfoFactory {
       @Override
       public ClientStreamTracer newClientStreamTracer(StreamInfo info, Metadata headers) {
+        return new CloseDelayedTracer();
+      }
+    }
