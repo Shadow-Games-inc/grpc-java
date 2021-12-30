@@ -103,3 +103,6 @@ public final class TrafficControlProxy {
         + " with Queue Length " + queueLength);
   }
 
+  public int getPort() {
+    return clientAcceptor.getLocalPort();
+  }
