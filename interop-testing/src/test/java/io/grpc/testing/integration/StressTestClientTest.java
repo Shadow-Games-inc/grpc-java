@@ -87,3 +87,6 @@ public class StressTestClientTest {
     List<InetSocketAddress> addresses = Arrays.asList(new InetSocketAddress("localhost", 8080),
         new InetSocketAddress("localhost", 8081), new InetSocketAddress("localhost", 8082));
     assertEquals(addresses, client.addresses());
+
+    List<TestCaseWeightPair> testCases = Arrays.asList(
+        new TestCaseWeightPair(TestCases.EMPTY_UNARY, 20),
