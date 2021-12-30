@@ -97,3 +97,6 @@ public final class TrafficControlProxy {
         } catch (IOException e) {
           throw new RuntimeException(e);
         }
+      }
+    });
+    logger.info("Started new proxy on port " + clientAcceptor.getLocalPort()
