@@ -47,3 +47,6 @@ public class StressTestClientTest {
   @Rule
   public final Timeout globalTimeout = Timeout.seconds(10);
 
+  @Test
+  public void ipv6AddressesShouldBeSupported() {
+    StressTestClient client = new StressTestClient();
