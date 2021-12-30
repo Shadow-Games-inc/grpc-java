@@ -58,3 +58,6 @@ public final class TrafficControlProxy {
    * Returns a new TrafficControlProxy with default bandwidth and latency.
    */
   public TrafficControlProxy(int serverPort) {
+    this(serverPort, DEFAULT_BAND_BPS, DEFAULT_DELAY_NANOS, TimeUnit.NANOSECONDS);
+  }
+
