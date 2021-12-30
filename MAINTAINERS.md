@@ -19,3 +19,6 @@ for general contribution guidelines.
 - [voidzcy](https://github.com/voidzcy), Google LLC
 - [zhangkun83](https://github.com/zhangkun83), Google LLC
 
+## Emeritus Maintainers (in alphabetical order)
+- [carl-mastrangelo](https://github.com/carl-mastrangelo), Google LLC
+- [creamsoup](https://github.com/creamsoup), Google LLC
