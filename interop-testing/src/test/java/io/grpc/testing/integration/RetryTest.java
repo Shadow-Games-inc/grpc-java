@@ -370,3 +370,6 @@ public class RetryTest {
 
     // We will have streamClosed return at a particular moment that we want.
     final CountDownLatch streamClosedLatch = new CountDownLatch(1);
+    ClientStreamTracer.Factory streamTracerFactory = new ClientStreamTracer.Factory() {
+      @Override
+      public ClientStreamTracer newClientStreamTracer(StreamInfo info, Metadata headers) {
