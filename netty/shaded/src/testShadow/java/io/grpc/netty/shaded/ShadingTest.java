@@ -85,3 +85,6 @@ public final class ShadingTest {
     Scanner s = new Scanner(inputStream, StandardCharsets.UTF_8.name()).useDelimiter("\\A");
     String reflectionConfig = s.hasNext() ? s.next() : "";
 
+    assertThat(reflectionConfig).contains("io.grpc.netty.shaded.io.netty");
+  }
+
