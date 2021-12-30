@@ -128,3 +128,7 @@ public class ProxyTest {
     long rtt = rtts.get(0);
     assertEquals(latency, rtt, .5 * latency);
   }
+
+  @Test
+  public void smallBandwidth() throws Exception {
+    server = new Server();
