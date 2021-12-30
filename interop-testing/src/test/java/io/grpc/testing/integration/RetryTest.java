@@ -271,3 +271,6 @@ public class RetryTest {
 
     startNewServer();
     bufferLimit = message.length() * 2L - 1; // Can buffer no more than 1 message.
+    retryPolicy = ImmutableMap.<String, Object>builder()
+        .put("maxAttempts", 4D)
+        .put("initialBackoff", "10s")
