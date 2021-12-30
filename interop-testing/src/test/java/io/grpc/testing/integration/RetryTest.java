@@ -466,3 +466,7 @@ public class RetryTest {
     createNewChannel();
 
     final AtomicBoolean transparentRetryTriggered = new AtomicBoolean();
+    class TransparentRetryTriggeringTracer extends ClientStreamTracer {
+
+      @Override
+      public void streamCreated(Attributes transportAttrs, Metadata metadata) {
