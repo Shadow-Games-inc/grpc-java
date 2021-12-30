@@ -226,3 +226,6 @@ public final class TrafficControlProxy {
       return Math.max(0, Math.min(chunkSize, queueLength - bytesQueued));
     }
 
+    synchronized void incrementBytes(int delta) {
+      bytesQueued += delta;
+      if (bytesQueued < queueLength) {
