@@ -67,3 +67,6 @@ public class TestCasesTest {
       "cancel_after_first_response",
       "timeout_on_sleeping_server"
     };
+
+    // additional test cases
+    String[] additionalTestCases = {
