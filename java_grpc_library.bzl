@@ -60,3 +60,6 @@ def _path_ignoring_repository(f):
     # the virtual imports directory of the rule in question.
     virtual_imports = "/_virtual_imports/"
     if virtual_imports in f.path:
+        return f.path.split(virtual_imports)[1].split("/", 1)[1]
+    elif len(f.owner.workspace_root) == 0:
+        # |f| is in the main repository
