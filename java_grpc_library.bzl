@@ -87,3 +87,6 @@ def _java_rpc_library_impl(ctx):
     args.add("--rpc-plugin_out={0}:{1}".format(toolchain.plugin_arg, srcjar.path))
     args.add_joined("--descriptor_set_in", descriptor_set_in, join_with = ctx.host_configuration.host_path_separator)
     args.add_all(srcs, map_each = _path_ignoring_repository)
+
+    ctx.actions.run(
+        inputs = depset([toolchain.plugin] + srcs, transitive = [descriptor_set_in]),
