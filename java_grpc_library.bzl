@@ -69,3 +69,6 @@ def _path_ignoring_repository(f):
         # before "external/workspace", so we need to add the starting index of "external/workspace"
         return f.path[f.path.find(f.owner.workspace_root) + len(f.owner.workspace_root) + 1:]
 
+def _java_rpc_library_impl(ctx):
+    if len(ctx.attr.srcs) != 1:
+        fail("Exactly one src value supported", "srcs")
