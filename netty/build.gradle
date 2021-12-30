@@ -52,3 +52,6 @@ project.sourceSets {
 }
 
 test {
+    // Allow testing Jetty ALPN in TlsTest
+    jvmArgs "-javaagent:" + configurations.alpnagent.asPath
+}
