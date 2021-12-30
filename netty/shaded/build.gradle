@@ -49,3 +49,6 @@ shadowJar {
     relocate 'META-INF/native/netty', 'META-INF/native/io_grpc_netty_shaded_netty'
     transform(NettyResourceTransformer.class)
     mergeServiceFiles()
+}
+
+publishing {
