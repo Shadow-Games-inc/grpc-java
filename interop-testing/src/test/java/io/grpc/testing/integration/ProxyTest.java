@@ -124,3 +124,7 @@ public class ProxyTest {
       clientIn.read(message);
       rtts.add(System.nanoTime() - start);
     }
+    Collections.sort(rtts);
+    long rtt = rtts.get(0);
+    assertEquals(latency, rtt, .5 * latency);
+  }
