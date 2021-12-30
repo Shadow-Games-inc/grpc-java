@@ -256,3 +256,6 @@ public class RetryTest {
         .isEqualTo(outboundMessages);
   }
 
+  private void assertRetryStatsRecorded(
+      int numRetries, int numTransparentRetries, long retryDelayMs) throws Exception {
+    MetricsRecord record = clientStatsRecorder.pollRecord(5, SECONDS);
