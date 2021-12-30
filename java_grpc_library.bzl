@@ -201,3 +201,5 @@ def java_grpc_library(
             deps = deps,
             **kwargs
         )
+    else:
+        fail("Flavor must be normal or lite")
