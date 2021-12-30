@@ -133,3 +133,6 @@ public final class TrafficControlProxy {
     executor.execute(new Reader(serverPipe));
     executor.execute(new Writer(serverPipe));
   }
+
+  private final class Reader implements Runnable {
+
