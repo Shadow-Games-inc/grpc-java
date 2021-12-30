@@ -25,3 +25,6 @@ dependencies {
             libraries.truth
     shadow project(':grpc-netty').configurations.runtimeClasspath.allDependencies.matching {
         it.group != 'io.netty'
+    }
+}
+
