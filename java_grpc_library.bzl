@@ -198,3 +198,6 @@ def java_grpc_library(
         _java_lite_grpc_library(
             name = name,
             srcs = srcs,
+            deps = deps,
+            **kwargs
+        )
