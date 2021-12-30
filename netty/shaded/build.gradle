@@ -10,3 +10,6 @@ plugins {
 
     id "com.github.johnrengelman.shadow"
 }
+
+description = "gRPC: Netty Shaded"
+
