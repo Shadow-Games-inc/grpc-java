@@ -290,3 +290,6 @@ public class RetryTest {
         Status.UNAVAILABLE.withDescription("original attempt failed"),
         new Metadata());
     elapseBackoff(10, SECONDS);
+    // 2nd attempt received
+    serverCall = serverCalls.poll(5, SECONDS);
+    serverCall.request(2);
