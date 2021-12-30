@@ -123,3 +123,6 @@ _java_grpc_library = rule(
             providers = [JavaInfo],
         ),
         "_toolchain": attr.label(
+            default = Label("//compiler:java_grpc_library_toolchain"),
+        ),
+    },
