@@ -325,3 +325,11 @@ public class RetryTest {
     call.sendMessage(message);
     assertOutboundMessageRecorded();
     ServerCall<String, Integer> serverCall = serverCalls.poll(5, SECONDS);
+    serverCall.request(2);
+    assertOutboundWireSizeRecorded(message.length());
+    // original attempt latency
+    fakeClock.forwardTime(1, SECONDS);
+    // trigger retry
+    serverCall.close(
+        Status.UNAVAILABLE.withDescription("original attempt failed"),
+        new Metadata());
