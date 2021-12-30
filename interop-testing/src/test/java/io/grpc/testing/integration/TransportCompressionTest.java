@@ -212,3 +212,6 @@ public class TransportCompressionTest extends AbstractInteropTest {
         @Override
         public int read() throws IOException {
           int val = super.read();
+          anyRead = true;
+          return val;
+        }
