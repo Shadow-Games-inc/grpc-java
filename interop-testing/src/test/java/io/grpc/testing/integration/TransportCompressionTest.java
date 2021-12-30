@@ -104,3 +104,6 @@ public class TransportCompressionTest extends AbstractInteropTest {
     InternalNettyServerBuilder.setStatsEnabled(builder, false);
     return builder.addStreamTracerFactory(createCustomCensusTracerFactory());
   }
+
+  @Test
+  public void compresses() {
