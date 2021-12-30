@@ -199,3 +199,6 @@ public final class TrafficControlProxy {
      */
     void writeOut() throws InterruptedException, IOException {
       Message next = queue.take();
+      outStream.write(next.message, 0, next.messageLength);
+      incrementBytes(-next.messageLength);
+    }
