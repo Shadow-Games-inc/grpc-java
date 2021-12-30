@@ -37,3 +37,6 @@ import io.grpc.stub.StreamObserver;
 import io.grpc.testing.protobuf.SimpleRequest;
 import io.grpc.testing.protobuf.SimpleResponse;
 import io.grpc.testing.protobuf.SimpleServiceGrpc;
+import io.grpc.testing.protobuf.SimpleServiceGrpc.SimpleServiceBlockingStub;
+import io.grpc.testing.protobuf.SimpleServiceGrpc.SimpleServiceImplBase;
+
