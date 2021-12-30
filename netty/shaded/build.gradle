@@ -118,3 +118,6 @@ class NettyResourceTransformer implements Transformer {
     @Override
     boolean hasTransformedResource() {
         resources.size() > 0
+    }
+
+    @Override
