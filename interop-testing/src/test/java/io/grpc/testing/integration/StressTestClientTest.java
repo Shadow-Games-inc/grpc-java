@@ -138,3 +138,6 @@ public class StressTestClientTest {
     // Wait until gauges have been exported
     Set<String> gaugeNames = newHashSet("/stress_test/server_0/channel_0/stub_0/qps",
         "/stress_test/server_0/channel_0/stub_1/qps");
+
+    List<GaugeResponse> allGauges =
+        ImmutableList.copyOf(stub.getAllGauges(EmptyMessage.getDefaultInstance()));
