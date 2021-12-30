@@ -36,3 +36,6 @@ java_rpc_toolchain = rule(
         "plugin_arg": attr.string(),
         "_protoc": attr.label(
             cfg = "host",
+            default = Label("@com_google_protobuf//:protoc"),
+            executable = True,
+        ),
