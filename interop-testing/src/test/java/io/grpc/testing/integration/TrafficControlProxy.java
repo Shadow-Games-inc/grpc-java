@@ -94,3 +94,6 @@ public final class TrafficControlProxy {
           serverSock = new Socket();
           serverSock.connect(new InetSocketAddress(localhost, serverPort));
           startWorkers();
+        } catch (IOException e) {
+          throw new RuntimeException(e);
+        }
