@@ -80,3 +80,6 @@ public class TransportCompressionTest extends AbstractInteropTest {
 
   @BeforeClass
   public static void registerCompressors() {
+    compressors.register(FZIPPER);
+    compressors.register(Codec.Identity.NONE);
+  }
