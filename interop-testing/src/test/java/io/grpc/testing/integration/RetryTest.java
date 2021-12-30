@@ -120,3 +120,10 @@ public class RetryTest {
             @Override
             public void run() {
               group.execute(command);
+            }
+          },
+          delay,
+          unit);
+      backoffLatch.countDown();
+      return super.schedule(
+          new Runnable() {
