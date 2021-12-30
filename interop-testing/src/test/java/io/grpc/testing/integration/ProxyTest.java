@@ -155,3 +155,11 @@ public class ProxyTest {
     Collections.sort(bandwidths);
     double bandUsed = bandwidths.get(bandwidths.size() - 1);
     assertEquals(bandwidth, bandUsed, .5 * bandwidth);
+  }
+
+  @Test
+  public void largeBandwidth() throws Exception {
+    server = new Server();
+    int serverPort = server.init();
+    server.setMode("stream");
+    executor.execute(server);
