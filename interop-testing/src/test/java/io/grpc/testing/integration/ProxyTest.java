@@ -170,3 +170,7 @@ public class ProxyTest {
     DataInputStream clientIn = new DataInputStream(client.getInputStream());
 
     clientIn.readFully(new byte[100 * 1024]);
+    int sample = bandwidth / 5;
+    List<Double> bandwidths = new ArrayList<>();
+    for (int i = 0; i < 5; i++) {
+      long start = System.nanoTime();
