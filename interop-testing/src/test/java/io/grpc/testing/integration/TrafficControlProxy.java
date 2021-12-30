@@ -202,3 +202,6 @@ public final class TrafficControlProxy {
       outStream.write(next.message, 0, next.messageLength);
       incrementBytes(-next.messageLength);
     }
+
+    /**
+     * Read bytes from an endpoint and add them as a message to the queue. Blocks if the queue is
