@@ -195,3 +195,14 @@ public class RetryTest {
             .channelType(LocalChannel.class)
             .eventLoopGroup(group)
             .usePlaintext()
+            .enableRetry()
+            .perRpcBufferLimit(bufferLimit)
+            .defaultServiceConfig(rawServiceConfig)
+            .intercept(statsInterceptor)
+            .build());
+  }
+
+  private void elapseBackoff(long time, TimeUnit unit) throws Exception {
+    assertThat(backoffLatch.await(5, SECONDS)).isTrue();
+    backoffLatch = new CountDownLatch(1);
+    fakeClock.forwardTime(time, unit);
