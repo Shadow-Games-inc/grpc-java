@@ -340,3 +340,6 @@ public class RetryTest {
     serverCall = serverCalls.poll(5, SECONDS);
     serverCall.request(2);
     assertOutboundWireSizeRecorded(message.length());
+    message = "new message";
+    call.sendMessage(message);
+    assertOutboundMessageRecorded();
