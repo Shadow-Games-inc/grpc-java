@@ -172,3 +172,6 @@ public final class TrafficControlProxy {
           queue.writeOut();
         } catch (IOException e) {
           shutDown = true;
+        } catch (InterruptedException e) {
+          shutDown = true;
+        }
