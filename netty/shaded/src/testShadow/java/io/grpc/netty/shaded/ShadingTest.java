@@ -103,3 +103,6 @@ public final class ShadingTest {
         .build().start();
     channel = Grpc.newChannelBuilder(
           "localhost:" + server.getPort(), InsecureChannelCredentials.create())
+        .build();
+    SimpleServiceBlockingStub stub = SimpleServiceGrpc.newBlockingStub(channel);
+    assertThat(SimpleResponse.getDefaultInstance())
