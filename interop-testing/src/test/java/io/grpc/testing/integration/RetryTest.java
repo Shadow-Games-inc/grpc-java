@@ -135,3 +135,14 @@ public class RetryTest {
     }
   };
   private final FakeStatsRecorder clientStatsRecorder = new FakeStatsRecorder();
+  private final ClientInterceptor statsInterceptor =
+      InternalCensusStatsAccessor.getClientInterceptor(
+          tagger, tagContextBinarySerializer, clientStatsRecorder,
+          fakeClock.getStopwatchSupplier(), true, true, true,
+          /* recordRealTimeMetrics= */ true, /* recordRetryMetrics= */ true);
+  private final MethodDescriptor<String, Integer> clientStreamingMethod =
+      MethodDescriptor.<String, Integer>newBuilder()
+          .setType(MethodType.CLIENT_STREAMING)
+          .setFullMethodName("service/method")
+          .setRequestMarshaller(new StringMarshaller())
+          .setResponseMarshaller(new IntegerMarshaller())
