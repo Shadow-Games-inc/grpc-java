@@ -130,3 +130,5 @@ class NettyResourceTransformer implements Transformer {
             outputStream.write(resourceEntry.value.getBytes())
             outputStream.closeEntry()
         }
+    }
+}
