@@ -92,3 +92,6 @@ public class TransportCompressionTest extends AbstractInteropTest {
         .decompressorRegistry(decompressors)
         .intercept(new ServerInterceptor() {
             @Override
+            public <ReqT, RespT> Listener<ReqT> interceptCall(ServerCall<ReqT, RespT> call,
+                Metadata headers, ServerCallHandler<ReqT, RespT> next) {
+              Listener<ReqT> listener = next.startCall(call, headers);
