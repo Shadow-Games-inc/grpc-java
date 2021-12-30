@@ -73,3 +73,6 @@ public final class ShadingTest {
   public void noNormalNetty() throws Exception {
     Class.forName("io.grpc.netty.NettyServerBuilder");
   }
+
+  /** Verify that resources under META-INF/native-image reference shaded class names. */
+  @Test
