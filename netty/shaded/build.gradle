@@ -91,3 +91,6 @@ task testShadow(type: Test) {
 }
 compileTestShadowJava.options.compilerArgs = compileTestJava.options.compilerArgs
 compileTestShadowJava.options.encoding = compileTestJava.options.encoding
+
+test.dependsOn testShadow
+
