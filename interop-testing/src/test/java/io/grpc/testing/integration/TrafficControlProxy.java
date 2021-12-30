@@ -115,3 +115,6 @@ public final class TrafficControlProxy {
     executor.shutdown();
     clientAcceptor.close();
     clientSock.close();
+    serverSock.close();
+    logger.info("Shutdown Complete");
+  }
