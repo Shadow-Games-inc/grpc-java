@@ -152,3 +152,6 @@ public class TransportCompressionTest extends AbstractInteropTest {
                   @Override
                   protected io.grpc.ClientCall.Listener<RespT> delegate() {
                     return responseListener;
+                  }
+
+                  @Override
