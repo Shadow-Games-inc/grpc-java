@@ -52,3 +52,6 @@ import org.junit.runners.JUnit4;
 
 /** Unit tests for shaded gRPC Netty. */
 @RunWith(JUnit4.class)
+public final class ShadingTest {
+  private ManagedChannel channel;
+  private Server server;
