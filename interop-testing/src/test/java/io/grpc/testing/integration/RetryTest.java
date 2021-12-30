@@ -438,3 +438,6 @@ public class RetryTest {
         return new CloseDelayedTracer();
       }
     }
+
+    CallOptions callOptions = CallOptions.DEFAULT
+        .withDeadline(Deadline.after(
