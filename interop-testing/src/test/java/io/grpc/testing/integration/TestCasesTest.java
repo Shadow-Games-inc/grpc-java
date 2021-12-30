@@ -82,3 +82,6 @@ public class TestCasesTest {
 
     Set<TestCases> testCaseSet = new HashSet<>(testCases.length);
     for (String testCase : testCases) {
+      testCaseSet.add(TestCases.fromString(testCase));
+    }
+    for (String testCase : additionalTestCases) {
