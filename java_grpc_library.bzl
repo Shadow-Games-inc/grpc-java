@@ -132,3 +132,6 @@ _java_grpc_library = rule(
         "srcjar": "lib%{name}-src.jar",
     },
     provides = [JavaInfo],
+    implementation = _java_rpc_library_impl,
+)
+
