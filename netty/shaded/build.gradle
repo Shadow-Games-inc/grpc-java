@@ -88,3 +88,6 @@ publishing {
 task testShadow(type: Test) {
     testClassesDirs = sourceSets.testShadow.output.classesDirs
     classpath = sourceSets.testShadow.runtimeClasspath
+}
+compileTestShadowJava.options.compilerArgs = compileTestJava.options.compilerArgs
+compileTestShadowJava.options.encoding = compileTestJava.options.encoding
