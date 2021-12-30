@@ -19,3 +19,6 @@ package io.grpc.netty.shaded;
 import static com.google.common.truth.Truth.assertThat;
 
 import io.grpc.ChannelCredentials;
+import io.grpc.Grpc;
+import io.grpc.InsecureChannelCredentials;
+import io.grpc.InsecureServerCredentials;
