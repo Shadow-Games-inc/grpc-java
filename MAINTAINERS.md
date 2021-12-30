@@ -16,3 +16,6 @@ for general contribution guidelines.
 - [sanjaypujare](https://github.com/sanjaypujare), Google LLC
 - [sergiitk](https://github.com/sergiitk), Google LLC
 - [srini100](https://github.com/srini100), Google LLC
+- [voidzcy](https://github.com/voidzcy), Google LLC
+- [zhangkun83](https://github.com/zhangkun83), Google LLC
+
