@@ -170,3 +170,6 @@ public class TransportCompressionTest extends AbstractInteropTest {
           }
         })
         .usePlaintext();
+    // Disable the default census stats interceptor, use testing interceptor instead.
+    InternalNettyChannelBuilder.setStatsEnabled(builder, false);
+    return builder.intercept(createCensusStatsClientInterceptor());
