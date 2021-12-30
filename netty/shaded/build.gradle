@@ -55,3 +55,6 @@ publishing {
     publications {
         maven(MavenPublication) {
             project.shadow.component(it)
+
+            // Empty jars are not published via withJavadocJar() and withSourcesJar()
+            artifact javadocJar
