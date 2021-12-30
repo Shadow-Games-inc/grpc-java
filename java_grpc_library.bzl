@@ -129,3 +129,6 @@ _java_grpc_library = rule(
     fragments = ["java"],
     outputs = {
         "jar": "lib%{name}.jar",
+        "srcjar": "lib%{name}-src.jar",
+    },
+    provides = [JavaInfo],
