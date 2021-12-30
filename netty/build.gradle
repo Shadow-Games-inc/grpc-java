@@ -1,3 +1,6 @@
 plugins {
     id "java-library"
     id "maven-publish"
+
+    id "me.champeau.gradle.japicmp"
+    id "me.champeau.gradle.jmh"
