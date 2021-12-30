@@ -166,3 +166,6 @@ public final class TrafficControlProxy {
     }
 
     @Override
+    public void run() {
+      while (!shutDown) {
+        try {
