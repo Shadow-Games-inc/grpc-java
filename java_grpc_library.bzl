@@ -117,3 +117,6 @@ _java_grpc_library = rule(
             allow_empty = False,
             providers = [ProtoInfo],
         ),
+        "deps": attr.label_list(
+            mandatory = True,
+            allow_empty = False,
