@@ -174,3 +174,6 @@ def java_grpc_library(
     java_lite_proto_library rule.
 
     Args:
+      name: A unique name for this rule.
+      srcs: (List of `labels`) a single proto_library target that contains the
+        schema of the service.
