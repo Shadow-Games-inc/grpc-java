@@ -62,3 +62,6 @@ import org.junit.runners.JUnit4;
  */
 @RunWith(JUnit4.class)
 public class TransportCompressionTest extends AbstractInteropTest {
+
+  // Masquerade as identity.
+  private static final Fzip FZIPPER = new Fzip("gzip", new Codec.Gzip());
