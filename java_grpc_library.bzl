@@ -90,3 +90,6 @@ def _java_rpc_library_impl(ctx):
 
     ctx.actions.run(
         inputs = depset([toolchain.plugin] + srcs, transitive = [descriptor_set_in]),
+        outputs = [srcjar],
+        executable = toolchain.protoc,
+        arguments = [args],
