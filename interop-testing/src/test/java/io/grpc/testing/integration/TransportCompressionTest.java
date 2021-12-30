@@ -164,3 +164,6 @@ public class TransportCompressionTest extends AbstractInteropTest {
                   }
                 };
                 super.start(listener, headers);
+                setMessageCompression(true);
+              }
+            };
