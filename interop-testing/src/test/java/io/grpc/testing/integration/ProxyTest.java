@@ -224,3 +224,6 @@ public class ProxyTest {
       OutputStream serverOut = rcv.getOutputStream();
       if (mode.equals("echo")) {
         ByteStreams.copy(serverIn, serverOut);
+      } else if (mode.equals("stream")) {
+        byte[] message = new byte[1024];
+        while (true) {
