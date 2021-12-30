@@ -62,6 +62,9 @@ public class StressTestClientTest {
   public void defaults() {
     StressTestClient client = new StressTestClient();
     assertEquals(singletonList(new InetSocketAddress("localhost", 8080)), client.addresses());
+  @Test
+  public void allCommandlineSwitchesAreSupported() {
+    StressTestClient client = new StressTestClient();
     client.parseArgs(new String[] {
         "--server_addresses=localhost:8080,localhost:8081,localhost:8082",
         "--test_cases=empty_unary:20,large_unary:50,server_streaming:30",
