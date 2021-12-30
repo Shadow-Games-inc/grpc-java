@@ -189,3 +189,6 @@ def java_grpc_library(
 
     if flavor == None or flavor == "normal":
         _java_grpc_library(
+            name = name,
+            srcs = srcs,
+            deps = deps,
