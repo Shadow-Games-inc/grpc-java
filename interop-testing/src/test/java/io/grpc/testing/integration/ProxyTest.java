@@ -163,3 +163,10 @@ public class ProxyTest {
     int serverPort = server.init();
     server.setMode("stream");
     executor.execute(server);
+    int bandwidth = 10 * 1024 * 1024;
+    proxy = new TrafficControlProxy(serverPort, bandwidth, 200, TimeUnit.MILLISECONDS);
+    proxy.start();
+    client = new Socket("localhost", proxy.getPort());
+    DataInputStream clientIn = new DataInputStream(client.getInputStream());
+
+    clientIn.readFully(new byte[100 * 1024]);
