@@ -420,3 +420,6 @@ public class RetryTest {
     assertRpcStatusRecorded(Code.CANCELLED, 7_000, 1);
   }
 
+  @Test
+  public void serverCancelledAndClientDeadlineExceeded() throws Exception {
+    startNewServer();
