@@ -229,3 +229,6 @@ public final class TrafficControlProxy {
     synchronized void incrementBytes(int delta) {
       bytesQueued += delta;
       if (bytesQueued < queueLength) {
+        notifyAll();
+      }
+    }
