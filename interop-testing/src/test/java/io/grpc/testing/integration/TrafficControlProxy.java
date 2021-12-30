@@ -232,3 +232,6 @@ public final class TrafficControlProxy {
         notifyAll();
       }
     }
+  }
+
+  private static class Message implements Delayed {
