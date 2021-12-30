@@ -142,3 +142,6 @@ public final class TrafficControlProxy {
       this.queue = queue;
     }
 
+    @Override
+    public void run() {
+      while (!shutDown) {
