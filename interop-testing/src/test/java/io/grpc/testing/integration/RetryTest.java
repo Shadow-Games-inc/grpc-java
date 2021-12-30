@@ -127,3 +127,11 @@ public class RetryTest {
       backoffLatch.countDown();
       return super.schedule(
           new Runnable() {
+            @Override
+            public void run() {} // no-op
+          },
+          0,
+          TimeUnit.NANOSECONDS);
+    }
+  };
+  private final FakeStatsRecorder clientStatsRecorder = new FakeStatsRecorder();
