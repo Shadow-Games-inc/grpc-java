@@ -120,3 +120,6 @@ _java_grpc_library = rule(
         "deps": attr.label_list(
             mandatory = True,
             allow_empty = False,
+            providers = [JavaInfo],
+        ),
+        "_toolchain": attr.label(
