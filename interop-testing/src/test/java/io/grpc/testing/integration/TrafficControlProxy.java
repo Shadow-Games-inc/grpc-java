@@ -163,3 +163,6 @@ public final class TrafficControlProxy {
 
     Writer(MessageQueue queue) {
       this.queue = queue;
+    }
+
+    @Override
