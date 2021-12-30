@@ -195,3 +195,6 @@ def java_grpc_library(
             **kwargs
         )
     elif flavor == "lite":
+        _java_lite_grpc_library(
+            name = name,
+            srcs = srcs,
