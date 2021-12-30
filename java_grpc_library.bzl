@@ -27,3 +27,6 @@ java_rpc_toolchain = rule(
         # This attribute has a "magic" name recognized by the native DexArchiveAspect (b/78647825).
         "runtime": attr.label_list(
             cfg = "target",
+            providers = [JavaInfo],
+        ),
+        "plugin": attr.label(
