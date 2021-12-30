@@ -235,3 +235,6 @@ public final class TrafficControlProxy {
   }
 
   private static class Message implements Delayed {
+    long sendTime;
+    byte[] message;
+    int messageLength;
