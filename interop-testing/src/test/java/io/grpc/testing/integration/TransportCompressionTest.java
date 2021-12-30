@@ -125,3 +125,6 @@ public class TransportCompressionTest extends AbstractInteropTest {
     assertTrue(FZIPPER.anyRead);
     assertTrue(FZIPPER.anyWritten);
   }
+
+  @Override
+  protected NettyChannelBuilder createChannelBuilder() {
