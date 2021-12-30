@@ -121,3 +121,6 @@ public final class TrafficControlProxy {
 
   private void startWorkers() throws IOException {
     DataInputStream clientIn = new DataInputStream(clientSock.getInputStream());
+    DataOutputStream clientOut = new DataOutputStream(serverSock.getOutputStream());
+    DataInputStream serverIn = new DataInputStream(serverSock.getInputStream());
+    DataOutputStream serverOut = new DataOutputStream(clientSock.getOutputStream());
