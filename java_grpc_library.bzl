@@ -15,3 +15,6 @@ def _java_rpc_toolchain_impl(ctx):
         _JavaRpcToolchainInfo(
             java_toolchain = ctx.attr._java_toolchain,
             plugin = ctx.executable.plugin,
+            plugin_arg = ctx.attr.plugin_arg,
+            protoc = ctx.executable._protoc,
+            runtime = ctx.attr.runtime,
