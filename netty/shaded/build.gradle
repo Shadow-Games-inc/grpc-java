@@ -19,3 +19,6 @@ dependencies {
     implementation project(':grpc-netty')
     runtimeOnly libraries.netty_tcnative,
             libraries.netty_epoll
+    testShadowImplementation files(shadowJar),
+            project(':grpc-testing-proto'),
+            project(':grpc-testing'),
