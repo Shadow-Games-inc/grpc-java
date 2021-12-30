@@ -125,6 +125,7 @@ public final class ShadingTest {
         .isEqualTo(stub.unaryRpc(SimpleRequest.getDefaultInstance()));
   }
       obs.onNext(SimpleResponse.getDefaultInstance());
+      obs.onCompleted();
     }
   }
 }
