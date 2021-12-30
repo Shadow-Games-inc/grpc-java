@@ -115,3 +115,6 @@ class NettyResourceTransformer implements Transformer {
         resources.put(updatedPath, updatedContent)
     }
 
+    @Override
+    boolean hasTransformedResource() {
+        resources.size() > 0
