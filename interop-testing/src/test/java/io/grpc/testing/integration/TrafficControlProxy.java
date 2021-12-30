@@ -190,3 +190,6 @@ public final class TrafficControlProxy {
 
     MessageQueue(DataInputStream inputStream, DataOutputStream outputStream) {
       inStream = inputStream;
+      outStream = outputStream;
+    }
+
