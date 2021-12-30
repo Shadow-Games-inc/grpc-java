@@ -122,3 +122,6 @@ public class TransportCompressionTest extends AbstractInteropTest {
 
     assertEquals(goldenResponse, blockingStub.unaryCall(request));
     // Assert that compression took place
+    assertTrue(FZIPPER.anyRead);
+    assertTrue(FZIPPER.anyWritten);
+  }
