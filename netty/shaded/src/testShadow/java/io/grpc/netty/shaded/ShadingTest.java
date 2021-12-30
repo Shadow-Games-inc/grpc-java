@@ -94,3 +94,6 @@ public final class ShadingTest {
         .isInstanceOf(NettyServerBuilder.class);
     assertThat(Grpc.newChannelBuilder("localhost:1234", InsecureChannelCredentials.create()))
         .isInstanceOf(NettyChannelBuilder.class);
+  }
+
+  @Test
