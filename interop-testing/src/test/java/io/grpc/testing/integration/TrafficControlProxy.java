@@ -37,3 +37,6 @@ public final class TrafficControlProxy {
 
   private static final int DEFAULT_BAND_BPS = 1024 * 1024;
   private static final int DEFAULT_DELAY_NANOS = 200 * 1000 * 1000;
+  private static final Logger logger = Logger.getLogger(TrafficControlProxy.class.getName());
+
+  // TODO: make host and ports arguments
