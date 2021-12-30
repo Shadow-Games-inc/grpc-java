@@ -28,3 +28,6 @@ dependencies {
             project(':grpc-api').sourceSets.test.output,
             project(':grpc-testing'),
             project(':grpc-testing-proto')
+    testRuntimeOnly libraries.netty_tcnative,
+            libraries.conscrypt,
+            libraries.netty_epoll
