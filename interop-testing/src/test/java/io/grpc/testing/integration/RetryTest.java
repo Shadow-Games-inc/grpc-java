@@ -259,3 +259,6 @@ public class RetryTest {
   private void assertRetryStatsRecorded(
       int numRetries, int numTransparentRetries, long retryDelayMs) throws Exception {
     MetricsRecord record = clientStatsRecorder.pollRecord(5, SECONDS);
+    assertThat(record.getMetricAsLongOrFail(RETRIES_PER_CALL)).isEqualTo(numRetries);
+    assertThat(record.getMetricAsLongOrFail(TRANSPARENT_RETRIES_PER_CALL))
+        .isEqualTo(numTransparentRetries);
