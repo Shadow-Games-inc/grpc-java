@@ -57,3 +57,6 @@ def _path_ignoring_repository(f):
     # https://github.com/bazelbuild/bazel/blob/0.27.1/src/main/java/com/google/devtools/build/lib/rules/proto/ProtoCommon.java#L289
     #
     # In that case, the import path of the .proto file is the path relative to
+    # the virtual imports directory of the rule in question.
+    virtual_imports = "/_virtual_imports/"
+    if virtual_imports in f.path:
