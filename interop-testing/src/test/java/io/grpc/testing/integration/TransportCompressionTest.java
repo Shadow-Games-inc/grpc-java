@@ -134,3 +134,6 @@ public class TransportCompressionTest extends AbstractInteropTest {
         .compressorRegistry(compressors)
         .intercept(new ClientInterceptor() {
           @Override
+          public <ReqT, RespT> ClientCall<ReqT, RespT> interceptCall(
+              MethodDescriptor<ReqT, RespT> method, CallOptions callOptions, Channel next) {
+            final ClientCall<ReqT, RespT> call = next.newCall(method, callOptions);
