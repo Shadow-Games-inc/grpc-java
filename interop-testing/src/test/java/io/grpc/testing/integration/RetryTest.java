@@ -178,3 +178,13 @@ public class RetryTest {
         .addService(serviceDefinition)
         .build());
     localServer.start();
+  }
+
+  private void createNewChannel() {
+    Map<String, Object> methodConfig = new HashMap<>();
+    Map<String, Object> name = new HashMap<>();
+    name.put("service", "service");
+    methodConfig.put("name", Arrays.<Object>asList(name));
+    if (retryPolicy != null) {
+      methodConfig.put("retryPolicy", retryPolicy);
+    }
