@@ -507,3 +507,8 @@ public class RetryTest {
     assertRpcStartedRecorded();
     assertRpcStatusRecorded(Code.UNAVAILABLE, 0, 0);
     assertRpcStartedRecorded();
+    call.cancel("cancel", null);
+    assertRpcStatusRecorded(Code.CANCELLED, 0, 0);
+    assertRetryStatsRecorded(0, 1, 0);
+  }
+}
