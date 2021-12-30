@@ -114,6 +114,7 @@ public final class ShadingTest {
     ServerCredentials serverCreds = TlsServerCredentials.create(
         TestUtils.loadCert("server1.pem"), TestUtils.loadCert("server1.key"));
     server = Grpc.newServerBuilderForPort(0, serverCreds)
+        .addService(new SimpleServiceImpl())
         .build().start();
     ChannelCredentials creds = NettySslContextChannelCredentials.create(
         GrpcSslContexts.configure(SslContextBuilder.forClient(), SslProvider.OPENSSL)
