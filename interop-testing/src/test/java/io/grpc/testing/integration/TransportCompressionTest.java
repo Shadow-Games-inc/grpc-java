@@ -137,3 +137,6 @@ public class TransportCompressionTest extends AbstractInteropTest {
           public <ReqT, RespT> ClientCall<ReqT, RespT> interceptCall(
               MethodDescriptor<ReqT, RespT> method, CallOptions callOptions, Channel next) {
             final ClientCall<ReqT, RespT> call = next.newCall(method, callOptions);
+            return new ForwardingClientCall<ReqT, RespT>() {
+
+              @Override
