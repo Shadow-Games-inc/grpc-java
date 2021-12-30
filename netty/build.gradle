@@ -46,3 +46,6 @@ javadoc {
     options.links 'http://netty.io/4.1/api/'
     exclude 'io/grpc/netty/Internal*'
 }
+
+project.sourceSets {
+    main { java { srcDir "${projectDir}/third_party/netty/java" } }
