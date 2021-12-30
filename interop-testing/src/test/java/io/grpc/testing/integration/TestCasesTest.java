@@ -34,3 +34,6 @@ public class TestCasesTest {
   @Test(expected = IllegalArgumentException.class)
   public void unknownStringThrowsException() {
     fromString("does_not_exist_1234");
+  }
+
+  @Test
