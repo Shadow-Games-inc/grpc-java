@@ -1,0 +1,3 @@
+# Publicly exposed in //netty package. Purposefully does not export any symbols.
+java_library(
+    name = "shaded",
