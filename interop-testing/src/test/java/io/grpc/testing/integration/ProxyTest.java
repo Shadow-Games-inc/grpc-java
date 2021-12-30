@@ -207,3 +207,14 @@ public class ProxyTest {
 
     @Override
     public void run() {
+      try {
+        Socket rcv = server.accept();
+        try {
+          handleSocket(rcv);
+        } finally {
+          rcv.close();
+        }
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
+    }
