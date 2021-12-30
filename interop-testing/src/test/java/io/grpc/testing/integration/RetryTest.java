@@ -408,3 +408,6 @@ public class RetryTest {
     assertRpcStartedRecorded();
     assertOutboundMessageRecorded();
     serverCall = serverCalls.poll(5, SECONDS);
+    serverCall.request(2);
+    assertOutboundWireSizeRecorded(message.length());
+    fakeClock.forwardTime(7, SECONDS);
