@@ -136,3 +136,6 @@ public final class TrafficControlProxy {
 
   private final class Reader implements Runnable {
 
+    private final MessageQueue queue;
+
+    Reader(MessageQueue queue) {
