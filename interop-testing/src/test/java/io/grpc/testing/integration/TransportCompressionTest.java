@@ -218,3 +218,6 @@ public class TransportCompressionTest extends AbstractInteropTest {
 
         @Override
         public int read(byte[] b, int off, int len) throws IOException {
+          int total = super.read(b, off, len);
+          anyRead = true;
+          return total;
