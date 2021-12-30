@@ -107,3 +107,6 @@ public class TransportCompressionTest extends AbstractInteropTest {
 
   @Test
   public void compresses() {
+    expectFzip = true;
+    final SimpleRequest request = SimpleRequest.newBuilder()
+        .setResponseSize(314159)
