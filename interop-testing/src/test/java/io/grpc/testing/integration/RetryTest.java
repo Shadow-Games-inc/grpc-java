@@ -402,3 +402,6 @@ public class RetryTest {
     // trigger retry
     serverCall.close(
         Status.UNAVAILABLE.withDescription("original attempt failed"),
+        new Metadata());
+    assertRpcStatusRecorded(Code.UNAVAILABLE, 5000, 1);
+    elapseBackoff(10, SECONDS);
