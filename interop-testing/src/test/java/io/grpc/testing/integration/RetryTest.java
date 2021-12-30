@@ -405,3 +405,6 @@ public class RetryTest {
         new Metadata());
     assertRpcStatusRecorded(Code.UNAVAILABLE, 5000, 1);
     elapseBackoff(10, SECONDS);
+    assertRpcStartedRecorded();
+    assertOutboundMessageRecorded();
+    serverCall = serverCalls.poll(5, SECONDS);
