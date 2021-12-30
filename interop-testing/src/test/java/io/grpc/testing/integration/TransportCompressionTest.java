@@ -58,3 +58,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 /**
+ * Tests that compression is turned on.
+ */
+@RunWith(JUnit4.class)
+public class TransportCompressionTest extends AbstractInteropTest {
