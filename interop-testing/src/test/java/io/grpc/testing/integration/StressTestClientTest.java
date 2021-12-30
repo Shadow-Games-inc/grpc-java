@@ -114,3 +114,6 @@ public class StressTestClientTest {
     assertEquals("foo.test.google.fr", client.addresses().get(0).getHostName());
   }
 
+  @Test
+  public void gaugesShouldBeExported() throws Exception {
+
