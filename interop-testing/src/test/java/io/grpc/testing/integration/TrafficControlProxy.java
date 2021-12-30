@@ -118,3 +118,6 @@ public final class TrafficControlProxy {
     serverSock.close();
     logger.info("Shutdown Complete");
   }
+
+  private void startWorkers() throws IOException {
+    DataInputStream clientIn = new DataInputStream(clientSock.getInputStream());
