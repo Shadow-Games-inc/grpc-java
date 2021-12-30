@@ -153,3 +153,6 @@ _java_lite_grpc_library = rule(
         ),
     },
     fragments = ["java"],
+    outputs = {
+        "jar": "lib%{name}.jar",
+        "srcjar": "lib%{name}-src.jar",
