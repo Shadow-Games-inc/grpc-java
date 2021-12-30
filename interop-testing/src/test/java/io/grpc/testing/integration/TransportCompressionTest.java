@@ -19,3 +19,6 @@ package io.grpc.testing.integration;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import com.google.protobuf.ByteString;
+import io.grpc.CallOptions;
+import io.grpc.Channel;
