@@ -337,3 +337,6 @@ public class RetryTest {
     elapseBackoff(10, SECONDS);
     assertRpcStartedRecorded();
     assertOutboundMessageRecorded();
+    serverCall = serverCalls.poll(5, SECONDS);
+    serverCall.request(2);
+    assertOutboundWireSizeRecorded(message.length());
