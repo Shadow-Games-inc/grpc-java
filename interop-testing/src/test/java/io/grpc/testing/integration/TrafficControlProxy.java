@@ -49,3 +49,6 @@ public final class TrafficControlProxy {
   private volatile boolean shutDown;
   private ServerSocket clientAcceptor;
   private Socket serverSock;
+  private Socket clientSock;
+  private final ThreadPoolExecutor executor =
+      new ThreadPoolExecutor(5, 10, 1, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(),
