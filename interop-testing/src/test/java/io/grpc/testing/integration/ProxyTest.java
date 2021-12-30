@@ -174,3 +174,7 @@ public class ProxyTest {
     List<Double> bandwidths = new ArrayList<>();
     for (int i = 0; i < 5; i++) {
       long start = System.nanoTime();
+      clientIn.readFully(new byte[sample]);
+      long duration = System.nanoTime() - start;
+      double actualBandwidth = sample / (((double) duration) / TimeUnit.SECONDS.toNanos(1));
+      bandwidths.add(actualBandwidth);
