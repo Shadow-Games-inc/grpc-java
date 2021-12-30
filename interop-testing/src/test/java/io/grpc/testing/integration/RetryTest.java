@@ -453,3 +453,6 @@ public class RetryTest {
     ClientCall<String, Integer> call = channel.newCall(clientStreamingMethod, callOptions);
     call.start(mockCallListener, new Metadata());
     assertRpcStartedRecorded();
+    ServerCall<String, Integer> serverCall = serverCalls.poll(5, SECONDS);
+    serverCall.close(Status.CANCELLED, new Metadata());
+    assertRpcStatusRecorded(Code.DEADLINE_EXCEEDED, 10_000, 0);
