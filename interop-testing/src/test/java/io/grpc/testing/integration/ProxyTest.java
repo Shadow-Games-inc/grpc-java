@@ -146,3 +146,12 @@ public class ProxyTest {
     int sample = bandwidth / 5;
     List<Double> bandwidths = new ArrayList<>();
     for (int i = 0; i < 5; i++) {
+      long start = System.nanoTime();
+      clientIn.readFully(new byte[sample]);
+      long duration = System.nanoTime() - start;
+      double actualBandwidth = sample / (((double) duration) / TimeUnit.SECONDS.toNanos(1));
+      bandwidths.add(actualBandwidth);
+    }
+    Collections.sort(bandwidths);
+    double bandUsed = bandwidths.get(bandwidths.size() - 1);
+    assertEquals(bandwidth, bandUsed, .5 * bandwidth);
