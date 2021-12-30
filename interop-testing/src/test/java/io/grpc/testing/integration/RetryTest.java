@@ -146,3 +146,9 @@ public class RetryTest {
           .setFullMethodName("service/method")
           .setRequestMarshaller(new StringMarshaller())
           .setResponseMarshaller(new IntegerMarshaller())
+          .build();
+  private final LinkedBlockingQueue<ServerCall<String, Integer>> serverCalls =
+      new LinkedBlockingQueue<>();
+  private final ServerMethodDefinition<String, Integer> methodDefinition =
+      ServerMethodDefinition.create(
+          clientStreamingMethod,
