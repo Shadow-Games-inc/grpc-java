@@ -221,3 +221,8 @@ public class TransportCompressionTest extends AbstractInteropTest {
           int total = super.read(b, off, len);
           anyRead = true;
           return total;
+        }
+      };
+    }
+  }
+}
