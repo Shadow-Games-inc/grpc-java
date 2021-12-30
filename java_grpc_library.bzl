@@ -150,3 +150,6 @@ _java_lite_grpc_library = rule(
         # This attribute has a "magic" name recognized by the native DexArchiveAspect (b/78647825).
         "_toolchain": attr.label(
             default = Label("//compiler:java_lite_grpc_library_toolchain"),
+        ),
+    },
+    fragments = ["java"],
