@@ -55,3 +55,6 @@ public final class TrafficControlProxy {
           new DefaultThreadFactory("proxy-pool", true));
 
   /**
+   * Returns a new TrafficControlProxy with default bandwidth and latency.
+   */
+  public TrafficControlProxy(int serverPort) {
