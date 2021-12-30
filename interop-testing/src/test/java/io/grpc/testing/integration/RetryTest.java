@@ -389,3 +389,6 @@ public class RetryTest {
       }
     };
     ClientCall<String, Integer> call = channel.newCall(
+        clientStreamingMethod, CallOptions.DEFAULT.withStreamTracerFactory(streamTracerFactory));
+    call.start(mockCallListener, new Metadata());
+    assertRpcStartedRecorded();
