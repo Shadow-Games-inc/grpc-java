@@ -61,3 +61,6 @@ public class TestCasesTest {
       "custom_metadata",
       "status_code_and_message",
       "special_status_message",
+      "unimplemented_method",
+      "unimplemented_service",
+      "cancel_after_begin",
