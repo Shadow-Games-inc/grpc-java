@@ -196,3 +196,6 @@ public final class TrafficControlProxy {
     /**
      * Take a message off the queue and write it to an endpoint. Blocks until a message becomes
      * available.
+     */
+    void writeOut() throws InterruptedException, IOException {
+      Message next = queue.take();
