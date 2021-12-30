@@ -126,3 +126,6 @@ public class StressTestClientTest {
         "--server_addresses=localhost:" + server.getPort(), "--metrics_port=" + 0,
         "--num_stubs_per_channel=2"});
     client.startMetricsService();
+    client.runStressTest();
+
+    // Connect to the metrics service
