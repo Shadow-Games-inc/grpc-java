@@ -61,3 +61,6 @@ public final class ShadingTest {
     if (channel != null) {
       channel.shutdownNow();
       channel.awaitTermination(1, TimeUnit.SECONDS);
+    }
+    if (server != null) {
+      server.shutdownNow();
