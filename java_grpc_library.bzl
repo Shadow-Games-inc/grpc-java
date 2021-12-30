@@ -180,3 +180,6 @@ def java_grpc_library(
       deps: (List of `labels`) a single java_proto_library or
         java_lite_proto_library target for the proto_library in srcs.
       flavor: (str) "normal" (default) for normal proto runtime. "lite"
+        for the lite runtime.
+      **kwargs: Other common attributes
+    """
