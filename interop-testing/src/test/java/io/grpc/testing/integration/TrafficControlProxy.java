@@ -88,3 +88,6 @@ public final class TrafficControlProxy {
     clientAcceptor.bind(new InetSocketAddress(localhost, 0));
     executor.execute(new Runnable() {
       @Override
+      public void run() {
+        try {
+          clientSock = clientAcceptor.accept();
