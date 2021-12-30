@@ -65,3 +65,6 @@ public class TransportCompressionTest extends AbstractInteropTest {
 
   // Masquerade as identity.
   private static final Fzip FZIPPER = new Fzip("gzip", new Codec.Gzip());
+  private volatile boolean expectFzip;
+
+  private static final DecompressorRegistry decompressors = DecompressorRegistry.emptyInstance()
