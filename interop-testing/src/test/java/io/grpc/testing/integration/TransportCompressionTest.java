@@ -194,3 +194,6 @@ public class TransportCompressionTest extends AbstractInteropTest {
     public String getMessageEncoding() {
       return actualName;
     }
+
+    @Override
+    public OutputStream compress(OutputStream os) throws IOException {
