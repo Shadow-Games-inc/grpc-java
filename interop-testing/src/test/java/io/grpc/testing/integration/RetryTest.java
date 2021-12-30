@@ -308,3 +308,8 @@ public class RetryTest {
 
   @Test
   public void statsRecorded() throws Exception {
+    startNewServer();
+    retryPolicy = ImmutableMap.<String, Object>builder()
+        .put("maxAttempts", 4D)
+        .put("initialBackoff", "10s")
+        .put("maxBackoff", "10s")
