@@ -98,3 +98,6 @@ public class TransportCompressionTest extends AbstractInteropTest {
               // TODO(carl-mastrangelo): check that encoding was set.
               call.setMessageCompression(true);
               return listener;
+            }
+          });
+    // Disable the default census stats tracer, use testing tracer instead.
