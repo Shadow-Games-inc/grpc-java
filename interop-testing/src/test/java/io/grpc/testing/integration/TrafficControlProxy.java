@@ -85,3 +85,6 @@ public final class TrafficControlProxy {
     // normally would a server. serverSock then connects the server using a regular Socket as a
     // client normally would.
     clientAcceptor = new ServerSocket();
+    clientAcceptor.bind(new InetSocketAddress(localhost, 0));
+    executor.execute(new Runnable() {
+      @Override
