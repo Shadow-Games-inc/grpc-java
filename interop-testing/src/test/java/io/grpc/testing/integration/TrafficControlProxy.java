@@ -250,3 +250,6 @@ public final class TrafficControlProxy {
       return ((Long) sendTime).compareTo(((Message) o).sendTime);
     }
 
+    @Override
+    public long getDelay(TimeUnit unit) {
+      return unit.convert(sendTime - System.nanoTime(), TimeUnit.NANOSECONDS);
