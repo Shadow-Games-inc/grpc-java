@@ -217,3 +217,6 @@ public final class TrafficControlProxy {
 
     /**
      * Block until space on the queue becomes available. Returns how many bytes can be read on to
+     * the queue
+     */
+    synchronized int getNextChunk() throws InterruptedException {
