@@ -127,3 +127,6 @@ public final class TrafficControlProxy {
 
     MessageQueue clientPipe = new MessageQueue(clientIn, clientOut);
     MessageQueue serverPipe = new MessageQueue(serverIn, serverOut);
+
+    executor.execute(new Reader(clientPipe));
+    executor.execute(new Writer(clientPipe));
