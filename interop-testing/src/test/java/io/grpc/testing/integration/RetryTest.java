@@ -392,3 +392,6 @@ public class RetryTest {
         clientStreamingMethod, CallOptions.DEFAULT.withStreamTracerFactory(streamTracerFactory));
     call.start(mockCallListener, new Metadata());
     assertRpcStartedRecorded();
+    fakeClock.forwardTime(5, SECONDS);
+    String message = "String of length 20.";
+    call.sendMessage(message);
