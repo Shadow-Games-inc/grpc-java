@@ -70,3 +70,6 @@ public class TestCasesTest {
 
     // additional test cases
     String[] additionalTestCases = {
+      "client_compressed_unary_noprobe",
+      "client_compressed_streaming_noprobe",
+      "very_large_request",
