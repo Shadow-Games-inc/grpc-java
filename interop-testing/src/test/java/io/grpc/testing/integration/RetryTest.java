@@ -444,3 +444,6 @@ public class RetryTest {
             10,
             SECONDS,
             new Ticker() {
+              @Override
+              public long nanoTime() {
+                return fakeClock.getTicker().read();
