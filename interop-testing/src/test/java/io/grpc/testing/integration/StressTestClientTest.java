@@ -108,3 +108,6 @@ public class StressTestClientTest {
     StressTestClient client = new StressTestClient();
     client.parseArgs(new String[] {
         "--server_addresses=localhost:8080",
+        "--server_host_override=foo.test.google.fr",
+    });
+
