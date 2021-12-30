@@ -64,3 +64,6 @@ public final class ShadingTest {
     }
     if (server != null) {
       server.shutdownNow();
+      server.awaitTermination(1, TimeUnit.SECONDS);
+    }
+  }
