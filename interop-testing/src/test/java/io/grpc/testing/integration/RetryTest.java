@@ -429,3 +429,6 @@ public class RetryTest {
       @Override
       public void streamClosed(Status status) {
         fakeClock.forwardTime(10, SECONDS);
+      }
+    }
+
