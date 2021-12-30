@@ -126,3 +126,6 @@ _java_grpc_library = rule(
             default = Label("//compiler:java_grpc_library_toolchain"),
         ),
     },
+    fragments = ["java"],
+    outputs = {
+        "jar": "lib%{name}.jar",
