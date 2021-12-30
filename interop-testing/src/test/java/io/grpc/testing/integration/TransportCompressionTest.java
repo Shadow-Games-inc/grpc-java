@@ -167,3 +167,6 @@ public class TransportCompressionTest extends AbstractInteropTest {
                 setMessageCompression(true);
               }
             };
+          }
+        })
+        .usePlaintext();
