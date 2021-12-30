@@ -148,3 +148,6 @@ public final class TrafficControlProxy {
         try {
           queue.readIn();
         } catch (IOException e) {
+          shutDown = true;
+        } catch (InterruptedException e) {
+          shutDown = true;
