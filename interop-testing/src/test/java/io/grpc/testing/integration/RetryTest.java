@@ -277,3 +277,7 @@ public class RetryTest {
         .put("maxBackoff", "10s")
         .put("backoffMultiplier", 1D)
         .put("retryableStatusCodes", Arrays.<Object>asList("UNAVAILABLE"))
+        .build();
+    createNewChannel();
+    ClientCall<String, Integer> call = channel.newCall(clientStreamingMethod, CallOptions.DEFAULT);
+    call.start(mockCallListener, new Metadata());
