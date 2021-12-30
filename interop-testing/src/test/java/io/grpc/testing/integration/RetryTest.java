@@ -367,3 +367,6 @@ public class RetryTest {
         .put("retryableStatusCodes", Arrays.<Object>asList("UNAVAILABLE"))
         .build();
     createNewChannel();
+
+    // We will have streamClosed return at a particular moment that we want.
+    final CountDownLatch streamClosedLatch = new CountDownLatch(1);
