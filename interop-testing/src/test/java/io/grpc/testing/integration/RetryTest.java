@@ -253,3 +253,6 @@ public class RetryTest {
     assertThat(record.getMetricAsLongOrFail(DeprecatedCensusConstants.RPC_CLIENT_ROUNDTRIP_LATENCY))
         .isEqualTo(roundtripLatencyMs);
     assertThat(record.getMetricAsLongOrFail(DeprecatedCensusConstants.RPC_CLIENT_REQUEST_COUNT))
+        .isEqualTo(outboundMessages);
+  }
+
