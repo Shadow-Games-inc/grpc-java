@@ -51,3 +51,6 @@ java_rpc_toolchain = rule(
 )
 
 # "repository" here is for Bazel builds that span multiple WORKSPACES.
+def _path_ignoring_repository(f):
+    # Bazel creates a _virtual_imports directory in case the .proto source files
+    # need to be accessed at a path that's different from their source path:
