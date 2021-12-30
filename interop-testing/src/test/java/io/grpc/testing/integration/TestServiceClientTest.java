@@ -25,3 +25,6 @@ import org.junit.runners.JUnit4;
 public class TestServiceClientTest {
 
   @Test
+  public void emptyArgumentListShouldNotThrowException() throws Exception {
+    TestServiceClient client = new TestServiceClient();
+    client.parseArgs(new String[0]);
