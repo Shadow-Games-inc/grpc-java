@@ -79,3 +79,6 @@ public final class ShadingTest {
   public void nettyResourcesUpdated() throws IOException {
     InputStream inputStream = NettyChannelBuilder.class.getClassLoader()
         .getResourceAsStream(
+            "META-INF/native-image/io.grpc.netty.shaded.io.netty/transport/reflection-config.json");
+    assertThat(inputStream).isNotNull();
+
