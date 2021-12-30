@@ -16,3 +16,6 @@ configurations {
 evaluationDependsOn(project(':grpc-core').path)
 
 dependencies {
+    api project(':grpc-core'),
+            libraries.netty
+    implementation libraries.netty_proxy_handler,
