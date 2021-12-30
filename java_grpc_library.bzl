@@ -156,3 +156,6 @@ _java_lite_grpc_library = rule(
     outputs = {
         "jar": "lib%{name}.jar",
         "srcjar": "lib%{name}-src.jar",
+    },
+    provides = [JavaInfo],
+    implementation = _java_rpc_library_impl,
