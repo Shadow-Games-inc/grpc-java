@@ -144,3 +144,6 @@ public class StressTestClientTest {
     while (allGauges.size() < gaugeNames.size()) {
       LockSupport.parkNanos(TimeUnit.MILLISECONDS.toNanos(100));
       allGauges = ImmutableList.copyOf(stub.getAllGauges(EmptyMessage.getDefaultInstance()));
+    }
+
+    for (GaugeResponse gauge : allGauges) {
