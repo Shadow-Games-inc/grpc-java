@@ -195,3 +195,15 @@ public class ProxyTest {
 
     /**
      * Initializes server and returns its listening port.
+     */
+    public int init() throws IOException {
+      server = new ServerSocket(0);
+      return server.getLocalPort();
+    }
+
+    public void shutDown() throws IOException {
+      server.close();
+    }
+
+    @Override
+    public void run() {
