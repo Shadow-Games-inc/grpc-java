@@ -66,3 +66,6 @@ def _path_ignoring_repository(f):
         return f.short_path
     else:
         # If |f| is a generated file, it will have "bazel-out/*/genfiles" prefix
+        # before "external/workspace", so we need to add the starting index of "external/workspace"
+        return f.path[f.path.find(f.owner.workspace_root) + len(f.owner.workspace_root) + 1:]
+
