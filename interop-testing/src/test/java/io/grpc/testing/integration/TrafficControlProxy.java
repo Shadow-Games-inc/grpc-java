@@ -79,3 +79,6 @@ public final class TrafficControlProxy {
 
   /**
    * Starts a new thread that waits for client and server and start reader/writer threads.
+   */
+  public void start() throws IOException {
+    // ClientAcceptor uses a ServerSocket server so that the client can connect to the proxy as it
