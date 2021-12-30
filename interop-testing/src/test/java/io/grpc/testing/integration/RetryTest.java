@@ -411,3 +411,6 @@ public class RetryTest {
     serverCall.request(2);
     assertOutboundWireSizeRecorded(message.length());
     fakeClock.forwardTime(7, SECONDS);
+    call.cancel("Cancelled before commit", null); // A noop substream will commit.
+    // The call listener is closed, but the netty substream listener is not yet closed.
+    verify(mockCallListener, timeout(5000)).onClose(any(Status.class), any(Metadata.class));
