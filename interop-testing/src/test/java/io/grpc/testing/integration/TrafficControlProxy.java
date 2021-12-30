@@ -238,3 +238,6 @@ public final class TrafficControlProxy {
     long sendTime;
     byte[] message;
     int messageLength;
+
+    Message(long sendTime, byte[] message, int messageLength) {
+      this.sendTime = sendTime;
