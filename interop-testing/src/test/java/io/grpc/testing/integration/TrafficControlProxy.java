@@ -208,3 +208,6 @@ public final class TrafficControlProxy {
      * full.
      */
     void readIn() throws InterruptedException, IOException {
+      byte[] request = new byte[getNextChunk()];
+      int readableBytes = inStream.read(request);
+      long sendTime = System.nanoTime() + latency;
