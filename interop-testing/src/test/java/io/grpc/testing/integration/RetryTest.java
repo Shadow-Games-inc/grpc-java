@@ -360,3 +360,6 @@ public class RetryTest {
   public void statsRecorde_callCancelledBeforeCommit() throws Exception {
     startNewServer();
     retryPolicy = ImmutableMap.<String, Object>builder()
+        .put("maxAttempts", 4D)
+        .put("initialBackoff", "10s")
+        .put("maxBackoff", "10s")
