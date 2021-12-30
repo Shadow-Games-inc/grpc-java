@@ -206,3 +206,6 @@ public class TransportCompressionTest extends AbstractInteropTest {
       };
     }
 
+    @Override
+    public InputStream decompress(InputStream is) throws IOException {
+      return new FilterInputStream(delegate.decompress(is)) {
