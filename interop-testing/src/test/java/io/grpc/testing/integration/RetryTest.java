@@ -480,3 +480,6 @@ public class RetryTest {
       public void streamClosed(Status status) {
         if (transparentRetryTriggered.get()) {
           return;
+        }
+        transparentRetryTriggered.set(true);
+        try {
