@@ -121,3 +121,6 @@ class NettyResourceTransformer implements Transformer {
     }
 
     @Override
+    void modifyOutputStream(ZipOutputStream outputStream, boolean preserveFileTimestamps) {
+        for (resourceEntry in resources) {
+            ZipEntry entry = new ZipEntry(resourceEntry.key)
