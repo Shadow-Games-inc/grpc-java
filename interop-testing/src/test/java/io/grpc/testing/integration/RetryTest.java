@@ -262,3 +262,8 @@ public class RetryTest {
     assertThat(record.getMetricAsLongOrFail(RETRIES_PER_CALL)).isEqualTo(numRetries);
     assertThat(record.getMetricAsLongOrFail(TRANSPARENT_RETRIES_PER_CALL))
         .isEqualTo(numTransparentRetries);
+    assertThat(record.getMetricAsLongOrFail(RETRY_DELAY_PER_CALL)).isEqualTo(retryDelayMs);
+  }
+
+  @Test
+  public void retryUntilBufferLimitExceeded() throws Exception {
