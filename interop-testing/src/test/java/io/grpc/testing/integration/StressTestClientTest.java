@@ -90,3 +90,6 @@ public class StressTestClientTest {
 
     List<TestCaseWeightPair> testCases = Arrays.asList(
         new TestCaseWeightPair(TestCases.EMPTY_UNARY, 20),
+        new TestCaseWeightPair(TestCases.LARGE_UNARY, 50),
+        new TestCaseWeightPair(TestCases.SERVER_STREAMING, 30));
+    assertEquals(testCases, client.testCaseWeightPairs());
