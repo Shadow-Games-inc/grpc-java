@@ -200,3 +200,6 @@ public class TransportCompressionTest extends AbstractInteropTest {
       return new FilterOutputStream(delegate.compress(os)) {
         @Override
         public void write(int b) throws IOException {
+          super.write(b);
+          anyWritten = true;
+        }
