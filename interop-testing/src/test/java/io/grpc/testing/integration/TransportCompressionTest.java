@@ -110,3 +110,6 @@ public class TransportCompressionTest extends AbstractInteropTest {
     expectFzip = true;
     final SimpleRequest request = SimpleRequest.newBuilder()
         .setResponseSize(314159)
+        .setResponseCompressed(BoolValue.newBuilder().setValue(true))
+        .setPayload(Payload.newBuilder()
+            .setBody(ByteString.copyFrom(new byte[271828])))
