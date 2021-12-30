@@ -52,3 +52,6 @@ public final class TrafficControlProxy {
   private Socket clientSock;
   private final ThreadPoolExecutor executor =
       new ThreadPoolExecutor(5, 10, 1, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(),
+          new DefaultThreadFactory("proxy-pool", true));
+
+  /**
