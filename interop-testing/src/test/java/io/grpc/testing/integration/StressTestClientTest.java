@@ -102,3 +102,6 @@ public class StressTestClientTest {
     assertEquals(5, client.stubsPerChannel());
     assertEquals(9090, client.metricsPort());
   }
+
+  @Test
+  public void serverHostOverrideShouldBeApplied() {
