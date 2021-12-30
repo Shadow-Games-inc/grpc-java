@@ -155,3 +155,6 @@ public class TransportCompressionTest extends AbstractInteropTest {
                   }
 
                   @Override
+                  public void onHeaders(Metadata headers) {
+                    super.onHeaders(headers);
+                    if (expectFzip) {
