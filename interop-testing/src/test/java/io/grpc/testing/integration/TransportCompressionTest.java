@@ -71,3 +71,6 @@ public class TransportCompressionTest extends AbstractInteropTest {
       .with(Codec.Identity.NONE, false)
       .with(FZIPPER, true);
   private static final CompressorRegistry compressors = CompressorRegistry.newEmptyInstance();
+
+  @Before
+  public void beforeTests() {
