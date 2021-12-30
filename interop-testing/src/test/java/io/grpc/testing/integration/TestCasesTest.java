@@ -64,3 +64,6 @@ public class TestCasesTest {
       "unimplemented_method",
       "unimplemented_service",
       "cancel_after_begin",
+      "cancel_after_first_response",
+      "timeout_on_sleeping_server"
+    };
