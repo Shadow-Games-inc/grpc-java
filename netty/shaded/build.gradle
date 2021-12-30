@@ -79,3 +79,6 @@ publishing {
                     dep.artifactId.text() in ['grpc-api', 'grpc-core']
                 }.each() { core ->
                     core.version*.value = "[" + core.version.text() + "]"
+                }
+            }
+        }
