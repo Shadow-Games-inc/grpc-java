@@ -105,3 +105,6 @@ public class StressTestClientTest {
 
   @Test
   public void serverHostOverrideShouldBeApplied() {
+    StressTestClient client = new StressTestClient();
+    client.parseArgs(new String[] {
+        "--server_addresses=localhost:8080",
