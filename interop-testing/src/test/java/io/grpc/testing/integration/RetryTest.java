@@ -206,3 +206,13 @@ public class RetryTest {
     assertThat(backoffLatch.await(5, SECONDS)).isTrue();
     backoffLatch = new CountDownLatch(1);
     fakeClock.forwardTime(time, unit);
+  }
+
+  private void assertRpcStartedRecorded() throws Exception {
+    MetricsRecord record = clientStatsRecorder.pollRecord(5, SECONDS);
+    assertThat(record.getMetricAsLongOrFail(DeprecatedCensusConstants.RPC_CLIENT_STARTED_COUNT))
+        .isEqualTo(1);
+  }
+
+  private void assertOutboundMessageRecorded() throws Exception {
+    MetricsRecord record = clientStatsRecorder.pollRecord(5, SECONDS);
