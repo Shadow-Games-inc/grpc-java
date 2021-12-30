@@ -182,3 +182,6 @@ public class TransportCompressionTest extends AbstractInteropTest {
     volatile boolean anyRead;
     volatile boolean anyWritten;
     volatile Codec delegate;
+
+    private final String actualName;
+
