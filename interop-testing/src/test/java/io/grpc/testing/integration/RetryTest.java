@@ -376,3 +376,6 @@ public class RetryTest {
         return new ClientStreamTracer() {
           @Override
           public void streamClosed(Status status) {
+            if (status.getCode().equals(Code.CANCELLED)) {
+              try {
+                streamClosedLatch.await();
