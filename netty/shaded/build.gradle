@@ -37,3 +37,6 @@ shadowJar {
     classifier = null
     dependencies {
         include(project(':grpc-netty'))
+        include(dependency('io.netty:'))
+    }
+    exclude 'META-INF/maven/**'
