@@ -281,3 +281,6 @@ public class RetryTest {
     createNewChannel();
     ClientCall<String, Integer> call = channel.newCall(clientStreamingMethod, CallOptions.DEFAULT);
     call.start(mockCallListener, new Metadata());
+    call.sendMessage(message);
+
+    ServerCall<String, Integer> serverCall = serverCalls.poll(5, SECONDS);
