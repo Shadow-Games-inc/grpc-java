@@ -149,3 +149,6 @@ public class TransportCompressionTest extends AbstractInteropTest {
                   final ClientCall.Listener<RespT> responseListener, Metadata headers) {
                 ClientCall.Listener<RespT> listener = new ForwardingClientCallListener<RespT>() {
 
+                  @Override
+                  protected io.grpc.ClientCall.Listener<RespT> delegate() {
+                    return responseListener;
