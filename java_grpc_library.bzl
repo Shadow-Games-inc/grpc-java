@@ -159,3 +159,6 @@ _java_lite_grpc_library = rule(
     },
     provides = [JavaInfo],
     implementation = _java_rpc_library_impl,
+)
+
+def java_grpc_library(
