@@ -244,3 +244,6 @@ public final class TrafficControlProxy {
       this.message = message;
       this.messageLength = messageLength;
     }
+
+    @Override
+    public int compareTo(Delayed o) {
