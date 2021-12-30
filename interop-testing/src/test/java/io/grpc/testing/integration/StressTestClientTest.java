@@ -129,3 +129,6 @@ public class StressTestClientTest {
     client.runStressTest();
 
     // Connect to the metrics service
+    ManagedChannel ch = Grpc.newChannelBuilder(
+          "localhost:" + client.getMetricServerPort(), InsecureChannelCredentials.create())
+        .build();
