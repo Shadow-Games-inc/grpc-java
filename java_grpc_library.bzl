@@ -12,3 +12,6 @@ _JavaRpcToolchainInfo = provider(
 
 def _java_rpc_toolchain_impl(ctx):
     return [
+        _JavaRpcToolchainInfo(
+            java_toolchain = ctx.attr._java_toolchain,
+            plugin = ctx.executable.plugin,
