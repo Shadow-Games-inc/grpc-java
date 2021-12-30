@@ -37,3 +37,6 @@ public class TestCasesTest {
   }
 
   @Test
+  public void testCaseNamesShouldMapToEnums() {
+    // names of testcases as defined in the interop spec
+    String[] testCases = {
