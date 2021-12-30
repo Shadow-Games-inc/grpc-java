@@ -76,3 +76,6 @@ public final class TrafficControlProxy {
     queueLength = (int) Math.max(bandwidth * latency / TimeUnit.SECONDS.toNanos(1), 1);
     chunkSize = Math.max(1, queueLength);
   }
+
+  /**
+   * Starts a new thread that waits for client and server and start reader/writer threads.
