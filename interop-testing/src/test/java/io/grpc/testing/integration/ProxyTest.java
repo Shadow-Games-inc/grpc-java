@@ -132,3 +132,8 @@ public class ProxyTest {
   @Test
   public void smallBandwidth() throws Exception {
     server = new Server();
+    int serverPort = server.init();
+    server.setMode("stream");
+    executor.execute(server);
+
+    int bandwidth = 64 * 1024;
