@@ -267,3 +267,6 @@ public class RetryTest {
 
   @Test
   public void retryUntilBufferLimitExceeded() throws Exception {
+
+    startNewServer();
+    bufferLimit = message.length() * 2L - 1; // Can buffer no more than 1 message.
