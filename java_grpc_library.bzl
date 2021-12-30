@@ -171,3 +171,6 @@ def java_grpc_library(
 
     This rule only generates code for services; it does not generate code for
     messages. You will need a separate java_proto_library or
+    java_lite_proto_library rule.
+
+    Args:
