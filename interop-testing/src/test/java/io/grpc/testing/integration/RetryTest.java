@@ -383,3 +383,6 @@ public class RetryTest {
                 Thread.currentThread().interrupt();
                 throw new AssertionError("streamClosedLatch interrupted", e);
               }
+            }
+          }
+        };
