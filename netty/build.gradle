@@ -19,3 +19,6 @@ dependencies {
     api project(':grpc-core'),
             libraries.netty
     implementation libraries.netty_proxy_handler,
+            libraries.guava,
+            libraries.errorprone,
+            libraries.perfmark
