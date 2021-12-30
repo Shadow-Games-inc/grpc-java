@@ -55,3 +55,6 @@ import org.junit.runners.JUnit4;
 public final class ShadingTest {
   private ManagedChannel channel;
   private Server server;
+
+  @After
+  public void tearDown() throws Exception {
