@@ -120,3 +120,7 @@ public class ProxyTest {
     List<Long> rtts = new ArrayList<>();
     for (int i = 0; i < 2; i++) {
       long start = System.nanoTime();
+      clientOut.write(message, 0, 1);
+      clientIn.read(message);
+      rtts.add(System.nanoTime() - start);
+    }
