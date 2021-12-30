@@ -7,3 +7,6 @@ import shadow.org.apache.tools.zip.ZipEntry
 plugins {
     id "java"
     id "maven-publish"
+
+    id "com.github.johnrengelman.shadow"
+}
