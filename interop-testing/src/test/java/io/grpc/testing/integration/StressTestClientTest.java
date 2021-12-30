@@ -17,3 +17,6 @@
 package io.grpc.testing.integration;
 
 import static com.google.common.collect.Sets.newHashSet;
+import static java.util.Collections.singletonList;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
