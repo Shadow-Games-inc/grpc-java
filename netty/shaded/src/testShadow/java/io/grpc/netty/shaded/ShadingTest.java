@@ -58,3 +58,6 @@ public final class ShadingTest {
 
   @After
   public void tearDown() throws Exception {
+    if (channel != null) {
+      channel.shutdownNow();
+      channel.awaitTermination(1, TimeUnit.SECONDS);
