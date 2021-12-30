@@ -117,3 +117,6 @@ public class StressTestClientTest {
   @Test
   public void gaugesShouldBeExported() throws Exception {
 
+    TestServiceServer server = new TestServiceServer();
+    server.parseArgs(new String[]{"--port=" + 0, "--use_tls=false"});
+    server.start();
