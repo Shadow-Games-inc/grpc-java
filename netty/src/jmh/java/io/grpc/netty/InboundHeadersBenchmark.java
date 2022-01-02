@@ -17,5 +17,7 @@
 package io.grpc.netty;
 
 import static io.grpc.netty.Utils.CONTENT_TYPE_HEADER;
+import static io.grpc.netty.Utils.TE_TRAILERS;
+
 import io.netty.handler.codec.http2.Http2Headers;
 import org.openjdk.jmh.annotations.BenchmarkMode;
