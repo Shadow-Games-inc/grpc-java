@@ -1,3 +1,34 @@
+/*
+ * Copyright 2016 The gRPC Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package io.grpc.netty;
+
+import io.grpc.Attributes;
+import io.grpc.Internal;
+import io.grpc.ServerStreamTracer;
+import io.grpc.internal.SharedResourcePool;
+import io.grpc.internal.TransportTracer;
+import io.netty.channel.socket.nio.NioServerSocketChannel;
+import java.util.List;
+
+/**
+ * Internal {@link NettyServerBuilder} accessor.  This is intended for usage internal to
+ * the gRPC team.  If you *really* think you need to use this, contact the gRPC team first.
+ */
+@Internal
 public final class InternalNettyServerBuilder {
   public static NettyServer buildTransportServers(NettyServerBuilder builder,
       List<? extends ServerStreamTracer.Factory> streamTracerFactories) {
@@ -24,6 +55,12 @@ public final class InternalNettyServerBuilder {
   public static void setTracingEnabled(NettyServerBuilder builder, boolean value) {
     builder.setTracingEnabled(value);
   }
+
+  public static void setForceHeapBuffer(NettyServerBuilder builder, boolean value) {
+    builder.setForceHeapBuffer(value);
+  }
+
+  /**
   public static void useNioTransport(NettyServerBuilder builder) {
     builder.channelType(NioServerSocketChannel.class);
     builder
