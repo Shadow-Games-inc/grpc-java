@@ -1,3 +1,7 @@
+  public static void setTransportTracerFactory(NettyServerBuilder builder,
+      TransportTracer.Factory transportTracerFactory) {
+    builder.setTransportTracerFactory(transportTracerFactory);
+  }
   public static void setStatsRecordRealTimeMetrics(NettyServerBuilder builder, boolean value) {
     builder.setStatsRecordRealTimeMetrics(value);
   }
