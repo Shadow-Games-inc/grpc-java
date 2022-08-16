@@ -1,3 +1,9 @@
+public final class InternalNettyServerBuilder {
+  public static NettyServer buildTransportServers(NettyServerBuilder builder,
+      List<? extends ServerStreamTracer.Factory> streamTracerFactories) {
+    return builder.buildTransportServers(streamTracerFactories);
+  }
+
   public static void setTransportTracerFactory(NettyServerBuilder builder,
       TransportTracer.Factory transportTracerFactory) {
     builder.setTransportTracerFactory(transportTracerFactory);
