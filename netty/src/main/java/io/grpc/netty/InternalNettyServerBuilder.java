@@ -12,6 +12,11 @@ public final class InternalNettyServerBuilder {
   public static void setStatsEnabled(NettyServerBuilder builder, boolean value) {
     builder.setStatsEnabled(value);
   }
+
+  public static void setStatsRecordStartedRpcs(NettyServerBuilder builder, boolean value) {
+    builder.setStatsRecordStartedRpcs(value);
+  }
+
   public static void setStatsRecordRealTimeMetrics(NettyServerBuilder builder, boolean value) {
     builder.setStatsRecordRealTimeMetrics(value);
   }
