@@ -69,3 +69,6 @@ public final class InternalNettyServerBuilder {
         .workerEventLoopGroupPool(
             SharedResourcePool.forResource(Utils.NIO_WORKER_EVENT_LOOP_GROUP));
   }
+  public static void eagAttributes(NettyServerBuilder builder, Attributes eagAttributes) {
+    builder.eagAttributes(eagAttributes);
+  }
