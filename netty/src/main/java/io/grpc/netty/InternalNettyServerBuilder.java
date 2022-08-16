@@ -8,6 +8,10 @@ public final class InternalNettyServerBuilder {
       TransportTracer.Factory transportTracerFactory) {
     builder.setTransportTracerFactory(transportTracerFactory);
   }
+
+  public static void setStatsEnabled(NettyServerBuilder builder, boolean value) {
+    builder.setStatsEnabled(value);
+  }
   public static void setStatsRecordRealTimeMetrics(NettyServerBuilder builder, boolean value) {
     builder.setStatsRecordRealTimeMetrics(value);
   }
