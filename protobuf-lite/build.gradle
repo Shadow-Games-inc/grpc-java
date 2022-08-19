@@ -1,0 +1,46 @@
+plugins {
+    id "java-library"
+    id "maven-publish"
+
+    id "com.google.protobuf"
+    id "me.champeau.gradle.japicmp"
+    id "ru.vyarus.animalsniffer"
+}
+
+description = 'gRPC: Protobuf Lite'
+
+dependencies {
+    api project(':grpc-api'),
+            libraries.protobuf_lite
+    implementation libraries.jsr305,
+            libraries.guava
+
+    testImplementation project(':grpc-core')
+
+    signature "org.codehaus.mojo.signature:java17:1.0@signature"
+    signature "net.sf.androidscents.signature:android-api-level-14:4.0_r4@signature"
+}
+
+compileTestJava {
+    options.compilerArgs += [
+        "-Xlint:-cast"
+    ]
+    options.errorprone.excludedPaths = ".*/build/generated/source/proto/.*"
+}
+
+protobuf {
+    protoc {
+        if (project.hasProperty('protoc')) {
+            path = project.protoc
+        } else {
+            artifact = "com.google.protobuf:protoc:${protocVersion}"
+        }
+    }
+    generateProtoTasks {
+        ofSourceSet('test')*.each { task ->
+            task.builtins {
+                java { option 'lite' }
+            }
+        }
+    }
+}

@@ -1,0 +1,31 @@
+plugins {
+    id "java-library"
+    id "maven-publish"
+
+    id "com.google.protobuf"
+    id "me.champeau.gradle.japicmp"
+    id "ru.vyarus.animalsniffer"
+}
+
+description = 'gRPC: Protobuf'
+
+dependencies {
+    api project(':grpc-api'),
+            libraries.jsr305,
+            libraries.protobuf
+    implementation libraries.guava
+
+    api (libraries.google_api_protos) {
+        // 'com.google.api:api-common' transitively depends on auto-value, which breaks our
+        // annotations.
+        exclude group: 'com.google.api', module: 'api-common'
+    }
+
+    api (project(':grpc-protobuf-lite')) {
+        exclude group: 'com.google.protobuf', module: 'protobuf-javalite'
+    }
+
+    signature "org.codehaus.mojo.signature:java17:1.0@signature"
+}
+
+javadoc.options.links 'https://developers.google.com/protocol-buffers/docs/reference/java/'

@@ -61,6 +61,10 @@ public final class InternalNettyServerBuilder {
   }
 
   /**
+   * Sets {@link io.grpc.Channel} and {@link io.netty.channel.EventLoopGroup}s to Nio. A major
+   * benefit over using existing setters is gRPC will manage the life cycle of {@link
+   * io.netty.channel.EventLoopGroup}s.
+   */
   public static void useNioTransport(NettyServerBuilder builder) {
     builder.channelType(NioServerSocketChannel.class);
     builder
@@ -69,6 +73,11 @@ public final class InternalNettyServerBuilder {
         .workerEventLoopGroupPool(
             SharedResourcePool.forResource(Utils.NIO_WORKER_EVENT_LOOP_GROUP));
   }
+
+  /** Sets the EAG attributes available to protocol negotiators. */
   public static void eagAttributes(NettyServerBuilder builder, Attributes eagAttributes) {
     builder.eagAttributes(eagAttributes);
   }
+
+  private InternalNettyServerBuilder() {}
+}

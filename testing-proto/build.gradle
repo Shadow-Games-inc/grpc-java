@@ -1,0 +1,18 @@
+plugins {
+    id "java-library"
+    id "maven-publish"
+
+    id "com.google.protobuf"
+}
+
+description = "gRPC: Testing Protos"
+
+dependencies {
+    api project(':grpc-protobuf'),
+            project(':grpc-stub')
+    compileOnly libraries.javax_annotation
+    testImplementation libraries.truth
+    testRuntimeOnly libraries.javax_annotation
+}
+
+configureProtoCompilation()
